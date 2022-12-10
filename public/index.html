@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <style>
+            *,
+            *::before,
+            *::after {
+                box-sizing: border-box;
+            }
+            body,
+            h1,
+            h2,
+            h3,
+            h4,
+            p,
+            figure,
+            blockquote,
+            dl,
+            dd {
+                margin: 0;
+            }
+            input {
+                padding: 0.25rem 0.75rem;
+                border: 1px solid #ccc;
+                border-radius: 4px;
+                transition: all 0.2s ease-in-out;
+                font-size: 1.1rem;
+            }
+            input:focus {
+                outline: none;
+                border-color: #007bff;
+                box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+            }
+            button {
+                padding: 0.25rem 1.75rem;
+                border-radius: 4px;
+                background-color: rgb(0, 132, 255);
+                border: none;
+                color: #fff;
+                font-size: 1.1rem;
+            }
+            button:hover {
+                background-color: rgb(0, 112, 255);
+            }
+            button:active {
+                background-color: rgb(0, 92, 255);
+            }
+            button:focus {
+                outline: none;
+                border-color: #007bff;
+                box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+            }
+        </style>
+        <title>Document</title>
+    </head>
+    <body>
+        <!-- login form -->
+        <form action="api/v1/auth/login" method="POST">
+            <input type="text" name="username" placeholder="username" />
+            <input type="password" name="password" placeholder="password" />
+            <button type="submit">Login</button>
+        </form>
+    </body>
+</html>

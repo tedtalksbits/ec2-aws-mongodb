@@ -1,0 +1,15 @@
+
+Sat Dec 10 2022 01:23:20 GMT-0500 (Eastern Standard Time) 1:23:20 AM Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36 ::1 52129 localhost:8000 POST /auth/login 200
+Sat Dec 10 2022 02:10:42 GMT-0500 (Eastern Standard Time) 2:10:42 AM PostmanRuntime/7.29.2 ::1 64351 localhost:8000 POST /auth/register 200
+Sat Dec 10 2022 02:10:50 GMT-0500 (Eastern Standard Time) 2:10:50 AM PostmanRuntime/7.29.2 ::1 64385 localhost:8000 POST /auth/register 200
+Sat Dec 10 2022 02:11:05 GMT-0500 (Eastern Standard Time) 2:11:05 AM PostmanRuntime/7.29.2 ::1 64448 localhost:8000 POST /auth/register 200
+Sat Dec 10 2022 02:11:27 GMT-0500 (Eastern Standard Time) 2:11:27 AM PostmanRuntime/7.29.2 ::1 64539 localhost:8000 POST /auth/login 200
+Sat Dec 10 2022 02:11:35 GMT-0500 (Eastern Standard Time) 2:11:35 AM PostmanRuntime/7.29.2 ::1 64575 localhost:8000 POST /auth/login 200
+Sat Dec 10 2022 10:20:22 GMT-0500 (Eastern Standard Time) 10:20:22 AM PostmanRuntime/7.29.2 ::1 59653 localhost:8000 POST /auth/login 200
+Sat Dec 10 2022 10:20:48 GMT-0500 (Eastern Standard Time) 10:20:48 AM PostmanRuntime/7.29.2 ::1 59762 localhost:8000 POST /auth/register 200
+Sat Dec 10 2022 10:21:04 GMT-0500 (Eastern Standard Time) 10:21:04 AM PostmanRuntime/7.29.2 ::1 59830 localhost:8000 POST /auth/register 200
+Sat Dec 10 2022 10:21:15 GMT-0500 (Eastern Standard Time) 10:21:15 AM PostmanRuntime/7.29.2 ::1 59881 localhost:8000 POST /auth/register 200
+Sat Dec 10 2022 10:21:28 GMT-0500 (Eastern Standard Time) 10:21:28 AM PostmanRuntime/7.29.2 ::1 59942 localhost:8000 POST /auth/login 200
+Sat Dec 10 2022 10:32:53 GMT-0500 (Eastern Standard Time) 10:32:53 AM PostmanRuntime/7.29.2 ::1 62918 localhost:8000 POST /auth/register 200
+Sat Dec 10 2022 10:34:34 GMT-0500 (Eastern Standard Time) 10:34:34 AM PostmanRuntime/7.29.2 ::1 63353 localhost:8000 POST /auth/register 200
+Sat Dec 10 2022 10:40:20 GMT-0500 (Eastern Standard Time) 10:40:20 AM Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36 ::1 64837 localhost:8000 POST /auth/login 200
