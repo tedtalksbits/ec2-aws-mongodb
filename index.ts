@@ -8,13 +8,14 @@ import mongoose from 'mongoose';
 import { getAppConfig } from './config/appConfig';
 const app = express();
 dotenv.config();
+const appConfig = getAppConfig();
 
 // middlewares
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 // cookies middleware
 app.use(cookieParser());
-
+console.log(process.env.SECRET_KEY);
 app.use('/api/v1', authRoutes);
 app.use('/api/v1', accountRoutes);
 
@@ -22,10 +23,7 @@ app.use('/api/v1', accountRoutes);
 app.use(express.static('public'));
 
 // connect to db
-// connectDB();
-//  connect to localhost db name test
-console.log(process.env.MONGO_URI);
-const appConfig = getAppConfig();
+
 console.log(appConfig.dbUri);
 
 mongoose.connect(appConfig.dbUri || '', (err) => {
