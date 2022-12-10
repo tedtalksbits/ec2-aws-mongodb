@@ -9,7 +9,7 @@
     "start": "node dist/index.js",
     "watch": "tsc -w",
     "build": "tsc",
-    "dev:watch": "npm run dev & npm run watch"
+    "dev:watch": "cross-env NODE_ENV=development npm run dev & npm run watch"
   },
   "keywords": [],
   "author": "Tedane Blake",
