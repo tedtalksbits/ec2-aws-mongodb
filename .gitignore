@@ -14,6 +14,7 @@ yarn.lock
 logs
 *.log
 npm-debug.log*
+log.txt
 
 
 
@@ -23,3 +24,10 @@ pids
 
 # pem files
 *.pem
+
+# build files
+build
+dist
+
+#  zip files
+*.zip
