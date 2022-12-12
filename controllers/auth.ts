@@ -196,7 +196,6 @@ export const login = async (req: Request, res: Response) => {
     //     })
     //     .send();
 
-    req.cookies.token = token;
     return res
         .cookie('token', token, { httpOnly: true })
         .header('cookie', token)

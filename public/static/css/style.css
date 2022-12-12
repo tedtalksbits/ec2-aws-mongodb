@@ -307,6 +307,9 @@ footer {
 input[type="text"],
 input[type="password"],
 input[type="search"],
+input[type="email"],
+input[type="number"],
+input[type="tel"],
 textarea {
     border: 1px solid transparent;
     border-radius: 4px;
@@ -324,10 +327,6 @@ textarea {
     -moz-osx-font-smoothing: grayscale;
     -webkit-tap-highlight-color: transparent;
     width: 100%;
-}
-
-input:invalid {
-    border-color: var(--danger-400);
 }
 
 input:focus {
@@ -388,6 +387,28 @@ label.label-required::after {
     margin-left: 0.25rem;
 }
 
+.input-icon {
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    display: inline-block;
+    background: transparent;
+    border-radius: var(--border-radius-sm);
+    margin: 4px;
+    padding: 2px;
+    font-size: var(--font-s);
+    cursor: pointer;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease-in-out;
+}
+
+.input-icon:hover {
+    background-color: var(--surface-700);
+}
 
 /* CONTAINERS AND WRAPPERS */
 
@@ -421,6 +442,20 @@ label.label-required::after {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     grid-gap: 1rem;
+}
+
+.wrapper {
+    display: grid;
+    grid-template-columns: 1fr min(99ch, 100%) 1fr;
+}
+
+.wrapper>* {
+    grid-column: 2;
+}
+
+.full-bleed {
+    width: 100%;
+    grid-column: 1 / 4;
 }
 
 @media (max-width: 768px) {
@@ -640,6 +675,10 @@ button:disabled {
     background-clip: text;
     -webkit-text-fill-color: transparent;
     -webkit-box-decoration-break: clone;
+}
+
+.txt-error {
+    color: var(--danger-400);
 }
 
 /*

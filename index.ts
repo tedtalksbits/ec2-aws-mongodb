@@ -1,3 +1,4 @@
+import jwt from 'jsonwebtoken';
 import express from 'express';
 import dotenv from 'dotenv';
 import cookieParser from 'cookie-parser';
@@ -45,9 +46,28 @@ app.get('/login', (_req, res) => {
     res.render('auth/login', { title: 'Login' });
 });
 app.get('/register', (_req, res) => {
-    res.render('register', { title: 'Register' });
+    res.render('auth/register', { title: 'Register' });
 });
 
+// PROTECTED ROUTES
+app.get('/dashboard', (req, res) => {
+    // console.log(req);
+
+    // get cookies from request
+    const { token } = req.cookies;
+    // check if token exists
+    if (!token) {
+        return res.redirect('/login');
+    }
+    // verify token
+    const verified = jwt.verify(token, process.env.SECRET_KEY || '');
+    // check if token is valid
+    if (!verified) {
+        return res.redirect('/login');
+    }
+
+    res.render('dashboard', { title: 'Dashboard' });
+});
 // 404 PAGE
 app.use((_req, res) => {
     res.status(404).render('404', { title: '404' });
