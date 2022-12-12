@@ -196,5 +196,13 @@ export const login = async (req: Request, res: Response) => {
     //     })
     //     .send();
 
-    return res.cookie('token', token, { httpOnly: true }).send();
+    req.cookies.token = token;
+    return res
+        .cookie('token', token, { httpOnly: true })
+        .header('cookie', token)
+        .json({
+            ok: true,
+            status: 200,
+        })
+        .send();
 };

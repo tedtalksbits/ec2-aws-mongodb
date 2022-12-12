@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="/static/css/style.css" />
+        <title>Billify 🧾| <%= title %></title>
+    </head>
+
+    <body>
+        <%- include('../partials/header.ejs') %>
+        <main><%- body %></main>
+        <%- include('../partials/footer.ejs') %>
+        <script>
+            const darkModeToggle = document.getElementById('dark-mode-toggle');
+            const theme = localStorage.getItem('theme');
+            console.log(theme);
+
+            const darkModeStyles = document.createElement('style');
+            darkModeStyles.innerHTML = `
+            :root{
+                --surface-900: #1a1b1e;
+                --surface-800: #2b2c31;
+                --surface-700: #3c3d42;
+                --surface-600: #4d4e53;
+                --surface-500: #5e5f64;
+                --surface-400: #6f7075;
+                --surface-300: #808285;
+                --surface-200: #919396;
+                --surface-100: #d2d2d2;
+        
+                --border-color: #373a40;
+            }
+            `;
+            const setDarkTheme = (toggle) => {
+                toggle.innerText = '🌞';
+                document.head.appendChild(darkModeStyles);
+                document.body.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+            };
+
+            const setLightTheme = (toggle) => {
+                toggle.innerText = '🌙';
+                localStorage.setItem('theme', 'light');
+                if (document.body.classList.contains('dark')) {
+                    document.head.removeChild(darkModeStyles);
+                    document.body.classList.remove('dark');
+                }
+            };
+
+            // get users theme preference from local storage
+
+            if (theme === 'dark') {
+                setDarkTheme(darkModeToggle);
+            } else {
+                setLightTheme(darkModeToggle);
+            }
+
+            darkModeToggle.addEventListener('click', () => {
+                const theme = localStorage.getItem('theme');
+                if (theme === 'dark') {
+                    setLightTheme(darkModeToggle);
+                } else {
+                    setDarkTheme(darkModeToggle);
+                }
+            });
+        </script>
+    </body>
+</html>

@@ -1,0 +1,61 @@
+<div class="container">
+    <h1 class="center">Welcome back!</h1>
+    <p class="center my-s">
+        Do not have an account yet?
+        <a class="link" href="/register">Create account</a>
+    </p>
+    <form action="api/v1/auth/login" method="POST" class="paper mt-l">
+        <div class="input-wrapper">
+            <label for="username" class="label-required">Username</label>
+            <input type="text" name="username" id="username" required />
+        </div>
+        <div class="input-wrapper mt-m">
+            <label for="username" class="label-required">Password</label>
+            <input
+                type="password"
+                name="username"
+                id="username"
+                required
+                autocomplete="password"
+            />
+        </div>
+        <div class="flex-h align-center justify-between mt-m">
+            <div class="input-wrapper flex align-center g-m">
+                <input type="checkbox" name="remember" id="remember" />
+                <label for="remember">Remember me</label>
+            </div>
+            <label>
+                <a class="link" href="/forgot-password"> Forgot password? </a>
+            </label>
+        </div>
+        <button class="mt-m">Sign In</button>
+    </form>
+</div>
+
+<script>
+    const rememberMe = document.getElementById('remember');
+    const rememberMePreference = localStorage.getItem('rememberMe');
+    const username = document.getElementById('username');
+    const usernameRemebered = localStorage.getItem('username') || '';
+
+    if (rememberMePreference === 'true') {
+        rememberMe.checked = true;
+        username.value = usernameRemebered;
+    } else {
+        rememberMe.checked = false;
+        username.value = '';
+    }
+    rememberMe.addEventListener('change', () => {
+        if (rememberMe.checked) {
+            rememberMe.value = 'true';
+            localStorage.setItem('rememberMe', 'true');
+        } else {
+            rememberMe.value = 'false';
+            localStorage.setItem('rememberMe', 'false');
+        }
+    });
+
+    username.addEventListener('input', () => {
+        localStorage.setItem('username', username.value);
+    });
+</script>
