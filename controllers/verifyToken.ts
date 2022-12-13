@@ -8,8 +8,6 @@ export const verifyToken = (
     next: NextFunction
 ) => {
     const token = req.cookies.token;
-    console.log(token);
-    console.log(process.env.SECRET_KEY);
     //check for token cookie
     if (!token) {
         fsLogger(req, res);

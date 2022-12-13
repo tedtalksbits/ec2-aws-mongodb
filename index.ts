@@ -1,5 +1,4 @@
-import jwt from 'jsonwebtoken';
-import express from 'express';
+import express, { Request, Response, NextFunction } from 'express';
 import dotenv from 'dotenv';
 import cookieParser from 'cookie-parser';
 // import connectDB from './config/dbConfig';
@@ -9,6 +8,8 @@ import mongoose from 'mongoose';
 import { getAppConfig } from './config/appConfig';
 import cors from 'cors';
 import expressLayouts from 'express-ejs-layouts';
+import { verifyAuth } from './controllers/view-controllers/verifyAuth';
+
 const app = express();
 dotenv.config();
 const appConfig = getAppConfig();
@@ -45,41 +46,33 @@ app.get('/contact', (_req, res) => {
 app.get('/login', (_req, res) => {
     res.render('auth/login', { title: 'Login' });
 });
+
 app.get('/register', (_req, res) => {
     res.render('auth/register', { title: 'Register' });
 });
 
 // PROTECTED ROUTES
-app.get('/dashboard', (req, res) => {
-    // console.log(req);
-
-    // get cookies from request
-    const { token } = req.cookies;
-    // check if token exists
-    if (!token) {
-        return res.redirect('/login');
-    }
-    // verify token
-    const verified = jwt.verify(token, process.env.SECRET_KEY || '');
-    // check if token is valid
-    if (!verified) {
-        return res.redirect('/login');
-    }
-
+app.get('/dashboard', verifyAuth, (_req, res) => {
     res.render('dashboard', { title: 'Dashboard' });
 });
+// PROTECTED ROUTES
+
+/*
+    ========================================
+    Error Handling
+    ========================================
+*/
 // 404 PAGE
 app.use((_req, res) => {
     res.status(404).render('404', { title: '404' });
 });
 
-// ERROR HANDLER
-app.use((err: any, _req: any, res: any, _next: any) => {
+app.use((err: any, _req: Request, res: Response, _next: NextFunction) => {
     if (err.message.includes('Failed to lookup view')) {
         console.log(err);
-        res.status(404).render('404', { title: '404' });
+        return res.status(404).render('404', { title: '404' });
     }
-    res.status(500).render('500', { title: '500' });
+    return res.status(500).render('500', { title: '500' });
 });
 
 // CONNECT TO DATABASE
