@@ -4,36 +4,38 @@
         Already have an account?
         <a class="link" href="/login">Login</a>
     </p>
-    <form action="api/v1/auth/register" method="POST" class="paper mt-l">
+    <form action="/register" method="POST" class="paper mt-l">
         <div class="flex-h gap-m">
             <div class="input-wrapper">
                 <label for="firstName" class="label-required">First Name</label>
-                <input type="text" name="firstName" id="firstName" required />
+                <input type="text" name="firstName" id="firstName" value="<%= firstName ?? '' %>" required />
             </div>
             <div class="input-wrapper">
                 <label for="lastName" class="label-required">Last Name</label>
-                <input type="text" name="lastName" id="lastName" required />
+                <input type="text" name="lastName" id="lastName" value="<%= lastName ?? '' %>" required />
             </div>
         </div>
         <div class="input-wrapper mt-s">
             <label for="username" class="label-required">Username</label>
-            <input type="text" name="username" id="username" required />
+            <input type="text" name="username" id="username" value="<%= username ?? '' %>" required />
         </div>
-        <div class="input-wrapper mt-s">
+        <div class=" input-wrapper mt-s">
             <label for="email" class="label-required">Email</label>
-            <input type="email" name="email" id="email" required />
+            <input type="email" name="email" id="email" value="<%= email ?? '' %>" required />
         </div>
-        <div class="input-wrapper mt-s">
+        <div class="input-wrapper mt-m">
             <label for="username" class="label-required">Password</label>
-            <input
-                type="password"
-                name="password"
-                id="password"
-                required
-                autocomplete="password"
-            />
+            <div style="position: relative">
+                <input type="password" name="password" id="register-password" required autocomplete="password" />
+                <div class="input-icon" role="button" id="showPassword" data-toggler="show-password"
+                    data-target="register-password">
+                    Show
+                </div>
+            </div>
         </div>
 
         <button class="mt-m">Sign Up</button>
+        <div class="txt-error font-m<%= error && " mt-m" %>" id="loginError"><%= errorMsg %>
+
     </form>
 </div>

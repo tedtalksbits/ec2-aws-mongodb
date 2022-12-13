@@ -1,24 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link rel="stylesheet" href="/static/css/style.css" />
-        <title>Billify 🧾| <%= title %></title>
-    </head>
 
-    <body>
-        <%- include('../partials/header.ejs') %>
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/static/css/style.css" />
+    <title>Billify 🧾| <%= title %>
+    </title>
+</head>
+
+<body>
+    <%- include('../partials/header.ejs') %>
         <main><%- body %></main>
         <%- include('../partials/footer.ejs') %>
-        <script>
-            const darkModeToggle = document.getElementById('dark-mode-toggle');
-            const theme = localStorage.getItem('theme');
-            console.log(theme);
+            <script>
+                const darkModeToggle = document.getElementById('dark-mode-toggle');
+                const theme = localStorage.getItem('theme');
+                console.log(theme);
 
-            const darkModeStyles = document.createElement('style');
-            darkModeStyles.innerHTML = `
+                const darkModeStyles = document.createElement('style');
+                darkModeStyles.innerHTML = `
             :root{
                 --surface-900: #1a1b1e;
                 --surface-800: #2b2c31;
@@ -33,38 +35,61 @@
                 --border-color: #373a40;
             }
             `;
-            const setDarkTheme = (toggle) => {
-                toggle.innerText = '🌞';
-                document.head.appendChild(darkModeStyles);
-                document.body.classList.add('dark');
-                localStorage.setItem('theme', 'dark');
-            };
+                const setDarkTheme = (toggle) => {
+                    toggle.innerText = '🌞';
+                    document.head.appendChild(darkModeStyles);
+                    document.body.classList.add('dark');
+                    localStorage.setItem('theme', 'dark');
+                };
 
-            const setLightTheme = (toggle) => {
-                toggle.innerText = '🌙';
-                localStorage.setItem('theme', 'light');
-                if (document.body.classList.contains('dark')) {
-                    document.head.removeChild(darkModeStyles);
-                    document.body.classList.remove('dark');
-                }
-            };
+                const setLightTheme = (toggle) => {
+                    toggle.innerText = '🌙';
+                    localStorage.setItem('theme', 'light');
+                    if (document.body.classList.contains('dark')) {
+                        document.head.removeChild(darkModeStyles);
+                        document.body.classList.remove('dark');
+                    }
+                };
 
-            // get users theme preference from local storage
+                // get users theme preference from local storage
 
-            if (theme === 'dark') {
-                setDarkTheme(darkModeToggle);
-            } else {
-                setLightTheme(darkModeToggle);
-            }
-
-            darkModeToggle.addEventListener('click', () => {
-                const theme = localStorage.getItem('theme');
                 if (theme === 'dark') {
-                    setLightTheme(darkModeToggle);
-                } else {
                     setDarkTheme(darkModeToggle);
+                } else {
+                    setLightTheme(darkModeToggle);
                 }
-            });
-        </script>
-    </body>
+
+                darkModeToggle.addEventListener('click', () => {
+                    const theme = localStorage.getItem('theme');
+                    if (theme === 'dark') {
+                        setLightTheme(darkModeToggle);
+                    } else {
+                        setDarkTheme(darkModeToggle);
+                    }
+                });
+
+                /*
+                    ========================================
+                    SHOW/HIDE PASSWORD
+                    ========================================
+                */
+
+                const showPasswords = document.querySelectorAll('[data-toggler=show-password]');
+                const password = document.getElementById(showPassword.dataset.target);
+
+                showPasswords.forEach((showPassword) => {
+                    showPassword.addEventListener('click', () => {
+                        if (password.type === 'password') {
+                            password.type = 'text';
+                            showPassword.textContent = 'Hide';
+                        } else {
+                            password.type = 'password';
+                            showPassword.textContent = 'Show';
+                        }
+                    });
+                });
+
+            </script>
+</body>
+
 </html>

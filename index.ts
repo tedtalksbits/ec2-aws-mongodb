@@ -4,11 +4,13 @@ import cookieParser from 'cookie-parser';
 // import connectDB from './config/dbConfig';
 import authRoutes from './routes/auth/auth';
 import accountRoutes from './routes/account/account';
+import registerRoute from './routes/auth/register';
 import mongoose from 'mongoose';
 import { getAppConfig } from './config/appConfig';
 import cors from 'cors';
 import expressLayouts from 'express-ejs-layouts';
 import { verifyAuth } from './controllers/view-controllers/verifyAuth';
+import { userLogin } from './controllers/authLogin';
 
 const app = express();
 dotenv.config();
@@ -43,13 +45,39 @@ app.get('/about', (_req, res) => {
 app.get('/contact', (_req, res) => {
     res.render('contact', { title: 'Contact' });
 });
-app.get('/login', (_req, res) => {
-    res.render('auth/login', { title: 'Login' });
+app.use('/login', async (req, res) => {
+    let error = false;
+    let errorMsg = '';
+    let status = 0;
+    let token = '';
+
+    if (req.method === 'POST') {
+        // handle login
+        const username = req.body.username;
+        const password = req.body.password;
+
+        // check if user exists
+        const response = await userLogin(username, password);
+
+        token = response.token as string;
+        error = response.error;
+        errorMsg = response.errorMsg as string;
+        status = response.status;
+
+        if (!error && token) {
+            res.cookie('token', token, { httpOnly: true });
+            res.header('cookie', token);
+            return res.redirect('/dashboard');
+        }
+
+        // if user exists, create a token and send it to the client
+        // if user does not exist, send an error message
+    }
+
+    res.render('auth/login', { title: 'Login', error, errorMsg, status });
 });
 
-app.get('/register', (_req, res) => {
-    res.render('auth/register', { title: 'Register' });
-});
+app.use('/register', registerRoute);
 
 // PROTECTED ROUTES
 app.get('/dashboard', verifyAuth, (_req, res) => {

@@ -1,14 +1,4 @@
 <div class="dashboard">
     <h1>dashboard</h1>
 
-    <button id="getAccounts">Get accounts</button>
 </div>
-
-<script>
-    const getAccounts = document.getElementById('getAccounts');
-    getAccounts.addEventListener('click', () => {
-        fetch('/api/v1/account')
-            .then((res) => res.json())
-            .then((data) => console.log(data));
-    });
-</script>

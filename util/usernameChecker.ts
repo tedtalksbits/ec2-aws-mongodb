@@ -6,7 +6,6 @@ interface UsernameChecker {
 export const usernameChecker = (username: string): UsernameChecker => {
     // valid username regex
     const validUsernameRegex = /^[a-zA-Z0-9]+$/;
-    console.log(username, validUsernameRegex.test(username));
 
     // check if username is valid
     if (!validUsernameRegex.test(username)) {

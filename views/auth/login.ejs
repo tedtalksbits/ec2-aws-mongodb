@@ -4,7 +4,7 @@
         Do not have an account yet?
         <a class="link" href="/register">Create account</a>
     </p>
-    <form class="paper mt-l" id="loginForm">
+    <form class="paper mt-l" id="loginForm" method="post" action="/login">
         <div class="input-wrapper">
             <label for="username" class="label-required">Username</label>
             <input type="text" name="username" id="username" required />
@@ -12,14 +12,9 @@
         <div class="input-wrapper mt-m">
             <label for="username" class="label-required">Password</label>
             <div style="position: relative">
-                <input
-                    type="password"
-                    name="password"
-                    id="password"
-                    required
-                    autocomplete="password"
-                />
-                <div class="input-icon" type="button" id="showPassword">
+                <input type="password" name="password" id="login-password" required autocomplete="password" />
+                <div class="input-icon" role="button" id="showPassword" data-toggler="show-password"
+                    data-target="login-password">
                     Show
                 </div>
             </div>
@@ -34,7 +29,8 @@
             </label>
         </div>
         <button class="mt-m">Sign In</button>
-        <div class="txt-error font-m" id="loginError"></div>
+        <div class="txt-error font-m<%= error && " mt-m" %>" id="loginError"><%= errorMsg %>
+        </div>
     </form>
 </div>
 
@@ -42,19 +38,8 @@
     const rememberMe = document.getElementById('remember');
     const rememberMePreference = localStorage.getItem('rememberMe');
     const username = document.getElementById('username');
-    const password = document.getElementById('password');
     const usernameRemebered = localStorage.getItem('username') || '';
-    const showPassword = document.getElementById('showPassword');
 
-    showPassword.addEventListener('click', () => {
-        if (password.type === 'password') {
-            password.type = 'text';
-            showPassword.textContent = 'Hide';
-        } else {
-            password.type = 'password';
-            showPassword.textContent = 'Show';
-        }
-    });
 
     if (rememberMePreference === 'true') {
         rememberMe.checked = true;
@@ -77,45 +62,5 @@
         localStorage.setItem('username', username.value);
     });
 
-    const loginForm = document.getElementById('loginForm');
-    loginForm.addEventListener('submit', (e) => {
-        e.preventDefault();
-        const usernameValue = username.value;
-        const passwordValue = password.value;
 
-        const data = {
-            username: usernameValue,
-            password: passwordValue,
-        };
-        login(data);
-    });
-
-    const login = async (data) => {
-        const loginError = document.getElementById('loginError');
-        if (!data.username || !data.password) {
-            loginError.innerText = 'Please fill in all fields';
-            loginError.classList.add('mt-m');
-            loginError.dataset.error = 'true';
-            return;
-        }
-        const response = await fetch('/api/v1/auth/login', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(data),
-        });
-        const responseData = await response.json();
-        if (response.status === 200) {
-            loginError.innerText = '';
-            loginError.dataset.error = 'false';
-            loginError.classList.remove('mt-m');
-            window.location.href = '/dashboard';
-        } else {
-            loginError.innerText = responseData.errorMsg;
-            loginError.dataset.error = 'true';
-            loginError.classList.add('mt-m');
-        }
-        console.log(responseData);
-    };
 </script>

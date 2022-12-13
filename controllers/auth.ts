@@ -110,7 +110,7 @@ export const register = async (req: Request, res: Response) => {
     // @ts-ignore
     const { password: pw, ...user } = newUser._doc;
 
-    console.log(user);
+    console.log('user', user);
 
     try {
         const account = new Account({

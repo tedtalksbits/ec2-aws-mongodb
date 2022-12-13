@@ -3,6 +3,8 @@ import { Request, Response, NextFunction } from 'express';
 
 export const verifyAuth = (req: Request, res: Response, next: NextFunction) => {
     const token = req.cookies.token;
+    console.log(token);
+    console.log('verifyAuth');
     //check for token cookie
     if (!token) {
         // redirect to login page
