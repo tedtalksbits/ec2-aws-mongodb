@@ -7,7 +7,7 @@
     <form class="paper mt-l" id="loginForm" method="post" action="/login">
         <div class="input-wrapper">
             <label for="username" class="label-required">Username</label>
-            <input type="text" name="username" id="username" required />
+            <input type="text" name="username" id="username" value="<%= data?.username %> " required />
         </div>
         <div class="input-wrapper mt-m">
             <label for="username" class="label-required">Password</label>
@@ -31,7 +31,14 @@
         <button class="mt-m">Sign In</button>
         <div class="txt-error font-m<%= error && " mt-m" %>" id="loginError"><%= errorMsg %>
         </div>
+
+
     </form>
+    <% if (showAlert) { %>
+        <div class="paper fade-in mt-xxl bg-gradient-400">
+            <h4 style="color: black">Account created!</h4>
+        </div>
+        <% } %>
 </div>
 
 <script>

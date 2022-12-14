@@ -79,7 +79,7 @@
     --info-transparent-700: rgba(49, 214, 230, 0.56);
     --info-transparent-800: rgba(49, 214, 230, 0.64);
     --info-transparent-900: rgba(49, 214, 230, 0.72);
-
+    --bg-color: #f8f9fa;
     --surface-900: #ffffff;
     --surface-800: #e8e8e8;
     --surface-700: #d0d0d0;
@@ -118,7 +118,7 @@
     --on-surface-transparent-800: rgba(64, 64, 64, 0.64);
     --on-surface-transparent-900: rgba(64, 64, 64, 0.72);
 
-    --primary-blue: #1971c2;
+    --primary-blue: #1f6feb;
     --primary-blue-darker: #0f4b99;
     --primary-blue-dark: #165ba0;
     --primary-blue-light: #1e8ce6;
@@ -133,6 +133,44 @@
     --primary-blue-transparent-700: rgba(25, 113, 194, 0.56);
     --primary-blue-transparent-800: rgba(25, 113, 194, 0.64);
     --primary-blue-transparent-900: rgba(25, 113, 194, 0.72);
+
+    /* gradients */
+
+    --gradient-primary-blue: linear-gradient(90deg,
+            var(--primary-blue-lightest) 0%,
+            var(--primary-blue-lighter) 100%);
+
+    --gradient-primary-blue-dark: linear-gradient(90deg,
+            var(--primary-blue-light) 0%,
+            var(--primary-blue) 100%);
+
+    --gradient-primary-blue-darker: linear-gradient(90deg,
+            var(--primary-blue-dark) 0%,
+            var(--primary-blue-darker) 100%);
+
+    --gradient-primary-blue-light: linear-gradient(90deg,
+            var(--primary-blue-lighter) 0%,
+            var(--primary-blue-lightest) 100%);
+
+    --gradient-primary-blue-lighter: linear-gradient(90deg,
+            var(--primary-blue-lightest) 0%,
+            var(--primary-blue-lighter) 100%);
+
+    --gradient-blue: linear-gradient(90deg,
+            var(--primary-blue-lightest) 0%,
+            var(--primary-blue-lighter) 100%);
+
+    --gradient-purple: linear-gradient(90deg, #7f00ff 0%, #e100ff 100%);
+    --gradient-pink: linear-gradient(90deg, #ff0084 0%, #ff6e7f 100%);
+    --gradient-blue: linear-gradient(90deg, #00dbde 0%, #fc00ff 100%);
+    --gradient-orange: linear-gradient(90deg, #fa5252 0%, #ff9a44 100%);
+    --gradient-pink-orange: linear-gradient(90deg, #ee0979 0%, #ff6a00 100%);
+    --gradient-yellow: linear-gradient(90deg, #f5d300 0%, #ff4e00 100%);
+    --gradient-green: linear-gradient(90deg, #00c9ff 0%, #92fe9d 100%);
+    --gradient-red: linear-gradient(90deg, #ff0084 0%, #ff6e7f 100%);
+    --gradient-red-blue: linear-gradient(90deg, #fc466b 0%, #3f5efb 100%);
+
+
 
     /* 
       Font 
@@ -193,6 +231,8 @@
     --border-radius-2xl: 64px;
     --border-radius-3xl: 128px;
     --border-radius-4xl: 256px;
+    --border-radius-full: 9999px;
+    --border-radius-circle: 50%;
 
     /* border width */
     --border-width-0: 0;
@@ -235,7 +275,7 @@ body {
     min-height: 100vh;
     scroll-behavior: smooth;
     text-rendering: optimizeSpeed;
-    background-color: var(--surface-900);
+    background-color: var(--bg-color);
     color: var(--surface-100);
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     font-size: 1rem;
@@ -279,6 +319,13 @@ a.active {
     color: var(--surface-200);
 }
 
+
+a.link {
+    color: var(--info-600);
+    font-size: inherit;
+    font-weight: 400;
+}
+
 main {
     height: var(--main-height);
     padding: 1rem;
@@ -293,14 +340,52 @@ footer {
 /* BASE COMPONENTS */
 .paper {
     background-color: var(--surface-900);
-    border-radius: 0.5rem;
+    border-radius: var(--border-radius-md);
     padding: 1.75rem;
     margin-bottom: 1rem;
     border: 1px solid var(--border-color);
     box-shadow: 0 1px 3px rgb(0 0 0 / 5%), rgb(0 0 0 / 5%) 0px 20px 25px -5px, rgb(0 0 0 / 4%) 0px 10px 10px -5px;
 }
 
+.paper.paper-alt {
+    background-color: var(--surface-800);
+}
 
+.card {
+    background-color: var(--surface-900);
+    border-radius: var(--border-radius-sm);
+    padding: 1.75rem;
+    margin-bottom: 1rem;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 1px 3px rgb(0 0 0 / 5%), rgb(0 0 0 / 5%) 0px 20px 25px -5px, rgb(0 0 0 / 4%) 0px 10px 10px -5px;
+}
+
+.mini-card {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    background: var(--surface-900);
+    padding: var(--spacing-md) var(--spacing-xl);
+    border-radius: var(--border-radius-md);
+    transition: transform 0.2s ease-in-out;
+    cursor: pointer;
+}
+
+.mini-card:hover {
+    /* background: var(--surface-800); */
+    transform: scale(1.05);
+}
+
+.mini-card .mini-card-icon {
+    font-size: 2rem;
+}
+
+.mini-card .mini-card__content h4 {
+    margin: 0;
+    white-space: nowrap;
+    font-size: .9rem;
+    font-weight: 400;
+}
 
 /* FORM COMPONENTS */
 
@@ -312,7 +397,7 @@ input[type="number"],
 input[type="tel"],
 textarea {
     border: 1px solid transparent;
-    border-radius: 4px;
+    border-radius: var(--border-radius-sm);
     transition: all 0.2s ease-in-out;
     font-size: 14px;
     appearance: none;
@@ -337,9 +422,9 @@ input:focus {
 /*  change bg color when auto fill */
 input:-webkit-autofill {
     background-color: transparent !important;
-    -webkit-text-fill-color: rgb(255, 255, 255);
-    -webkit-box-shadow: 0 0 0 50px rgb(46, 47, 49) inset;
-    color: white;
+    -webkit-text-fill-color: var(--surface-100) !important;
+    -webkit-box-shadow: 0 0 0 50px var(--surface-800) inset;
+    color: var(--surface-100);
     overflow: hidden;
 }
 
@@ -415,9 +500,19 @@ label.label-required::after {
 .container {
     display: flex;
     flex-direction: column;
-    max-width: 40ch;
+    max-width: var(--width-sm);
     margin: 0 auto;
     height: 100%;
+}
+
+.container.container-md {
+    max-width: var(--width-md);
+}
+
+.container.container-md .container-grid-items {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(calc((var(--width-md) / 3) - 3rem), 1fr));
+    grid-gap: 1rem;
 }
 
 .container-grid-items {
@@ -523,6 +618,45 @@ button:disabled {
 
 
 
+/* border radius */
+.rounded-xs {
+    border-radius: var(--border-radius-xs);
+}
+
+.rounded-sm {
+    border-radius: var(--border-radius-sm);
+}
+
+.rounded-md {
+    border-radius: var(--border-radius-md);
+}
+
+.rounded-lg {
+    border-radius: var(--border-radius-lg);
+}
+
+.rounded-xl {
+    border-radius: var(--border-radius-xl);
+}
+
+.rounded-xxl {
+    border-radius: var(--border-radius-2xl);
+}
+
+.rounded-xxxl {
+    border-radius: var(--border-radius-3xl);
+}
+
+.rounded-full {
+    border-radius: var(--border-radius-full);
+}
+
+.rounded-circle {
+    border-radius: var(--border-radius-circle);
+}
+
+
+
 /*
     ========================================
     from styles.css on github: github.com/tedtalksbits/styles
@@ -553,6 +687,91 @@ button:disabled {
 .shadow-xxl {
     box-shadow: var(--shadow-xxl);
 }
+
+.bg-primary {
+    background-color: var(--primary-blue);
+}
+
+.bg-primary-dark {
+    background-color: var(--primary-blue-dark);
+}
+
+.bg-primary-light {
+    background-color: var(--primary-blue-light);
+}
+
+.bg-primary-transparent-100 {
+    background-color: var(--primary-blue-transparent-100);
+}
+
+.bg-primary-transparent-200 {
+    background-color: var(--primary-blue-transparent-200);
+}
+
+.bg-primary-transparent-300 {
+    background-color: var(--primary-blue-transparent-300);
+}
+
+.bg-primary-transparent-400 {
+    background-color: var(--primary-blue-transparent-400);
+}
+
+.bg-primary-transparent-500 {
+    background-color: var(--primary-blue-transparent-500);
+}
+
+.bg-primary-transparent-600 {
+    background-color: var(--primary-blue-transparent-600);
+}
+
+.bg-primary-transparent-700 {
+    background-color: var(--primary-blue-transparent-700);
+}
+
+.bg-primary-transparent-800 {
+    background-color: var(--primary-blue-transparent-800);
+}
+
+.bg-primary-transparent-900 {
+    background-color: var(--primary-blue-transparent-900);
+}
+
+.bg-surface-900 {
+    background-color: var(--surface-900);
+}
+
+.bg-surface-800 {
+    background-color: var(--surface-800);
+}
+
+.bg-surface-700 {
+    background-color: var(--surface-700);
+}
+
+.bg-surface-600 {
+    background-color: var(--surface-600);
+}
+
+.bg-surface-500 {
+    background-color: var(--surface-500);
+}
+
+.bg-surface-400 {
+    background-color: var(--surface-400);
+}
+
+.bg-surface-300 {
+    background-color: var(--surface-300);
+}
+
+.bg-surface-200 {
+    background-color: var(--surface-200);
+}
+
+.bg-surface-100 {
+    background-color: var(--surface-100);
+}
+
 
 /* gradients */
 .bg-gradient-50 {
@@ -593,6 +812,22 @@ button:disabled {
 
 .bg-gradient-900 {
     background: linear-gradient(90deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
+}
+
+.txt-white {
+    color: white;
+}
+
+.txt-white:hover {
+    color: white;
+}
+
+.txt-black {
+    color: black;
+}
+
+.txt-black:hover {
+    color: black;
 }
 
 .txt-gradient-50 {

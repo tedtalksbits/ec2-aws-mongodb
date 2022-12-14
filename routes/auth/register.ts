@@ -1,9 +1,11 @@
-import express from 'express';
+import express, { Request, Response } from 'express';
+
 import { userRegister } from '../../controllers/authRegister';
+import { ExtendedRequest } from '../../types/restResponse';
 
 const router = express.Router();
 
-router.use('/', async (req, res) => {
+router.use('/', async (req: ExtendedRequest, res: Response) => {
     let error = false;
     let errorMsg = '';
     let status = 0;
@@ -35,11 +37,15 @@ router.use('/', async (req, res) => {
         data = response.data;
 
         if (!error) {
-            return res.render('auth/login', { title: 'Login', data });
+            req.session.user = {};
+            // save local variable to session
+            req.session.state = {
+                setShowAlert: true,
+            };
+
+            return res.redirect('/login');
         }
     }
-
-    // if theres an error, render the register page again with the error message and filds filled except for password
 
     res.render('auth/register', {
         title: 'Register',

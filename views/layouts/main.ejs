@@ -22,6 +22,7 @@
                 const darkModeStyles = document.createElement('style');
                 darkModeStyles.innerHTML = `
             :root{
+                --bg-color: #1a1b1e;
                 --surface-900: #1a1b1e;
                 --surface-800: #2b2c31;
                 --surface-700: #3c3d42;
@@ -75,9 +76,9 @@
                 */
 
                 const showPasswords = document.querySelectorAll('[data-toggler=show-password]');
-                const password = document.getElementById(showPassword.dataset.target);
-
                 showPasswords.forEach((showPassword) => {
+                    const passwordId = showPassword.getAttribute('data-target');
+                    const password = document.getElementById(passwordId);
                     showPassword.addEventListener('click', () => {
                         if (password.type === 'password') {
                             password.type = 'text';

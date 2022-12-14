@@ -8,17 +8,20 @@ export const verifyAuth = (req: Request, res: Response, next: NextFunction) => {
     //check for token cookie
     if (!token) {
         // redirect to login page
+        req.session = null;
         return res.status(401).redirect('/login');
     }
 
     jwt.verify(
         token,
-        process.env.SECRET_KEY || '',
+        process.env.SECRET_KEY as string,
         (err: any, _decoded: any) => {
             if (err) {
                 console.log(err);
+                req.session = null;
                 return res.status(401).redirect('/login');
             }
+            console.log('verified');
             next();
         }
     );

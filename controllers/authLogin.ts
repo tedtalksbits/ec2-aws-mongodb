@@ -48,8 +48,9 @@ export const userLogin = async (
         process.env.SECRET_KEY || '',
         { expiresIn: '1hr' }
     );
-
-    //const { password: pw, ssn, ...userWithoutPw } = user._doc;
+    // _doc is a mongoose thing
+    //@ts-ignore:next-line
+    const { password: pw, ssn, ...userWithoutPw } = user._doc;
 
     // return res.status(200).json({
     //     ok: true,
@@ -67,5 +68,6 @@ export const userLogin = async (
         error: false,
         status: 200,
         token,
+        data: userWithoutPw,
     };
 };
