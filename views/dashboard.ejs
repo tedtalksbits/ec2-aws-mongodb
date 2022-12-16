@@ -1,46 +1,49 @@
 <div class="">
-    <a href="/logout">logout</a>
     <div class="container container-md">
         <h2 class="mb-xxxl">Hello <%= data.firstName %> <span>👋🏿</span></h2>
         <div class="paper paper-alt p-l">
             <h4>Services</h4>
             <div class="container-grid-items mt-l">
-                <div class="mini-card">
+                <a class="mini-card" href="/bills">
                     <span class="mini-card-icon">🧾</span>
                     <div class="mini-card__content">
                         <h4>Bills</h4>
                     </div>
-                </div>
-                <div class="mini-card">
+                </a>
+                <a class="mini-card">
                     <span class="mini-card-icon">💳</span>
                     <div class="mini-card__content">
                         <h4>Credit Cards</h4>
                     </div>
-                </div>
-                <div class="mini-card">
+                </a>
+                <a class="mini-card">
                     <span class="mini-card-icon">🛰</span>
                     <div class="mini-card__content">
                         <h4>Funds</h4>
                     </div>
-                </div>
+                </a>
                 <div class="mini-card">
-                    <span class="mini-card-icon">🪙</span>
+                    <span class="mini-card-icon">↔️</span>
                     <div class="mini-card__content">
                         <h4>Transfers</h4>
                     </div>
                 </div>
-                <div class="mini-card">
-                    <span class="mini-card-icon">🏧</span>
+                <a class="mini-card">
+                    <span class="mini-card-icon">
+                        <img src="static/images/user.svg" alt="" srcset="">
+                    </span>
                     <div class="mini-card__content">
-                        <h4>ATM</h4>
+                        <h4>Profile</h4>
                     </div>
-                </div>
-                <div class="mini-card">
-                    <span class="mini-card-icon">💳</span>
+                </a>
+                <a class="mini-card" href="/logout">
+                    <span class="mini-card-icon">
+                        <img src="static/images/logout.svg" alt="" srcset="">
+                    </span>
                     <div class="mini-card__content">
-                        <h4>Bills</h4>
+                        <h4>Logout</h4>
                     </div>
-                </div>
+                </a>
             </div>
         </div>
     </div>

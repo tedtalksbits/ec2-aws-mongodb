@@ -326,7 +326,7 @@ a.link {
     font-weight: 400;
 }
 
-main {
+main.main {
     height: var(--main-height);
     padding: 1rem;
 }
@@ -378,6 +378,12 @@ footer {
 
 .mini-card .mini-card-icon {
     font-size: 2rem;
+}
+
+.mini-card .mini-card-icon img {
+    height: 2rem;
+    width: 100%;
+    object-fit: contain;
 }
 
 .mini-card .mini-card__content h4 {
