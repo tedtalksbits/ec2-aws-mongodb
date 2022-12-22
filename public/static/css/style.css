@@ -135,7 +135,7 @@
     --primary-blue-transparent-900: rgba(25, 113, 194, 0.72);
 
     /* gradients */
-
+    --gradient-primary: linear-gradient(90deg, #7f00ff 0%, #e100ff 100%);
     --gradient-primary-blue: linear-gradient(90deg,
             var(--primary-blue-lightest) 0%,
             var(--primary-blue-lighter) 100%);
@@ -592,7 +592,7 @@ button {
     display: inline-block;
     padding: 0.5rem 1rem;
     border-radius: var(--border-radius-sm);
-    background-color: var(--primary-blue);
+    background: var(--gradient-primary);
     color: white;
     font-size: 1rem;
     font-weight: 400;
@@ -818,6 +818,51 @@ button:disabled {
 
 .bg-gradient-900 {
     background: linear-gradient(90deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
+}
+
+/* .bg-gradient-primary {
+    background: var(--gradient-primary);
+    background-position: 100% 50%;
+    animation: gradient 3s ease infinite;
+} */
+.bg-gradient-primary {
+    background: var(--gradient-primary);
+    background-size: 100% 400%;
+}
+
+.bg-gradient-primary:hover {
+    background: var(--gradient-primary);
+    background-size: 151% 400%;
+    animation: AnimationName 5s ease infinite;
+}
+
+@keyframes AnimationName {
+    0% {
+        background-position: 0% 50%
+    }
+
+    50% {
+        background-position: 100% 50%
+    }
+
+    100% {
+        background-position: 0% 50%
+    }
+}
+
+/* gradient animation */
+@keyframes gradient {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
 }
 
 .txt-white {

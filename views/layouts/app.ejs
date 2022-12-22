@@ -11,10 +11,10 @@
 </head>
 
 <body>
-
-    <div style="display: none;"><%- include('../partials/header.ejs') %></div>
-    <main class="main"><%- body %></main>
-    <%- include('../partials/themeScript.ejs') %>
+    <%- include('../partials/header.ejs') %>
+        <div style="display: none;"><%- include('../partials/header.ejs') %></div>
+        <main class="main"><%- body %></main>
+        <%- include('../partials/themeScript.ejs') %>
 
 </body>
 
