@@ -1,12 +1,64 @@
-<div class="">
-    <div class="container container-md">
+<style>
+    .dashboard {
+        display: flex;
+        overflow-x: hidden;
+        height: calc(100vh - var(--header-height) - 2rem);
+        overflow-y: hidden;
+    }
+
+    .dashboard__main {
+        grid-area: main;
+        overflow-y: auto;
+    }
+
+    .dashboard__sidebar {
+        grid-area: sidebar;
+    }
+
+    .dashboard__sidebar {
+        background-color: var(--surface-700);
+        transition: width 500ms ease-in-out 0s, opacity 200ms ease-in-out 0s,
+            padding 300ms ease-in-out 0s;
+        width: 0ch;
+        opacity: 0;
+        animation: fade-out 200ms ease-in-out 0s;
+    }
+
+    .dashboard__sidebar.open {
+        width: var(--width-sm);
+        opacity: 1;
+        animation: fade-in 350ms ease-in-out 0s;
+        padding: var(--spacing-lg);
+    }
+
+    @keyframes fade-in {
+        0% {
+            opacity: 0;
+        }
+        100% {
+            opacity: 1;
+        }
+    }
+
+    @keyframes fade-out {
+        0% {
+            opacity: 1;
+        }
+        100% {
+            opacity: 0;
+        }
+    }
+</style>
+
+<div class="dashboard">
+    <div class="dashboard__main container container-md w-full w-100 p-m">
         <h2 class="mb-xxxl">Hello <%= data.firstName %> <span>👋🏿</span></h2>
         <div class="paper paper-alt p-l">
             <h4>Services</h4>
             <div class="container-grid-items mt-l">
                 <a class="mini-card" href="/bills">
                     <span class="mini-card-icon">
-                        <img src="static/images/bills.svg" alt="" srcset="">
+                        <img src="static/images/bills.svg" alt="" srcset="" />
                     </span>
                     <div class="mini-card__content">
                         <h4>Bills</h4>
@@ -14,7 +66,11 @@
                 </a>
                 <a class="mini-card">
                     <span class="mini-card-icon">
-                        <img src="static/images/notification.svg" alt="" srcset="">
+                        <img
+                            src="static/images/notification.svg"
+                            alt=""
+                            srcset=""
+                        />
                     </span>
                     <div class="mini-card__content">
                         <h4>Notifications</h4>
@@ -22,7 +78,7 @@
                 </a>
                 <a class="mini-card">
                     <span class="mini-card-icon">
-                        <img src="static/images/search.svg" alt="" srcset="">
+                        <img src="static/images/search.svg" alt="" srcset="" />
                     </span>
                     <div class="mini-card__content">
                         <h4>Search</h4>
@@ -30,15 +86,19 @@
                 </a>
                 <a class="mini-card">
                     <span class="mini-card-icon">
-                        <img src="static/images/user.svg" alt="" srcset="">
+                        <img src="static/images/user.svg" alt="" srcset="" />
                     </span>
                     <div class="mini-card__content">
                         <h4>Profile</h4>
                     </div>
                 </a>
-                <a class="mini-card">
+                <a class="mini-card" data-sidebar-toggler="true">
                     <span class="mini-card-icon">
-                        <img src="static/images/preference.svg" alt="" srcset="">
+                        <img
+                            src="static/images/preference.svg"
+                            alt=""
+                            srcset=""
+                        />
                     </span>
                     <div class="mini-card__content">
                         <h4>Preference</h4>
@@ -46,7 +106,7 @@
                 </a>
                 <a class="mini-card" href="/logout">
                     <span class="mini-card-icon">
-                        <img src="static/images/logout.svg" alt="" srcset="">
+                        <img src="static/images/logout.svg" alt="" srcset="" />
                     </span>
                     <div class="mini-card__content">
                         <h4>Logout</h4>
@@ -55,5 +115,43 @@
             </div>
         </div>
     </div>
+    <div class="dashboard__sidebar hidden border bg-surface-800 flex-v">
+        <div class="flex-h gap-s align-center">
+            <span class="mini-card-icon">
+                <img src="static/images/preference.svg" alt="" srcset="" />
+            </span>
+            <h3>Preference</h3>
+        </div>
+        <div
+            class="flex align-center gap-s p-l justify-between bg-surface-900 rounded-md mt-m"
+        >
+            <span>Dark Mode</span>
+            <div class="switch">
+                <input type="checkbox" id="darkMode" />
+                <label for="darkMode"></label>
+            </div>
+        </div>
+        <div
+            class="flex align-center gap-s p-l justify-between bg-surface-900 rounded-md mt-m"
+        >
+            <span>Dark Mode</span>
+            <div class="switch">
+                <input type="checkbox" id="darkMode" />
+                <label for="darkMode"></label>
+            </div>
+        </div>
+        <div
+            class="flex align-center gap-s p-l justify-between bg-surface-900 rounded-md mt-m"
+        >
+            <span>Dark Mode</span>
+            <div class="switch">
+                <input type="checkbox" id="darkMode" />
+                <label for="darkMode"></label>
+            </div>
+        </div>
 
+        <div class="mt-auto">
+            <button data-sidebar-toggler="true">Save</button>
+        </div>
+    </div>
 </div>

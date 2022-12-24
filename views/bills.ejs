@@ -1,0 +1,190 @@
+<a href="/dashboard">Back</a>
+<div class="bills">
+    <div class="bills__header">
+        <h1 class="font-xxxl">Bills</h1>
+        <div class="bills__header__actions">
+            <a href="/bills/new" class="btn btn-primary">Add New Bill</a>
+        </div>
+    </div>
+    <div class="bills__content">
+        <div class="bills__content__header">
+            <h3 class="font-m">All Bills</h3>
+            <div class="bills__content__header__actions">
+                <a href="/bills" class="btn btn-primary">All</a>
+                <a href="/bills?status=unpaid" class="btn btn-primary">
+                    Unpaid
+                </a>
+                <a href="/bills?status=paid" class="btn btn-primary">Paid</a>
+            </div>
+        </div>
+        <div class="bills__content__body">
+            <div class="bills__content__body__items">
+                <% bills.forEach(bill => { %>
+
+                <div class="bills__content__body__item paper">
+                    <h4 class="font-s">Name: <%= bill.billName %></h4>
+                    <h4 class="font-s">Amount: $<%= bill.billAmount %></h4>
+                    <h4 class="font-s">Due: <%= bill.billDueDate %></h4>
+                    <h4 class="font-s">Status: <%= bill.billStatus %></h4>
+                    <h4 class="font-s">Category: <%= bill.billCategory %></h4>
+                    <h4 class="font-s">Notes: <%= bill.billNotes %></h4>
+                    <h4 class="font-s">Reminder: <%= bill.billReminder %></h4>
+                    <h4 class="font-s">
+                        Reminder Date: <%= bill.billReminderDate %>
+                    </h4>
+                    <h4 class="font-s">
+                        Reminder Time: <%= bill.billReminderTime %>
+                    </h4>
+                    <h4 class="font-s">
+                        Reminder Notes: <%= bill.billReminderNotes %>
+                    </h4>
+                    <h4 class="font-s">
+                        Reminder Frequency: <%= bill.billReminderFrequency %>
+                    </h4>
+                    <h4 class="font-s">
+                        Reminder Frequency: <%= bill.billReminderFrequency %>
+                    </h4>
+
+                    <div class="bills__content__body__item__actions">
+                        <a
+                            href="/bills/<%= bill._id %>"
+                            class="btn btn-primary"
+                        >
+                            View
+                        </a>
+                        <a
+                            href="/bills/<%= bill._id %>/edit"
+                            class="btn btn-primary"
+                        >
+                            Edit
+                        </a>
+                        <form action="/bills/<%= bill._id %>" method="POST">
+                            <input
+                                type="hidden"
+                                name="_method"
+                                value="DELETE"
+                            />
+                            <button type="submit" class="btn btn-primary">
+                                Delete
+                            </button>
+                        </form>
+                    </div>
+
+                    <% }) %> <% if (bills.length === 0) { %>
+
+                    <div class="bills__content__body__item paper">
+                        <h4 class="font-s">No bills found</h4>
+                    </div>
+                    <% } %>
+                </div>
+            </div>
+            <div class="add-bill">
+                <a
+                    class="btn btn-primary"
+                    data-toggler="true"
+                    data-toggler-for="newBill"
+                    >Add New Bill</a
+                >
+            </div>
+        </div>
+    </div>
+
+    <div
+        class="modal"
+        aria-hidden="true"
+        data-toggle-target="newBill"
+        data-component="modal"
+    >
+        <div class="modal__content">
+            <div
+                class="modal__content__header flex align-center justify-between"
+            >
+                <h3 class="font-m">Add New Bill</h3>
+                <div class="modal__content__header__actions">
+                    <a
+                        class="btn btn-primary"
+                        data-toggler="true"
+                        data-toggler-for="newBill"
+                        >Close</a
+                    >
+                </div>
+            </div>
+            <div class="modal__content__body">
+                <form action="/register" method="POST" class="mt-l">
+                    <div class="input-wrapper flex-v gap-s">
+                        <label for="billName" class="label-required"
+                            >Name</label
+                        >
+                        <input
+                            type="text"
+                            name="billName"
+                            id="billName"
+                            required
+                        />
+                    </div>
+                    <div class="input-wrapper flex-v gap-s mt-s">
+                        <label for="billAmount" class="label-required"
+                            >Amount</label
+                        >
+                        <input
+                            type="number"
+                            name="billAmount"
+                            id="billAmount"
+                            required
+                            min="0"
+                        />
+                    </div>
+
+                    <div class="input-wrapper flex-v gap-s mt-s">
+                        <label for="billDueDate" class="label-required"
+                            >billDueDate</label
+                        >
+                        <input
+                            type="date"
+                            name="billDueDate"
+                            id="billDueDate"
+                            required
+                        />
+                    </div>
+                    <div class="input-wrapper flex-v gap-s mt-s">
+                        <label for="billFrequency" class="label-required"
+                            >billFrequency</label
+                        >
+                        <input
+                            type="number"
+                            name="billFrequency"
+                            id="billFrequency"
+                            required
+                            min="1"
+                        />
+                    </div>
+                    <div class="input-wrapper flex-v gap-s mt-m">
+                        <label for="category" class="label-required"
+                            >Category</label
+                        >
+                        <select name="category" id="category" required>
+                            <option value="food">Food</option>
+                            <option value="entertainment">Entertainment</option>
+                            <option value="utilities">Utilities</option>
+                            <option value="transportation">
+                                Transportation
+                            </option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    <div class="input-wrapper flex-v gap-s mt-m">
+                        <label for="isAutoPay">Autopay</label>
+                        <input
+                            type="checkbox"
+                            name="isAutoPay"
+                            id="isAutoPay"
+                            value="true"
+                        />
+                    </div>
+
+                    <button class="mt-m">Add bill</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

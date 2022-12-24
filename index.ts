@@ -68,12 +68,13 @@ app.get('/logout', (req, res) => {
 });
 app.use('/register', registerRoute);
 
-// PROTECTED ROUTES
 app.get('/dashboard', verifyAuth, (req: ExtendedRequest, res) => {
     let data = {};
 
     if (req.session.user) {
         data = req.session.user.data;
+
+        console.log('data from session', data);
     }
 
     res.render('dashboard', {
@@ -83,7 +84,19 @@ app.get('/dashboard', verifyAuth, (req: ExtendedRequest, res) => {
     });
 });
 
-// PROTECTED ROUTES
+app.get('/profile', verifyAuth, (req: ExtendedRequest, res) => {
+    let data = {};
+
+    if (req.session.user) {
+        data = req.session.user.data;
+    }
+    res.render('profile', {
+        title: 'Profile',
+        data,
+        layout: './layouts/app',
+    });
+});
+app.use('', accountRoutes);
 
 /*
     ========================================
@@ -96,6 +109,9 @@ app.use((_req, res) => {
 });
 
 app.use((err: any, _req: Request, res: Response, _next: NextFunction) => {
+    console.log('*********** ERROR HANDLER ************');
+    console.log(err);
+    console.log('*********** ERROR HANDLER ************');
     if (err.message.includes('Failed to lookup view')) {
         console.log(err);
         return res.status(404).render('404', { title: '404' });

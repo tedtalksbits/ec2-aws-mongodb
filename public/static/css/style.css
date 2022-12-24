@@ -197,6 +197,7 @@
     --width-2xl: 120ch;
     --width-3xl: 160ch;
     --width-4xl: 200ch;
+    --width-full: 100%;
 
     /* height sizes */
 
@@ -209,6 +210,7 @@
     --height-2xl: 120ch;
     --height-3xl: 160ch;
     --height-4xl: 200ch;
+    --height-full: 100%;
 
     /* spacing sizes */
     --spacing-0: 0;
@@ -328,7 +330,7 @@ a.link {
 
 main.main {
     height: var(--main-height);
-    padding: 1rem;
+    /* padding: 1rem; */
 }
 
 
@@ -401,11 +403,14 @@ input[type="search"],
 input[type="email"],
 input[type="number"],
 input[type="tel"],
+input[type="date"],
+select,
 textarea {
     border: 1px solid transparent;
     border-radius: var(--border-radius-sm);
     transition: all 0.2s ease-in-out;
     font-size: 14px;
+    font-family: inherit;
     appearance: none;
     height: 36px;
     min-height: 36px;
@@ -466,7 +471,6 @@ input[type="checkbox"]:checked::after {
 
 label {
     display: block;
-    margin-bottom: var(--spacing-xs);
     font-size: 0.875rem;
     font-weight: 500;
     color: var(--surface-100);
@@ -587,8 +591,38 @@ label.label-required::after {
     }
 }
 
+/* modal */
+.modal[aria-hidden="false"] {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(25px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+}
+
+.modal,
+.modal[aria-hidden="true"] {
+    display: none;
+}
+
+.modal__content {
+    background-color: var(--surface-900);
+    border-radius: var(--border-radius-md);
+    padding: 1rem;
+    width: 100%;
+    max-width: 500px;
+    position: relative;
+}
+
 /* BUTTONS */
-button {
+button,
+.button {
     display: inline-block;
     padding: 0.5rem 1rem;
     border-radius: var(--border-radius-sm);
@@ -1263,6 +1297,10 @@ button:disabled {
     margin: var(--spacing-3xl);
 }
 
+.m-auto {
+    margin: auto;
+}
+
 .my-s {
     margin-top: var(--spacing-sm);
     margin-bottom: var(--spacing-sm);
@@ -1291,6 +1329,11 @@ button:disabled {
 .my-xxxl {
     margin-top: var(--spacing-3xl);
     margin-bottom: var(--spacing-3xl);
+}
+
+.my-auto {
+    margin-top: auto;
+    margin-bottom: auto;
 }
 
 .mx-s {
@@ -1323,6 +1366,11 @@ button:disabled {
     margin-right: var(--spacing-3xl);
 }
 
+.mx-auto {
+    margin-left: auto;
+    margin-right: auto;
+}
+
 .mt-s {
     margin-top: var(--spacing-sm);
 }
@@ -1347,6 +1395,10 @@ button:disabled {
     margin-top: var(--spacing-3xl);
 }
 
+.mt-auto {
+    margin-top: auto;
+}
+
 .mb-s {
     margin-bottom: var(--spacing-sm);
 }
@@ -1369,6 +1421,10 @@ button:disabled {
 
 .mb-xxxl {
     margin-bottom: var(--spacing-3xl);
+}
+
+.mb-auto {
+    margin-bottom: auto;
 }
 
 .ml-s {
@@ -1467,6 +1523,14 @@ button:disabled {
 
 .font-xxxl {
     font-size: var(--font-3xl);
+}
+
+.w-full {
+    width: var(--width-full);
+}
+
+.h-full {
+    height: var(--height-full);
 }
 
 /* animation */

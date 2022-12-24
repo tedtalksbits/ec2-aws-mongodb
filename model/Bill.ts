@@ -12,7 +12,7 @@ const billSchema = new Schema(
             type: Number,
             required: true,
         },
-        billDueDay: {
+        billDueDate: {
             type: String,
             required: true,
         },
@@ -24,9 +24,43 @@ const billSchema = new Schema(
             type: String,
             required: true,
         },
-        billNotes: {
+        billStatus: {
             type: String,
-            default: '',
+            default: 'Pending',
+        },
+        billNotes: {
+            type: Array,
+            default: [
+                // {
+                //     note: {
+                //         type: String,
+                //         default: '',
+                //     },
+                //     noteDate: {
+                //         type: String,
+                //         default: '',
+                //     },
+                //     createdAt: {
+                //         type: Date,
+                //         default: Date.now(),
+                //     },
+                // },
+            ],
+        },
+        billReminders: {
+            type: Array,
+            default: [
+                // {
+                //     reminderDate: {
+                //         type: String,
+                //         default: '',
+                //     },
+                //     reminderStatus: {
+                //         type: String,
+                //         default: 'Pending',
+                //     },
+                // },
+            ],
         },
         isAutoPay: {
             type: Boolean,
