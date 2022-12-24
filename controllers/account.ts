@@ -3,18 +3,18 @@ import Bill from '../model/Bill';
 import { Response } from 'express';
 import { ExtendedRequest } from '../types/restResponse';
 
-export const account = async (req: ExtendedRequest, res: Response) => {
+export const getAccount = async (req: ExtendedRequest, res: Response) => {
     // get all accounts
     const userId = req.session?.user?.data?._id;
 
     if (!userId) {
-        console.log('*********** /account GET ************');
+        console.log('*********** /bills GET ************');
         console.log('userID', userId);
-        console.log('*********** /account GET ************');
+        console.log('*********** /bills GET ************');
         return res.redirect('/login');
     }
 
-    console.log('*********** /account GET ************');
+    console.log('*********** /bills GET ************');
 
     console.log('session', req.session);
 
@@ -23,18 +23,15 @@ export const account = async (req: ExtendedRequest, res: Response) => {
     }).exec();
 
     if (!account) {
-        console.log('*********** /account GET ************');
+        console.log('*********** /bills GET ************');
         console.log('account not found');
-        console.log('*********** /account GET ************');
+        console.log('*********** /bills GET ************');
         return res.redirect('/login');
     }
 
-    console.log('*********** /account GET ************');
+    console.log('*********** /bills GET ************');
 
     console.log('account found', account);
-    console.log(typeof account);
-
-    console.log(account[0].bills);
 
     return res.status(200).render('bills', {
         title: 'Bills',
@@ -46,73 +43,80 @@ export const account = async (req: ExtendedRequest, res: Response) => {
     });
 };
 
-export const addBill = async (req: ExtendedRequest, res: Response) => {
-    // get all accounts
+export const addBillToAccount = async (req: ExtendedRequest, res: Response) => {
     const userId = req.session?.user?.data?._id;
+    const { billName, billAmount, billDueDate, billFrequency, billCategory } =
+        req.body;
 
-    const {
+    let isAutoPay = req.body.isAutoPay === 'on' ? true : false;
+
+    if (!userId) {
+        return res.redirect('/login');
+    }
+
+    if (
+        !billName ||
+        !billAmount ||
+        !billDueDate ||
+        !billFrequency ||
+        !billCategory
+    ) {
+        return res.status(400).render('bills', {
+            title: 'Bills',
+            data: req.session?.user?.data,
+            bills: [],
+            layout: './layouts/app',
+            erorr: true,
+            errorMsg: 'Please fill all required fields',
+        });
+    }
+
+    // const account = await Account.find({
+    //     userId,
+    // }).exec();
+
+    // if (!account) {
+    //     return res.redirect('/login');
+    // }
+
+    const bill = new Bill({
         billName,
         billAmount,
         billDueDate,
         billFrequency,
         billCategory,
         isAutoPay,
-    } = req.body.bill;
-
-    if (!userId) {
-        console.log('*********** /addBill GET ************');
-        console.log('userID', userId);
-        console.log('*********** /addBill GET ************');
-        return res.redirect('/login');
-    }
-
-    console.log('*********** /addBill GET ************');
-
-    console.log('session', req.session);
-
+    });
     const account = await Account.findOne({
         userId,
     }).exec();
+    if (!account) {
+        return res.redirect('/login');
+    }
 
-    console.log('*********** /addBill GET ************');
+    const updatedAccount = (await Account.findOneAndUpdate(
+        { userId },
+        { $push: { bills: bill } },
+        { new: true }
+    ).exec()) as any;
 
-    console.log('account found', account);
-
-    if (account) {
-        // create new bill and add to account
-
-        const newBill = await Bill.create({
-            billName: billName,
-            billAmount: billAmount,
-            billCategory: billCategory,
-            billDueDay: billDueDate,
-            billFrequency: billFrequency,
-            isAutoPay: isAutoPay,
+    if (!updatedAccount) {
+        return res.status(500).render('bills', {
+            title: 'Bills',
+            data: req.session?.user?.data,
+            bills: account.bills,
+            layout: './layouts/app',
+            erorr: true,
+            errorMsg: 'Something went wrong',
         });
-
-        console.log('*********** /addBill GET ************');
-
-        console.log('newBill', newBill);
-        // push using mongoose
-        account.updateOne(
-            { $push: { bills: newBill } },
-            (err: any, result: any) => {
-                if (err) {
-                    console.log('*********** /addBill GET ************');
-                    console.log('error', err);
-                    console.log('*********** /addBill GET ************');
-                    return res.redirect('/login');
-                }
-                console.log('*********** /addBill GET ************');
-                console.log('result', result);
-                console.log('*********** /addBill GET ************');
-            }
-        );
     }
 
     return res.status(200).render('bills', {
         title: 'Bills',
-        data: account,
+        data: req.session?.user?.data,
+        bills: updatedAccount.bills,
         layout: './layouts/app',
+        erorr: false,
+        errorMsg: '',
     });
 };

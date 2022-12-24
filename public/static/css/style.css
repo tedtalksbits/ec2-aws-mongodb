@@ -118,57 +118,56 @@
     --on-surface-transparent-800: rgba(64, 64, 64, 0.64);
     --on-surface-transparent-900: rgba(64, 64, 64, 0.72);
 
-    --primary-blue: #1f6feb;
-    --primary-blue-darker: #0f4b99;
-    --primary-blue-dark: #165ba0;
-    --primary-blue-light: #1e8ce6;
-    --primary-blue-lighter: #1e8ce6;
-    --primary-blue-lightest: #1e8ce6;
-    --primary-blue-transparent-100: rgba(25, 113, 194, 0.08);
-    --primary-blue-transparent-200: rgba(25, 113, 194, 0.16);
-    --primary-blue-transparent-300: rgba(25, 113, 194, 0.24);
-    --primary-blue-transparent-400: rgba(25, 113, 194, 0.32);
-    --primary-blue-transparent-500: rgba(25, 113, 194, 0.4);
-    --primary-blue-transparent-600: rgba(25, 113, 194, 0.48);
-    --primary-blue-transparent-700: rgba(25, 113, 194, 0.56);
-    --primary-blue-transparent-800: rgba(25, 113, 194, 0.64);
-    --primary-blue-transparent-900: rgba(25, 113, 194, 0.72);
+    --primary: #7f00ff;
+    --primary-light: #8f00ff;
+    --primary-lighter: #9f00ff;
+    --primary-lightest: #af00ff;
+    --primary-dark: #6f00ff;
+    --primary-darker: #5f00ff;
+    --primary-darkest: #4f00ff;
+    --primary-transparent-100: rgba(127, 0, 255, 0.08);
+    --primary-transparent-200: rgba(127, 0, 255, 0.16);
+    --primary-transparent-300: rgba(127, 0, 255, 0.24);
+    --primary-transparent-400: rgba(127, 0, 255, 0.32);
+    --primary-transparent-500: rgba(127, 0, 255, 0.4);
+    --primary-transparent-600: rgba(127, 0, 255, 0.48);
+    --primary-transparent-700: rgba(127, 0, 255, 0.56);
+    --primary-transparent-800: rgba(127, 0, 255, 0.64);
+    --primary-transparent-900: rgba(127, 0, 255, 0.72);
+
+    --secondary: #e100ff;
+    --secondary-light: #f100ff;
+    --secondary-lighter: #ff00ff;
+    --secondary-lightest: #ff00ef;
+    --secondary-dark: #d100ff;
+    --secondary-darker: #c100ff;
+    --secondary-darkest: #b100ff;
+    --secondary-transparent-100: rgba(225, 0, 255, 0.08);
+    --secondary-transparent-200: rgba(225, 0, 255, 0.16);
+    --secondary-transparent-300: rgba(225, 0, 255, 0.24);
+    --secondary-transparent-400: rgba(225, 0, 255, 0.32);
+    --secondary-transparent-500: rgba(225, 0, 255, 0.4);
+    --secondary-transparent-600: rgba(225, 0, 255, 0.48);
+    --secondary-transparent-700: rgba(225, 0, 255, 0.56);
+    --secondary-transparent-800: rgba(225, 0, 255, 0.64);
+    --secondary-transparent-900: rgba(225, 0, 255, 0.72);
+
 
     /* gradients */
     --gradient-primary: linear-gradient(90deg, #7f00ff 0%, #e100ff 100%);
-    --gradient-primary-blue: linear-gradient(90deg,
-            var(--primary-blue-lightest) 0%,
-            var(--primary-blue-lighter) 100%);
-
-    --gradient-primary-blue-dark: linear-gradient(90deg,
-            var(--primary-blue-light) 0%,
-            var(--primary-blue) 100%);
-
-    --gradient-primary-blue-darker: linear-gradient(90deg,
-            var(--primary-blue-dark) 0%,
-            var(--primary-blue-darker) 100%);
-
-    --gradient-primary-blue-light: linear-gradient(90deg,
-            var(--primary-blue-lighter) 0%,
-            var(--primary-blue-lightest) 100%);
-
-    --gradient-primary-blue-lighter: linear-gradient(90deg,
-            var(--primary-blue-lightest) 0%,
-            var(--primary-blue-lighter) 100%);
-
-    --gradient-blue: linear-gradient(90deg,
-            var(--primary-blue-lightest) 0%,
-            var(--primary-blue-lighter) 100%);
-
+    --gradient-secondary: linear-gradient(90deg, #e100ff 0%, #7f00ff 100%);
     --gradient-purple: linear-gradient(90deg, #7f00ff 0%, #e100ff 100%);
     --gradient-pink: linear-gradient(90deg, #ff0084 0%, #ff6e7f 100%);
     --gradient-blue: linear-gradient(90deg, #00dbde 0%, #fc00ff 100%);
     --gradient-orange: linear-gradient(90deg, #fa5252 0%, #ff9a44 100%);
     --gradient-pink-orange: linear-gradient(90deg, #ee0979 0%, #ff6a00 100%);
     --gradient-yellow: linear-gradient(90deg, #f5d300 0%, #ff4e00 100%);
-    --gradient-green: linear-gradient(90deg, #00c9ff 0%, #92fe9d 100%);
+    --gradient-green: linear-gradient(90deg, #00b09b 0%, #96c93d 100%);
     --gradient-red: linear-gradient(90deg, #ff0084 0%, #ff6e7f 100%);
     --gradient-red-blue: linear-gradient(90deg, #fc466b 0%, #3f5efb 100%);
+    --gradient-teal: linear-gradient(90deg, #03d9a5 0%, #00badd 100%);
+    --gradient-indigo: linear-gradient(90deg, #3325ff 0%, #0b1e91 100%);
+    --gradient-grey: linear-gradient(90deg, #bdc3c7 0%, #2c3e50 100%);
 
 
 
@@ -311,6 +310,7 @@ a {
     text-decoration: none;
     font-size: 1rem;
     font-weight: 400;
+    cursor: pointer;
 }
 
 a:hover {
@@ -415,7 +415,7 @@ textarea {
     height: 36px;
     min-height: 36px;
     text-align: left;
-    padding-inline: 12px;
+    padding-inline: var(--spacing-sm);
     transition: border-color 100ms ease;
     background-color: var(--surface-800);
     color: var(--surface-100);
@@ -425,9 +425,10 @@ textarea {
     width: 100%;
 }
 
+
 input:focus {
     outline: none;
-    border-color: var(--primary-blue-lightest);
+    border-color: var(--primary-lightest);
 }
 
 /*  change bg color when auto fill */
@@ -468,6 +469,31 @@ input[type="checkbox"]:checked::after {
     bottom: 0;
     top: 0;
 }
+
+/* change the icon color on date input */
+/* input[type="date"]::-webkit-calendar-picker-indicator {
+    opacity: 0;
+
+}
+
+input[type="date"] {
+    position: relative;
+}
+
+svg.test {
+    color: red;
+    fill: red;
+}
+
+input[type="date"]::after {
+    content: url('../images/calendar.svg');
+    position: absolute;
+    right: var(--spacing-sm);
+    bottom: 0;
+    top: 0;
+} */
+
+
 
 label {
     display: block;
@@ -639,7 +665,7 @@ button,
 }
 
 button:hover {
-    background-color: var(--primary-blue-dark);
+    background-color: var(--primary-dark);
 }
 
 button:focus {
@@ -647,11 +673,11 @@ button:focus {
 }
 
 button:active {
-    background-color: var(--primary-blue-dark);
+    background-color: var(--primary-dark);
 }
 
 button:disabled {
-    background-color: var(--primary-blue-transparent-400);
+    background-color: var(--primary-transparent-400);
     color: var(--surface-100);
     cursor: not-allowed;
 }
@@ -695,6 +721,246 @@ button:disabled {
     border-radius: var(--border-radius-circle);
 }
 
+.circle-xs {
+    width: 1rem;
+    height: 1rem;
+    border-radius: var(--border-radius-circle);
+}
+
+.circle-sm {
+    width: 1.5rem;
+    height: 1.5rem;
+    border-radius: var(--border-radius-circle);
+}
+
+.circle-md {
+    width: 2rem;
+    height: 2rem;
+    border-radius: var(--border-radius-circle);
+}
+
+.circle-lg {
+    width: 3rem;
+    height: 3rem;
+    border-radius: var(--border-radius-circle);
+}
+
+.circle-xl {
+    width: 4rem;
+    height: 4rem;
+    border-radius: var(--border-radius-circle);
+}
+
+.circle-xxl {
+    width: 5rem;
+    height: 5rem;
+    border-radius: var(--border-radius-circle);
+}
+
+
+/* position */
+
+.relative {
+    position: relative;
+}
+
+.fixed {
+    position: fixed;
+}
+
+.absolute {
+    position: absolute;
+}
+
+.sticky {
+    position: sticky;
+}
+
+.top-0 {
+    top: 0;
+}
+
+.right-0 {
+    right: 0;
+}
+
+.bottom-0 {
+    bottom: 0;
+}
+
+.left-0 {
+    left: 0;
+}
+
+/* xs */
+.top-xs {
+    top: 0.25rem;
+}
+
+.right-xs {
+    right: 0.25rem;
+}
+
+.bottom-xs {
+    bottom: 0.25rem;
+}
+
+.left-xs {
+    left: 0.25rem;
+}
+
+/* sm */
+.top-sm {
+    top: 0.5rem;
+}
+
+.right-sm {
+    right: 0.5rem;
+}
+
+.bottom-sm {
+    bottom: 0.5rem;
+}
+
+.left-sm {
+    left: 0.5rem;
+}
+
+/* md */
+.top-md {
+    top: 1rem;
+}
+
+.right-md {
+    right: 1rem;
+}
+
+.bottom-md {
+    bottom: 1rem;
+}
+
+.left-md {
+    left: 1rem;
+}
+
+/* lg */
+.top-lg {
+    top: 1.5rem;
+}
+
+.right-lg {
+    right: 1.5rem;
+}
+
+.bottom-lg {
+    bottom: 1.5rem;
+}
+
+.left-lg {
+    left: 1.5rem;
+}
+
+/* xl */
+.top-xl {
+    top: 2rem;
+}
+
+.right-xl {
+    right: 2rem;
+}
+
+.bottom-xl {
+    bottom: 2rem;
+}
+
+.left-xl {
+    left: 2rem;
+}
+
+/* xxl */
+.top-xxl {
+    top: 3rem;
+}
+
+.right-xxl {
+    right: 3rem;
+}
+
+.bottom-xxl {
+    bottom: 3rem;
+}
+
+.left-xxl {
+    left: 3rem;
+}
+
+/* xxxl */
+.top-xxxl {
+    top: 4rem;
+}
+
+.right-xxxl {
+    right: 4rem;
+}
+
+.bottom-xxxl {
+    bottom: 4rem;
+}
+
+.left-xxxl {
+    left: 4rem;
+}
+
+/* full */
+.top-full {
+    top: 100%;
+}
+
+.right-full {
+    right: 100%;
+}
+
+.bottom-full {
+    bottom: 100%;
+}
+
+.left-full {
+    left: 100%;
+}
+
+/* -full */
+.top--full {
+    top: -100%;
+}
+
+.right--full {
+    right: -100%;
+}
+
+.bottom--full {
+    bottom: -100%;
+}
+
+.left--full {
+    left: -100%;
+}
+
+/* cursors */
+.pointer {
+    cursor: pointer;
+}
+
+.not-allowed {
+    cursor: not-allowed;
+}
+
+.move {
+    cursor: move;
+}
+
+
+
+
 
 
 /*
@@ -728,52 +994,57 @@ button:disabled {
     box-shadow: var(--shadow-xxl);
 }
 
+.shadow-xxxl {
+    box-shadow: -4px 5px 4px 0px #00000045;
+
+}
+
 .bg-primary {
-    background-color: var(--primary-blue);
+    background-color: var(--primary);
 }
 
 .bg-primary-dark {
-    background-color: var(--primary-blue-dark);
+    background-color: var(--primary-dark);
 }
 
 .bg-primary-light {
-    background-color: var(--primary-blue-light);
+    background-color: var(--primary-light);
 }
 
 .bg-primary-transparent-100 {
-    background-color: var(--primary-blue-transparent-100);
+    background-color: var(--primary-transparent-100);
 }
 
 .bg-primary-transparent-200 {
-    background-color: var(--primary-blue-transparent-200);
+    background-color: var(--primary-transparent-200);
 }
 
 .bg-primary-transparent-300 {
-    background-color: var(--primary-blue-transparent-300);
+    background-color: var(--primary-transparent-300);
 }
 
 .bg-primary-transparent-400 {
-    background-color: var(--primary-blue-transparent-400);
+    background-color: var(--primary-transparent-400);
 }
 
 .bg-primary-transparent-500 {
-    background-color: var(--primary-blue-transparent-500);
+    background-color: var(--primary-transparent-500);
 }
 
 .bg-primary-transparent-600 {
-    background-color: var(--primary-blue-transparent-600);
+    background-color: var(--primary-transparent-600);
 }
 
 .bg-primary-transparent-700 {
-    background-color: var(--primary-blue-transparent-700);
+    background-color: var(--primary-transparent-700);
 }
 
 .bg-primary-transparent-800 {
-    background-color: var(--primary-blue-transparent-800);
+    background-color: var(--primary-transparent-800);
 }
 
 .bg-primary-transparent-900 {
-    background-color: var(--primary-blue-transparent-900);
+    background-color: var(--primary-transparent-900);
 }
 
 .bg-surface-900 {
@@ -815,43 +1086,43 @@ button:disabled {
 
 /* gradients */
 .bg-gradient-50 {
-    background: linear-gradient(90deg, #cfd9df 0%, #e2ebf0 100%);
+    background: var(--gradient-red);
 }
 
 .bg-gradient-100 {
-    background: linear-gradient(90deg, #ff9a9e 0%, #fad0c4 100%);
+    background: var(--gradient-orange);
 }
 
 .bg-gradient-200 {
-    background: linear-gradient(90deg, #89f7fe 0%, #66a6ff 100%);
+    background: var(--gradient-yellow);
 }
 
 .bg-gradient-300 {
-    background: linear-gradient(90deg, #4e54c8 0%, #8f94fb 100%);
+    background: var(--gradient-green);
 }
 
 .bg-gradient-400 {
-    background: linear-gradient(90deg, #0cebeb 0%, #20e3b2 50%, #29ffc6 100%);
+    background: var(--gradient-teal);
 }
 
 .bg-gradient-500 {
-    background: linear-gradient(90deg, #ff9966 0%, #ff5e62 100%);
+    background: var(--gradient-blue);
 }
 
 .bg-gradient-600 {
-    background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+    background: var(--gradient-indigo);
 }
 
 .bg-gradient-700 {
-    background: linear-gradient(90deg, #fc466b 0%, #3f5efb 100%);
+    background: var(--gradient-purple);
 }
 
 .bg-gradient-800 {
-    background: linear-gradient(90deg, #00f260 0%, #0575e6 100%);
+    background: var(--gradient-pink);
 }
 
 .bg-gradient-900 {
-    background: linear-gradient(90deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
+    background: var(--gradient-grey);
 }
 
 /* .bg-gradient-primary {
@@ -869,6 +1140,15 @@ button:disabled {
     background-size: 151% 400%;
     animation: AnimationName 5s ease infinite;
 }
+
+.bg-white {
+    background-color: white;
+}
+
+.bg-black {
+    background-color: black;
+}
+
 
 @keyframes AnimationName {
     0% {

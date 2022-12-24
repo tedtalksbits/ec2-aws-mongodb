@@ -6,6 +6,7 @@ import { ExtendedRequest } from '../../types/restResponse';
 const router = express.Router();
 
 router.use('/', async (req: ExtendedRequest, res: Response) => {
+    console.log('*********** /register ************');
     let error = false;
     let errorMsg = '';
     let status = 0;
@@ -20,7 +21,12 @@ router.use('/', async (req: ExtendedRequest, res: Response) => {
         avatar,
     } = req.body;
 
+    console.log('*********** /register ************');
+    console.log('req.body', req.body);
+    console.log('*********** /register ************');
+
     if (req.method === 'POST') {
+        console.log('*********** /register POST ************');
         const response = await userRegister(
             username,
             email,
@@ -37,7 +43,12 @@ router.use('/', async (req: ExtendedRequest, res: Response) => {
         data = response.data;
 
         if (!error) {
-            req.session.user = {};
+            console.log('*********** /register POST ************');
+            console.log('response', response);
+            console.log('*********** /register POST ************');
+            req.session = null;
+            res.clearCookie('token');
+            console.log('session', req.session);
             // save local variable to session
             req.session.state = {
                 setShowAlert: true,
@@ -46,6 +57,10 @@ router.use('/', async (req: ExtendedRequest, res: Response) => {
             return res.redirect('/login');
         }
     }
+
+    console.log('*********** /register ************');
+
+    console.log('method', req.method);
 
     res.render('auth/register', {
         title: 'Register',
