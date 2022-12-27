@@ -1,4 +1,4 @@
-import express, { Request, Response } from 'express';
+import express, { Response } from 'express';
 
 import { userRegister } from '../../controllers/authRegister';
 import { ExtendedRequest } from '../../types/restResponse';

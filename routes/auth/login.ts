@@ -1,4 +1,4 @@
-import express, { Request, Response } from 'express';
+import express from 'express';
 import { ExtendedRequest } from '../../types/restResponse';
 import { userLogin } from '../../controllers/authLogin';
 import jwt from 'jsonwebtoken';

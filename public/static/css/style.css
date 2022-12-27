@@ -272,6 +272,94 @@ dd {
     margin: 0;
 }
 
+
+@font-face {
+    font-family: 'icony';
+    src: url('../fonts/icony.eot?3lrf4x');
+    src: url('../fonts/icony.eot?3lrf4x#iefix') format('embedded-opentype'),
+        url('../fonts/icony.woff?3lrf4x') format('woff'),
+        url('../fonts/icony.ttf?3lrf4x') format('truetype'),
+        url('../fonts/icony.svg?3lrf4x#icony') format('svg');
+    font-weight: normal;
+    font-style: normal;
+    font-display: block;
+}
+
+.icon {
+    /* use !important to prevent issues with browser extensions that change fonts */
+    font-family: 'icony' !important;
+    speak: never;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+
+    /* Better Font Rendering =========== */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-calendar:before {
+    content: "\e900";
+}
+
+.icon-bin:before {
+    content: "\e901";
+}
+
+.icon-pencil:before {
+    content: "\e902";
+}
+
+.icon-close:before {
+    content: "\e903";
+}
+
+.icon-plus1:before {
+    content: "\e904";
+}
+
+.icon-settings:before {
+    content: "\e905";
+}
+
+.icon-fire:before {
+    content: "\e9a9";
+}
+
+.icon-arrow-up-left2:before {
+    content: "\ea39";
+}
+
+.icon-arrow-up2:before {
+    content: "\ea3a";
+}
+
+.icon-arrow-up-right2:before {
+    content: "\ea3b";
+}
+
+.icon-arrow-right2:before {
+    content: "\ea3c";
+}
+
+.icon-arrow-down-right2:before {
+    content: "\ea3d";
+}
+
+.icon-arrow-down2:before {
+    content: "\ea3e";
+}
+
+.icon-arrow-down-left2:before {
+    content: "\ea3f";
+}
+
+.icon-arrow-left2:before {
+    content: "\ea40";
+}
+
 body {
     min-height: 100vh;
     scroll-behavior: smooth;
@@ -351,6 +439,14 @@ footer {
 
 .paper.paper-alt {
     background-color: var(--surface-800);
+}
+
+.paper-bordered {
+    padding: 1.75rem;
+    margin-bottom: 1rem;
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius-md);
+    background-color: var(--surface-900);
 }
 
 .card {
@@ -531,6 +627,75 @@ label.label-required::after {
     background-color: var(--surface-700);
 }
 
+/*
+    ========================================
+    TABLES
+    ========================================
+*/
+
+table {
+    width: 100%;
+    max-width: 120ch;
+    margin: auto;
+    border-collapse: collapse;
+    text-align: center;
+    border-radius: 6px;
+    overflow: hidden;
+    border-spacing: 0;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+    background-color: var(--surface-900);
+}
+
+/* table,
+th,
+td {
+    border-bottom: 1px solid var(--border-color);
+} */
+
+th,
+td {
+    padding: 15px;
+    text-align: left;
+}
+
+tbody tr:not(:last-child) {
+    /* transition: border-color 0.15s ease-in-out,
+        box-shadow 0.15s ease-in-out; */
+    border-bottom: 1px solid var(--border-color);
+}
+
+/* tbody tr:hover {
+    background-color: var(--theme-dark-700);
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+    border-color: #80bdff;
+} */
+
+/* tr:nth-child(even) {
+            background-color: var(--theme-dark-700);
+        }
+        tr:nth-child(odd) {
+            background-color: var(--theme-dark-800);
+        } */
+
+th {
+    background-color: var(--surface-900);
+    /* color: white; */
+    position: relative;
+    cursor: pointer;
+}
+
+th[data-direction='asc']::after {
+    content: ' ▲';
+    position: absolute;
+    /* color: white; */
+}
+
+th[data-direction='desc']::after {
+    content: ' ▼';
+    position: absolute;
+    color: white;
+}
+
 /* CONTAINERS AND WRAPPERS */
 
 .container {
@@ -682,6 +847,9 @@ button:disabled {
     cursor: not-allowed;
 }
 
+*[role="button"] {
+    cursor: pointer;
+}
 
 
 /* border radius */
@@ -721,6 +889,32 @@ button:disabled {
     border-radius: var(--border-radius-circle);
 }
 
+/* borders */
+
+.border {
+    border: 1px solid var(--border-color);
+}
+
+.border-top {
+    border-top: 1px solid var(--border-color);
+}
+
+.border-right {
+    border-right: 1px solid var(--border-color);
+}
+
+.border-bottom {
+    border-bottom: 1px solid var(--border-color);
+}
+
+.border-left {
+    border-left: 1px solid var(--border-color);
+}
+
+.border-0 {
+    border: 0;
+}
+
 .circle-xs {
     width: 1rem;
     height: 1rem;
@@ -756,6 +950,93 @@ button:disabled {
     height: 5rem;
     border-radius: var(--border-radius-circle);
 }
+
+/*
+    ========================================
+    CUSTOM ICONS css icons
+    ========================================
+*/
+
+i.icon-pen {
+    box-sizing: border-box;
+    position: relative;
+    display: block;
+    transform: rotate(-45deg) scale(var(--ggs, 1));
+    width: 14px;
+    height: 4px;
+    border-right: 2px solid transparent;
+    box-shadow:
+        0 0 0 2px,
+        inset -2px 0 0;
+    border-top-right-radius: 1px;
+    border-bottom-right-radius: 1px;
+    margin-right: -2px
+}
+
+i.icon-pen::after,
+i.icon-pen::before {
+    content: "";
+    display: block;
+    box-sizing: border-box;
+    position: absolute
+}
+
+i.icon-pen::before {
+    background: currentColor;
+    border-left: 0;
+    right: -6px;
+    width: 3px;
+    height: 4px;
+    border-radius: 1px;
+    top: 0
+}
+
+i.icon-pen::after {
+    width: 8px;
+    height: 7px;
+    border-top: 4px solid transparent;
+    border-bottom: 4px solid transparent;
+    border-right: 7px solid;
+    left: -11px;
+    top: -2px
+}
+
+i.icon-trash {
+    box-sizing: border-box;
+    position: relative;
+    display: block;
+    transform: scale(var(--ggs, 1));
+    width: 14px;
+    height: 14px;
+    border: 2px solid;
+    border-radius: 2px
+}
+
+i.icon-trash::after,
+i.icon-trash::before {
+    content: "";
+    display: block;
+    box-sizing: border-box;
+    position: absolute
+}
+
+i.icon-trash::before {
+    width: 2px;
+    height: 6px;
+    background: currentColor;
+    left: 6px;
+    top: 4px
+}
+
+i.icon-trash::after {
+    width: 6px;
+    height: 2px;
+    background: currentColor;
+    left: 4px;
+    top: 6px
+}
+
+
 
 
 /* position */

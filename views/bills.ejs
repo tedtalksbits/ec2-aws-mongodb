@@ -1,12 +1,111 @@
-<div class="bills">
-    <div class="bills__header flex-h align-center justify-between p-l">
-        <h1 class="font-xxxl">Bills</h1>
-        <a href="/dashboard">Back To Dashboard</a>
+<style>
+    .bills__info__card {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: var(--spacing-md);
+    }
+
+    .active-bills-info small {
+        opacity: .5;
+    }
+
+    .active-bills-info h4 {
+        margin-bottom: var(--spacing-xs);
+        font-size: var(--font-xl);
+    }
+
+    .bills-icon {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+
+    }
+
+    .active-bills {
+        background: var(--success-transparent-300);
+        border: 1px solid var(--success-transparent-300);
+    }
+
+    .active-bills::after {
+        content: '✅';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    .total-bills {
+        background: var(--warning-transparent-300);
+        border: 1px solid var(--warning-transparent-300);
+    }
+
+    .total-bills::after {
+        content: '💰';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    .expensive-bill {
+        background: var(--danger-transparent-300);
+        border: 1px solid var(--danger-transparent-300);
+    }
+
+    .expensive-bill::after {
+        content: '🔥';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+</style>
+<div class="bills wrapper p-l">
+    <div class="bills__header">
+        <div class="breadcrumbs mb-l">
+            <a class="mb-l" href="/dashboard">Dashboard</a> / <span class="bold">Bills</span>
+        </div>
+        <h1 class="font-xxl mb-l">Bills</h1>
+    </div>
+    <div class="bills__info__cards container-grid-items">
+        <div class="bills__info__card paper-bordered">
+            <div class="bills-icon active-bills"></div>
+            <div class="active-bills-info">
+                <h4>
+                    <%= bills.length %>
+                </h4>
+                <small class="">Bills Active</small>
+            </div>
+        </div>
+        <div class="bills__info__card paper-bordered">
+            <div class="bills-icon total-bills"></div>
+            <div class="active-bills-info">
+                <h4>
+                    <!-- display the total amount of all bills -->
+                    $<%= bills.reduce((total, bill)=> total + bill.billAmount, 0) %>
+                </h4>
+                <small>Total Amount</small>
+            </div>
+        </div>
+        <div class="bills__info__card paper-bordered">
+            <div class="bills-icon expensive-bill"></div>
+            <div class="active-bills-info">
+                <h4>
+                    <!-- display the largest bill -->
+                    $<%= bills.reduce((max, bill)=> bill.billAmount > max ? bill.billAmount : max, 0) %>
+                </h4>
+                <small>Most Expensive</small>
+            </div>
+        </div>
     </div>
     <div class="bills__content">
         <div class="bills__content__header">
-            <h3 class="font-m">All Bills</h3>
-            <div class="bills__content__header__actions">
+            <div class="bills__content__header__actions flex gap-l pb-s my-l border-bottom">
                 <a href="/bills" class="btn btn-primary">All</a>
                 <a href="/bills?status=unpaid" class="btn btn-primary">
                     Unpaid
@@ -16,62 +115,138 @@
         </div>
         <div class="bills__content__body">
             <div class="bills__content__body__items">
-                <% bills.forEach(bill=> { %>
+                <table id="dtBasicExample" class="table table-striped table-bordered table-sm" cellspacing="0"
+                    width="100%">
+                    <thead>
+                        <tr>
+                            <th class="th-sm">Id</th>
+                            <th class="th-sm" data-sort="true" data-sort-type="string" data-sort-target="name">
+                                Name
+                            </th>
+                            <th class="th-sm" data-sort="true" data-sort-type="string" data-sort-target="position">
+                                Amount
+                            </th>
+                            <th class="th-sm" data-sort="true" data-sort-type="string" data-sort-target="office">
+                                Due
+                            </th>
+                            <th class="th-sm" data-sort="true" data-sort-type="number" data-sort-target="age">
+                                Status
+                            </th>
+                            <th class="th-sm" data-sort="true" data-sort-type="number" data-sort-target="age">
+                                Category
+                            </th>
+                            <th>
+                                Actions
+                            </th>
 
-                    <div class="bills__content__body__item paper">
-                        <h4 class="font-s">Name: <%= bill.billName %>
-                        </h4>
-                        <h4 class="font-s">Amount: $<%= bill.billAmount %>
-                        </h4>
-                        <h4 class="font-s">Due: <%= bill.billDueDate %>
-                        </h4>
-                        <h4 class="font-s">Status: <%= bill.billStatus %>
-                        </h4>
-                        <h4 class="font-s">Category: <%= bill.billCategory %>
-                        </h4>
-                        <h4 class="font-s">Notes: <%= bill.billNotes %>
-                        </h4>
-                        <h4 class="font-s">Reminder: <%= bill.billReminder %>
-                        </h4>
-                        <h4 class="font-s">
-                            Reminder Date: <%= bill.billReminderDate %>
-                        </h4>
-                        <h4 class="font-s">
-                            Reminder Time: <%= bill.billReminderTime %>
-                        </h4>
-                        <h4 class="font-s">
-                            Reminder Notes: <%= bill.billReminderNotes %>
-                        </h4>
-                        <h4 class="font-s">
-                            Reminder Frequency: <%= bill.billReminderFrequency %>
-                        </h4>
-                        <h4 class="font-s">
-                            Reminder Frequency: <%= bill.billReminderFrequency %>
-                        </h4>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% bills.forEach((bill, i)=> { %>
+                            <tr>
+                                <td>
+                                    <%= i + 1 %>
+                                </td>
+                                <td>
+                                    <%= bill.billName %>
+                                </td>
+                                <td>
+                                    $<%= bill.billAmount %>
+                                </td>
+                                <td>
+                                    <%= bill.billDueDate %>
+                                </td>
+                                <td>
+                                    <%= bill.billStatus %>
+                                </td>
+                                <td>
+                                    <%= bill.billCategory %>
+                                        <!-- add emoji based on category -->
+                                        <% if(bill.billCategory==='food' ) { %>
+                                            <span class="icon icon-food">🍔</span>
+                                            <% } else if(bill.billCategory==='transportation' ) { %>
+                                                <span class="icon icon-car">🛫</span>
+                                                <% } else if(bill.billCategory==='utilities' ) { %>
+                                                    <span class="icon icon-electricity">🔌</span>
+                                                    <% } else if(bill.billCategory==='entertainment' ) { %>
+                                                        <span class="icon icon-gamepad">🎮</span>
+                                                        <% } else if(bill.billCategory==='shopping' ) { %>
+                                                            <span class="icon icon-shopping-bag">🛍</span>
+                                                            <% } else if(bill.billCategory==='other' ) { %>
+                                                                <span class="icon icon-ellipsis">❔</span>
+                                                                <% } %>
+                                </td>
+                                <td class="flex align-center justify-evenly">
+                                    <a href="/bills/<%= bill._id %>/edit" class="btn btn-primary">
+                                        <i class='bx bx-edit'></i>
+                                    </a>
+                                    <!-- <form action="/bills/<%= bill._id %>?_method=DELETE" method="POST"> -->
+                                    <span role="button">
+                                        <i class='bx bx-trash txt-error'></i>
+                                        <!-- <span class="icon icon-calendar"></span> -->
+                                    </span>
+                                    <!-- </form> -->
+                                </td>
 
-                        <div class="bills__content__body__item__actions">
-                            <a href="/bills/<%= bill._id %>" class="btn btn-primary">
-                                View
-                            </a>
-                            <a href="/bills/<%= bill._id %>/edit" class="btn btn-primary">
-                                Edit
-                            </a>
-                            <form action="/bills/<%= bill._id %>" method="POST">
-                                <input type="hidden" name="_method" value="DELETE" />
-                                <button type="submit" class="btn btn-primary">
-                                    Delete
-                                </button>
-                            </form>
+
+                            </tr>
+
+
+                            <!-- <div class="bills__content__body__item paper">
+                                <h4 class="font-s">Name: <%= bill.billName %>
+                                </h4>
+                                <h4 class="font-s">Amount: $<%= bill.billAmount %>
+                                </h4>
+                                <h4 class="font-s">Due: <%= bill.billDueDate %>
+                                </h4>
+                                <h4 class="font-s">Status: <%= bill.billStatus %>
+                                </h4>
+                                <h4 class="font-s">Category: <%= bill.billCategory %>
+                                </h4>
+                                <h4 class="font-s">Notes: <%= bill.billNotes %>
+                                </h4>
+                                <h4 class="font-s">Reminder: <%= bill.billReminder %>
+                                </h4>
+                                <h4 class="font-s">
+                                    Reminder Date: <%= bill.billReminderDate %>
+                                </h4>
+                                <h4 class="font-s">
+                                    Reminder Time: <%= bill.billReminderTime %>
+                                </h4>
+                                <h4 class="font-s">
+                                    Reminder Notes: <%= bill.billReminderNotes %>
+                                </h4>
+                                <h4 class="font-s">
+                                    Reminder Frequency: <%= bill.billReminderFrequency %>
+                                </h4>
+                                <h4 class="font-s">
+                                    Reminder Frequency: <%= bill.billReminderFrequency %>
+                                </h4>
+
+                                <div class="bills__content__body__item__actions">
+                                    <a href="/bills/<%= bill._id %>" class="btn btn-primary">
+                                        View
+                                    </a>
+                                    <a href="/bills/<%= bill._id %>/edit" class="btn btn-primary">
+                                        Edit
+                                    </a>
+                                    <form action="/bills/<%= bill._id %>" method="POST">
+                                        <input type="hidden" name="_method" value="DELETE" />
+                                        <button type="submit" class="btn btn-primary">
+                                            Delete
+                                        </button>
+                                    </form>
+                                </div>
+                            </div> -->
+
+                            <% }) %>
+                    </tbody>
+                    <% if (bills.length===0) { %>
+
+                        <div class="bills__content__body__item paper">
+                            <h4 class="font-s">No bills found</h4>
                         </div>
-                    </div>
-
-                    <% }) %>
-                        <% if (bills.length===0) { %>
-
-                            <div class="bills__content__body__item paper">
-                                <h4 class="font-s">No bills found</h4>
-                            </div>
-                            <% } %>
+                        <% } %>
             </div>
         </div>
         <div class="add-bill circle-xl fixed bottom-lg right-md pointer flex align-center justify-center bg-black shadow-xxxl "
