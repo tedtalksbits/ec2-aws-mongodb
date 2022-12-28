@@ -104,7 +104,7 @@
         </div>
     </div>
     <div class="bills__content">
-        <div class="bills__content__header">
+        <div class="bills__content__header" style="<%= bills.length === 0 && 'display: none;' %>">
             <div class="bills__content__header__actions flex gap-l pb-s my-l border-bottom">
                 <a href="/bills" class="btn btn-primary">All</a>
                 <a href="/bills?status=unpaid" class="btn btn-primary">
@@ -116,7 +116,7 @@
         <div class="bills__content__body">
             <div class="bills__content__body__items">
                 <table id="dtBasicExample" class="table table-striped table-bordered table-sm" cellspacing="0"
-                    width="100%">
+                    width="100%" style="<%= bills.length === 0 && 'display: none;' %>">
                     <thead>
                         <tr>
                             <th class="th-sm">Id</th>
@@ -176,15 +176,20 @@
                                                                 <span>❔</span>
                                                                 <% } %>
                                 </td>
-                                <td class="flex align-center justify-evenly">
-                                    <a href="/bills/<%= bill._id %>/edit" class="unstyled-btn">
+                                <td class="flex align-center justify-evenly gap-m">
+                                    <a href="/bills/<%= bill._id %>/edit" class="unstyled-btn"
+                                        title="Edit <%= bill.billName %>">
                                         <i class='nc nc-edit'></i>
                                     </a>
-                                    <!-- <form action="/bills/<%= bill._id %>?_method=DELETE" method="POST"> -->
-                                    <span role="button" class="unstyled-btn">
+                                    <form action="/bills/delete/<%= bill._id %>" method="POST">
+                                        <button type="submit" class="unstyled-btn" title="Delete <%= bill.billName %>">
+                                            <i class="nc nc-trash txt-error"></i>
+                                        </button>
+                                    </form>
+                                    <!-- <div role="button" class="unstyled-btn" id="deleteBill" data-id="<%= bill._id %> ">
                                         <i class="nc nc-trash txt-error"></i>
-                                    </span>
-                                    <!-- </form> -->
+                                    </div> -->
+
                                 </td>
                             </tr>
 
@@ -258,3 +263,26 @@
         </div>
     </div>
 </div>
+
+<script>
+    // async function deleteBill(id) {
+    //     await fetch(`/bills/${id}`, {
+    //         method: 'DELETE',
+    //     });
+
+    // }
+
+    // const deleteBillBtn = document.getElementById('deleteBill');
+
+    // console.log(deleteBillBtn);
+
+    // deleteBillBtn.addEventListener('click', async (e) => {
+
+    //     const id = deleteBillBtn.dataset.id.trim();
+    //     console.log(id);
+    //     await deleteBill(id);
+
+    // });
+
+
+</script>

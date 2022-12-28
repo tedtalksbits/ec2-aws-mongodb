@@ -1,9 +1,8 @@
 import Account from '../model/Account';
-import Bill from '../model/Bill';
 import { Response } from 'express';
 import { ExtendedRequest } from '../types/restResponse';
 
-export const getAccount = async (req: ExtendedRequest, res: Response) => {
+export const getAccountById = async (req: ExtendedRequest, res: Response) => {
     // get all accounts
     const userId = req.session?.user?.data?._id;
 
@@ -43,7 +42,8 @@ export const getAccount = async (req: ExtendedRequest, res: Response) => {
     });
 };
 
-export const addBillToAccount = async (req: ExtendedRequest, res: Response) => {
+export const addBill = async (req: ExtendedRequest, res: Response) => {
+    console.log('*********** /bills/new POST ************');
     const userId = req.session?.user?.data?._id;
     const { billName, billAmount, billDueDate, billFrequency, billCategory } =
         req.body;
@@ -79,14 +79,14 @@ export const addBillToAccount = async (req: ExtendedRequest, res: Response) => {
     //     return res.redirect('/login');
     // }
 
-    const bill = new Bill({
+    const bill = {
         billName,
         billAmount,
         billDueDate,
         billFrequency,
         billCategory,
         isAutoPay,
-    });
+    };
     const account = await Account.findOne({
         userId,
     }).exec();
@@ -120,5 +120,60 @@ export const addBillToAccount = async (req: ExtendedRequest, res: Response) => {
     //     errorMsg: '',
     // });
 
+    return res.redirect('/bills');
+};
+
+export const deleteBill = async (req: ExtendedRequest, res: Response) => {
+    console.log('*********** /bills DELETE ************');
+    const userId = req.session?.user?.data?._id;
+    const billId = req.params.id;
+
+    console.log('userId', userId);
+    console.log('billId', billId);
+    console.log(req.params);
+
+    if (!userId) {
+        return res.redirect('/login');
+    }
+
+    if (!billId) {
+        return res.status(400).render('bills', {
+            title: 'Bills',
+            data: req.session?.user?.data,
+            bills: [],
+            layout: './layouts/app',
+            erorr: true,
+            errorMsg: 'Id is required',
+        });
+    }
+
+    const account = await Account.findOne({
+        userId,
+    }).exec();
+    if (!account) {
+        return res.redirect('/login');
+    }
+
+    const updatedAccount = await Account.findOneAndUpdate(
+        { userId },
+        { $pull: { bills: { _id: billId } } }
+    ).exec();
+
+    if (!updatedAccount) {
+        return res.status(500).render('bills', {
+            title: 'Bills',
+            data: req.session?.user?.data,
+            bills: account.bills,
+            layout: './layouts/app',
+            erorr: true,
+            errorMsg: 'Something went wrong',
+        });
+    }
+
+    console.log('*********** /bills DELETE ************');
+    console.log('updatedAccount', updatedAccount);
+
+    console.log('*********** /bills DELETE ************');
+    // refresh the page after deleting the bill
     return res.redirect('/bills');
 };

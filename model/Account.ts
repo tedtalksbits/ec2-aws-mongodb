@@ -8,10 +8,36 @@ const accountSchema = new Schema(
             type: String,
             default: '',
         },
-        bills: {
-            type: Array,
-            default: [],
-        },
+        bills: [
+            {
+                billId: String,
+                billName: String,
+                billAmount: Number,
+                billDueDate: Date,
+                billFrequency: String,
+                billCategory: String,
+                billStatus: {
+                    type: String,
+                    default: 'Pending',
+                },
+                isAutoPay: Boolean,
+                billNotes: [
+                    {
+                        note: String,
+                        noteId: String,
+                        noteDate: Date,
+                        createdAt: Date,
+                    },
+                ],
+                billReminders: [
+                    {
+                        reminderId: String,
+                        reminderDate: Date,
+                        reminderStatus: String,
+                    },
+                ],
+            },
+        ],
         userId: {
             type: String,
             required: true,

@@ -7,7 +7,7 @@ const darkModeStyles = document.createElement('style');
 darkModeStyles.innerHTML = `
 :root{
 
-    --surface: #1a1b1e;
+    --surface: #1a1a1d;
     --surface-alt: #2b2c31;
     --surface-alt2: #3c3d42;
     --txt: hsl(0, 0%, 90%);
