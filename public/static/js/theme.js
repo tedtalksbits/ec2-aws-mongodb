@@ -6,16 +6,13 @@ console.log(theme);
 const darkModeStyles = document.createElement('style');
 darkModeStyles.innerHTML = `
 :root{
-    --bg-color: #1a1b1e;
-    --surface-900: #1a1b1e;
-    --surface-800: #2b2c31;
-    --surface-700: #3c3d42;
-    --surface-600: #4d4e53;
-    --surface-500: #5e5f64;
-    --surface-400: #6f7075;
-    --surface-300: #808285;
-    --surface-200: #919396;
-    --surface-100: #d2d2d2;
+
+    --surface: #1a1b1e;
+    --surface-alt: #2b2c31;
+    --surface-alt2: #3c3d42;
+    --txt: hsl(0, 0%, 90%);
+    --txt-alt: hsl(208, 7%, 80%);
+    --txt-alt2: hsl(210, 11%, 71%);
 
     --border-color: #373a40;
 }
@@ -62,14 +59,18 @@ darkModeToggle.addEventListener('click', () => {
 const showPasswords = document.querySelectorAll('[data-toggler=show-password]');
 showPasswords.forEach((showPassword) => {
     const passwordId = showPassword.getAttribute('data-target');
+    const showIconClass = showPassword.getAttribute('data-show-icon');
+    const hideIconClass = showPassword.getAttribute('data-hide-icon');
     const password = document.getElementById(passwordId);
     showPassword.addEventListener('click', () => {
         if (password.type === 'password') {
             password.type = 'text';
-            showPassword.textContent = 'Hide';
+            const showIconEl = `<i class="${hideIconClass}"></i>`;
+            showPassword.innerHTML = showIconEl;
         } else {
             password.type = 'password';
-            showPassword.textContent = 'Show';
+            const hideIconEl = `<i class="${showIconClass}"></i>`;
+            showPassword.innerHTML = hideIconEl;
         }
     });
 });

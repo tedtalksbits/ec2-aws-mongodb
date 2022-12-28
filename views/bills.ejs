@@ -173,16 +173,15 @@
                                                         <% } else if(bill.billCategory==='shopping' ) { %>
                                                             <span class="icon icon-shopping-bag">🛍</span>
                                                             <% } else if(bill.billCategory==='other' ) { %>
-                                                                <span class="nc nc-more-horizontal">❔</span>
+                                                                <span>❔</span>
                                                                 <% } %>
                                 </td>
                                 <td class="flex align-center justify-evenly">
-                                    <a href="/bills/<%= bill._id %>/edit" class="btn btn-primary">
+                                    <a href="/bills/<%= bill._id %>/edit" class="unstyled-btn">
                                         <i class='nc nc-edit'></i>
                                     </a>
                                     <!-- <form action="/bills/<%= bill._id %>?_method=DELETE" method="POST"> -->
-                                    <span role="button">
-
+                                    <span role="button" class="unstyled-btn">
                                         <i class="nc nc-trash txt-error"></i>
                                     </span>
                                     <!-- </form> -->
@@ -199,11 +198,9 @@
                         <% } %>
             </div>
         </div>
-        <div class="add-bill circle-xl fixed bottom-lg right-md pointer flex align-center justify-center bg-black shadow-xxxl "
+        <div class="add-bill circle-xl fixed bottom-lg right-md pointer flex align-center justify-center bg-primary shadow-xxxl txt-white"
             data-toggler="true" data-toggler-for="newBill">
-            <span>
-                <img src="static/images/plus.svg" alt="add symbol">
-            </span>
+            <i class="nc nc-plus"></i>
         </div>
     </div>
 </div>

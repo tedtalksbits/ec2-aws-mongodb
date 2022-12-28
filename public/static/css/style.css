@@ -79,44 +79,18 @@
     --info-transparent-700: rgba(49, 214, 230, 0.56);
     --info-transparent-800: rgba(49, 214, 230, 0.64);
     --info-transparent-900: rgba(49, 214, 230, 0.72);
-    --bg-color: #f8f9fa;
-    --surface-900: #ffffff;
-    --surface-800: #e8e8e8;
-    --surface-700: #d0d0d0;
-    --surface-600: #c8c8c8;
-    --surface-500: #b0b0b0;
-    --surface-400: #a8a8a8;
-    --surface-300: #909090;
-    --surface-200: #787878;
-    --surface-100: #303030;
-    --surface-transparent-100: rgba(192, 192, 192, 0.08);
-    --surface-transparent-200: rgba(192, 192, 192, 0.16);
-    --surface-transparent-300: rgba(192, 192, 192, 0.24);
-    --surface-transparent-400: rgba(192, 192, 192, 0.32);
-    --surface-transparent-500: rgba(192, 192, 192, 0.4);
-    --surface-transparent-600: rgba(192, 192, 192, 0.48);
-    --surface-transparent-700: rgba(192, 192, 192, 0.56);
-    --surface-transparent-800: rgba(192, 192, 192, 0.64);
-    --surface-transparent-900: rgba(192, 192, 192, 0.72);
 
-    --on-surface-100: #000000;
-    --on-surface-200: #080808;
-    --on-surface-300: #101010;
-    --on-surface-400: #181818;
-    --on-surface-500: #202020;
-    --on-surface-600: #282828;
-    --on-surface-700: #303030;
-    --on-surface-800: #383838;
-    --on-surface-900: #404040;
-    --on-surface-transparent-100: rgba(64, 64, 64, 0.08);
-    --on-surface-transparent-200: rgba(64, 64, 64, 0.16);
-    --on-surface-transparent-300: rgba(64, 64, 64, 0.24);
-    --on-surface-transparent-400: rgba(64, 64, 64, 0.32);
-    --on-surface-transparent-500: rgba(64, 64, 64, 0.4);
-    --on-surface-transparent-600: rgba(64, 64, 64, 0.48);
-    --on-surface-transparent-700: rgba(64, 64, 64, 0.56);
-    --on-surface-transparent-800: rgba(64, 64, 64, 0.64);
-    --on-surface-transparent-900: rgba(64, 64, 64, 0.72);
+    --surface: hsl(210, 17%, 98%);
+    --surface-alt: hsl(0, 0%, 100%);
+    --surface-alt2: hsl(0deg 0% 92%);
+
+    --txt: hsl(0, 0%, 9%);
+    --txt-alt: hsl(208, 7%, 46%);
+    --txt-alt2: hsl(210, 11%, 71%);
+
+    /* --surface-900: #ffffff; */
+    /* --surface-alt: #e8e8e8; */
+    /* --surface-alt2: #d0d0d0; */
 
     --primary: #7f00ff;
     --primary-light: #8f00ff;
@@ -276,8 +250,8 @@ body {
     min-height: 100vh;
     scroll-behavior: smooth;
     text-rendering: optimizeSpeed;
-    background-color: var(--bg-color);
-    color: var(--surface-100);
+    background-color: var(--surface);
+    color: var(--txt);
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     font-size: 1rem;
     font-weight: 400;
@@ -288,7 +262,7 @@ body {
 
 header {
     height: var(--header-height);
-    background-color: var(--surface-800);
+    background-color: var(--surface-alt);
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -306,7 +280,7 @@ header nav ul {
 }
 
 a {
-    color: var(--surface-100);
+    color: var(--txt);
     text-decoration: none;
     font-size: 1rem;
     font-weight: 400;
@@ -314,11 +288,11 @@ a {
 }
 
 a:hover {
-    color: var(--surface-200);
+    color: var(--txt-alt);
 }
 
 a.active {
-    color: var(--surface-200);
+    color: var(--txt-alt);
 }
 
 
@@ -336,12 +310,12 @@ main.main {
 
 footer {
     height: var(--footer-height);
-    background-color: var(--surface-800);
+    background-color: var(--surface-alt);
 }
 
 /* BASE COMPONENTS */
 .paper {
-    background-color: var(--surface-900);
+    background-color: var(--surface);
     border-radius: var(--border-radius-md);
     padding: 1.75rem;
     margin-bottom: 1rem;
@@ -350,7 +324,7 @@ footer {
 }
 
 .paper.paper-alt {
-    background-color: var(--surface-800);
+    background-color: var(--surface-alt);
 }
 
 .paper-bordered {
@@ -358,11 +332,11 @@ footer {
     margin-bottom: 1rem;
     border: 1px solid var(--border-color);
     border-radius: var(--border-radius-md);
-    background-color: var(--surface-900);
+    background-color: var(--surface);
 }
 
 .card {
-    background-color: var(--surface-900);
+    background-color: var(--surface);
     border-radius: var(--border-radius-sm);
     padding: 1.75rem;
     margin-bottom: 1rem;
@@ -374,7 +348,7 @@ footer {
     display: flex;
     flex-direction: column;
     text-align: center;
-    background: var(--surface-900);
+    background: var(--surface);
     padding: var(--spacing-md) var(--spacing-xl);
     border-radius: var(--border-radius-md);
     transition: transform 0.2s ease-in-out;
@@ -382,7 +356,7 @@ footer {
 }
 
 .mini-card:hover {
-    /* background: var(--surface-800); */
+    /* background: var(--surface-alt); */
     transform: scale(1.05);
 }
 
@@ -414,7 +388,7 @@ input[type="tel"],
 input[type="date"],
 select,
 textarea {
-    border: 1px solid transparent;
+    border: 1px solid var(--border-color);
     border-radius: var(--border-radius-sm);
     transition: all 0.2s ease-in-out;
     font-size: 14px;
@@ -425,8 +399,8 @@ textarea {
     text-align: left;
     padding-inline: var(--spacing-sm);
     transition: border-color 100ms ease;
-    background-color: var(--surface-800);
-    color: var(--surface-100);
+    background-color: var(--surface-alt);
+    color: var(--txt);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     -webkit-tap-highlight-color: transparent;
@@ -434,19 +408,39 @@ textarea {
 }
 
 
-input:focus {
+input:focus,
+textarea:focus,
+select:focus,
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill:focus {
     outline: none;
     border-color: var(--primary-lightest);
 }
 
 /*  change bg color when auto fill */
 input:-webkit-autofill {
-    background-color: transparent !important;
-    -webkit-text-fill-color: var(--surface-100) !important;
-    -webkit-box-shadow: 0 0 0 50px var(--surface-800) inset;
-    color: var(--surface-100);
-    overflow: hidden;
+    border: 1px solid var(--border-color);
+    -webkit-text-fill-color: var(--txt) !important;
+    -webkit-box-shadow: 0 0 0px 1000px var(--surface-alt) inset;
+    transition: background-color 5000s ease-in-out 0s;
 }
+
+/* input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+    border: 1px solid var(--border-color);
+    -webkit-text-fill-color: var(--txt) !important;
+    -webkit-box-shadow: 0 0 0px 1000px var(--surface-alt) inset;
+    transition: background-color 5000s ease-in-out 0s;
+} */
+
 
 input[type="checkbox"] {
     appearance: none;
@@ -454,7 +448,7 @@ input[type="checkbox"] {
     height: 14px;
     border: 1px solid var(--border-color);
     border-radius: 0.25rem;
-    background-color: var(--surface-800);
+    background-color: var(--surface-alt);
     display: inline-block;
     position: relative;
     vertical-align: middle;
@@ -506,7 +500,7 @@ label {
     display: block;
     font-size: 0.875rem;
     font-weight: 500;
-    color: var(--surface-100);
+    color: var(--txt);
 }
 
 label.label-required::after {
@@ -535,7 +529,13 @@ label.label-required::after {
 }
 
 .input-icon:hover {
-    background-color: var(--surface-700);
+    background-color: var(--surface-alt2);
+}
+
+/* add margin to .input-wrapper first child */
+
+.input-wrapper>* {
+    margin-bottom: var(--spacing-sm);
 }
 
 /*
@@ -554,7 +554,7 @@ table {
     overflow: hidden;
     border-spacing: 0;
     box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
-    background-color: var(--surface-800);
+    background-color: var(--surface-alt);
 }
 
 /* table,
@@ -589,7 +589,7 @@ tbody tr:not(:last-child) {
         } */
 
 th {
-    background-color: var(--surface-700);
+    background-color: var(--surface-alt2);
     /* color: white; */
     position: relative;
     cursor: pointer;
@@ -714,7 +714,7 @@ th[data-direction='desc']::after {
 }
 
 .modal__content {
-    background-color: var(--surface-900);
+    background-color: var(--surface);
     border-radius: var(--border-radius-md);
     padding: 1rem;
     width: 100%;
@@ -728,7 +728,7 @@ button,
     display: inline-block;
     padding: 0.5rem 1rem;
     border-radius: var(--border-radius-sm);
-    background: var(--gradient-primary);
+    background-color: var(--gradient-primary);
     color: white;
     font-size: 1rem;
     font-weight: 400;
@@ -754,12 +754,26 @@ button:active {
 
 button:disabled {
     background-color: var(--primary-transparent-400);
-    color: var(--surface-100);
+    color: var(--txt);
     cursor: not-allowed;
 }
 
 *[role="button"] {
     cursor: pointer;
+}
+
+.unstyled-btn {
+    border: 1px solid var(--border-color);
+    background-color: var(--surface-alt);
+    padding: var(--spacing-sm);
+    border-radius: var(--border-radius-md);
+    transition: all 0.2s ease-in-out;
+    cursor: pointer;
+    aspect-ratio: 1/1;
+}
+
+.unstyled-btn:hover {
+    background-color: var(--surface-alt2);
 }
 
 
@@ -1239,42 +1253,17 @@ i.icon-trash::after {
     background-color: var(--primary-transparent-900);
 }
 
-.bg-surface-900 {
-    background-color: var(--surface-900);
+.bg-surface {
+    background-color: var(--surface);
 }
 
-.bg-surface-800 {
-    background-color: var(--surface-800);
+.bg-surface-alt {
+    background-color: var(--surface-alt);
 }
 
-.bg-surface-700 {
-    background-color: var(--surface-700);
+.bg-surface-alt2 {
+    background-color: var(--surface-alt2);
 }
-
-.bg-surface-600 {
-    background-color: var(--surface-600);
-}
-
-.bg-surface-500 {
-    background-color: var(--surface-500);
-}
-
-.bg-surface-400 {
-    background-color: var(--surface-400);
-}
-
-.bg-surface-300 {
-    background-color: var(--surface-300);
-}
-
-.bg-surface-200 {
-    background-color: var(--surface-200);
-}
-
-.bg-surface-100 {
-    background-color: var(--surface-100);
-}
-
 
 /* gradients */
 .bg-gradient-50 {

@@ -111,12 +111,14 @@ export const addBillToAccount = async (req: ExtendedRequest, res: Response) => {
         });
     }
 
-    return res.status(200).render('bills', {
-        title: 'Bills',
-        data: req.session?.user?.data,
-        bills: updatedAccount.bills,
-        layout: './layouts/app',
-        erorr: false,
-        errorMsg: '',
-    });
+    // return res.status(200).render('bills', {
+    //     title: 'Bills',
+    //     data: req.session?.user?.data,
+    //     bills: updatedAccount.bills,
+    //     layout: './layouts/app',
+    //     erorr: false,
+    //     errorMsg: '',
+    // });
+
+    return res.redirect('/bills');
 };
