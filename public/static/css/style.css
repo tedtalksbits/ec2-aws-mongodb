@@ -1,6 +1,6 @@
 :root {
     --header-height: 3rem;
-    --footer-height: 5rem;
+    --footer-height: 10rem;
     --main-height: calc(100vh - var(--header-height) - var(--footer-height));
 
     /* colors */
@@ -272,94 +272,6 @@ dd {
     margin: 0;
 }
 
-
-@font-face {
-    font-family: 'icony';
-    src: url('../fonts/icony.eot?3lrf4x');
-    src: url('../fonts/icony.eot?3lrf4x#iefix') format('embedded-opentype'),
-        url('../fonts/icony.woff?3lrf4x') format('woff'),
-        url('../fonts/icony.ttf?3lrf4x') format('truetype'),
-        url('../fonts/icony.svg?3lrf4x#icony') format('svg');
-    font-weight: normal;
-    font-style: normal;
-    font-display: block;
-}
-
-.icon {
-    /* use !important to prevent issues with browser extensions that change fonts */
-    font-family: 'icony' !important;
-    speak: never;
-    font-style: normal;
-    font-weight: normal;
-    font-variant: normal;
-    text-transform: none;
-    line-height: 1;
-
-    /* Better Font Rendering =========== */
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-}
-
-.icon-calendar:before {
-    content: "\e900";
-}
-
-.icon-bin:before {
-    content: "\e901";
-}
-
-.icon-pencil:before {
-    content: "\e902";
-}
-
-.icon-close:before {
-    content: "\e903";
-}
-
-.icon-plus1:before {
-    content: "\e904";
-}
-
-.icon-settings:before {
-    content: "\e905";
-}
-
-.icon-fire:before {
-    content: "\e9a9";
-}
-
-.icon-arrow-up-left2:before {
-    content: "\ea39";
-}
-
-.icon-arrow-up2:before {
-    content: "\ea3a";
-}
-
-.icon-arrow-up-right2:before {
-    content: "\ea3b";
-}
-
-.icon-arrow-right2:before {
-    content: "\ea3c";
-}
-
-.icon-arrow-down-right2:before {
-    content: "\ea3d";
-}
-
-.icon-arrow-down2:before {
-    content: "\ea3e";
-}
-
-.icon-arrow-down-left2:before {
-    content: "\ea3f";
-}
-
-.icon-arrow-left2:before {
-    content: "\ea40";
-}
-
 body {
     min-height: 100vh;
     scroll-behavior: smooth;
@@ -538,15 +450,14 @@ input:-webkit-autofill {
 
 input[type="checkbox"] {
     appearance: none;
-    width: 24px;
-    height: 24px;
+    width: 14px;
+    height: 14px;
     border: 1px solid var(--border-color);
     border-radius: 0.25rem;
     background-color: var(--surface-800);
     display: inline-block;
     position: relative;
     vertical-align: middle;
-    margin-right: 0.5rem;
     cursor: pointer;
     transition: all 0.2s ease-in-out;
 }
@@ -643,7 +554,7 @@ table {
     overflow: hidden;
     border-spacing: 0;
     box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
-    background-color: var(--surface-900);
+    background-color: var(--surface-800);
 }
 
 /* table,
@@ -678,7 +589,7 @@ tbody tr:not(:last-child) {
         } */
 
 th {
-    background-color: var(--surface-900);
+    background-color: var(--surface-700);
     /* color: white; */
     position: relative;
     cursor: pointer;
@@ -693,7 +604,7 @@ th[data-direction='asc']::after {
 th[data-direction='desc']::after {
     content: ' ▼';
     position: absolute;
-    color: white;
+    /* color: white; */
 }
 
 /* CONTAINERS AND WRAPPERS */

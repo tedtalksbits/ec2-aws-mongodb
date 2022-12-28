@@ -173,71 +173,21 @@
                                                         <% } else if(bill.billCategory==='shopping' ) { %>
                                                             <span class="icon icon-shopping-bag">🛍</span>
                                                             <% } else if(bill.billCategory==='other' ) { %>
-                                                                <span class="icon icon-ellipsis">❔</span>
+                                                                <span class="nc nc-more-horizontal">❔</span>
                                                                 <% } %>
                                 </td>
                                 <td class="flex align-center justify-evenly">
                                     <a href="/bills/<%= bill._id %>/edit" class="btn btn-primary">
-                                        <i class='bx bx-edit'></i>
+                                        <i class='nc nc-edit'></i>
                                     </a>
                                     <!-- <form action="/bills/<%= bill._id %>?_method=DELETE" method="POST"> -->
                                     <span role="button">
-                                        <i class='bx bx-trash txt-error'></i>
-                                        <!-- <span class="icon icon-calendar"></span> -->
+
+                                        <i class="nc nc-trash txt-error"></i>
                                     </span>
                                     <!-- </form> -->
                                 </td>
-
-
                             </tr>
-
-
-                            <!-- <div class="bills__content__body__item paper">
-                                <h4 class="font-s">Name: <%= bill.billName %>
-                                </h4>
-                                <h4 class="font-s">Amount: $<%= bill.billAmount %>
-                                </h4>
-                                <h4 class="font-s">Due: <%= bill.billDueDate %>
-                                </h4>
-                                <h4 class="font-s">Status: <%= bill.billStatus %>
-                                </h4>
-                                <h4 class="font-s">Category: <%= bill.billCategory %>
-                                </h4>
-                                <h4 class="font-s">Notes: <%= bill.billNotes %>
-                                </h4>
-                                <h4 class="font-s">Reminder: <%= bill.billReminder %>
-                                </h4>
-                                <h4 class="font-s">
-                                    Reminder Date: <%= bill.billReminderDate %>
-                                </h4>
-                                <h4 class="font-s">
-                                    Reminder Time: <%= bill.billReminderTime %>
-                                </h4>
-                                <h4 class="font-s">
-                                    Reminder Notes: <%= bill.billReminderNotes %>
-                                </h4>
-                                <h4 class="font-s">
-                                    Reminder Frequency: <%= bill.billReminderFrequency %>
-                                </h4>
-                                <h4 class="font-s">
-                                    Reminder Frequency: <%= bill.billReminderFrequency %>
-                                </h4>
-
-                                <div class="bills__content__body__item__actions">
-                                    <a href="/bills/<%= bill._id %>" class="btn btn-primary">
-                                        View
-                                    </a>
-                                    <a href="/bills/<%= bill._id %>/edit" class="btn btn-primary">
-                                        Edit
-                                    </a>
-                                    <form action="/bills/<%= bill._id %>" method="POST">
-                                        <input type="hidden" name="_method" value="DELETE" />
-                                        <button type="submit" class="btn btn-primary">
-                                            Delete
-                                        </button>
-                                    </form>
-                                </div>
-                            </div> -->
 
                             <% }) %>
                     </tbody>
