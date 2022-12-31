@@ -4,7 +4,15 @@ export type RestResponse = {
     status: number;
     errorMsg?: string;
     token?: string;
-    data?: any;
+    data?: {
+        _id: string;
+        username: string;
+        email: string;
+        firstName: string;
+        lastName: string;
+        middleName?: string;
+        avatar: string;
+    };
 };
 export interface ExtendedRequest extends Request {
     session?: any;

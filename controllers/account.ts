@@ -1,10 +1,11 @@
 import Account from '../model/Account';
-import { Response } from 'express';
-import { ExtendedRequest } from '../types/restResponse';
+import { Response, Request } from 'express';
 
-export const getAccountById = async (req: ExtendedRequest, res: Response) => {
-    // get all accounts
-    const userId = req.session?.user?.data?._id;
+export const getAccountById = async (req: Request, res: Response) => {
+    if (!req.session) {
+        return res.redirect('/login');
+    }
+    const userId = req.session.user.data._id;
 
     if (!userId) {
         console.log('*********** /bills GET ************');
@@ -32,25 +33,59 @@ export const getAccountById = async (req: ExtendedRequest, res: Response) => {
 
     console.log('account found', account);
 
+    if (req.session.state?.setShowAlert) {
+        const { alertMsg, isAlertError, setShowAlert } = req.session.state;
+        req.session.state = {
+            setShowAlert: false,
+            alertMsg: '',
+            isAlertError: false,
+        };
+
+        return res.status(200).render('bills', {
+            title: 'Bills',
+            data: req.session?.user?.data,
+            bills: account[0].bills,
+            layout: './layouts/app',
+            showAlert: setShowAlert,
+            alertMsg: alertMsg,
+            isAlertError: isAlertError,
+        });
+    }
+
     return res.status(200).render('bills', {
         title: 'Bills',
         data: req.session?.user?.data,
         bills: account[0].bills,
         layout: './layouts/app',
-        erorr: false,
-        errorMsg: '',
+        showAlert: false,
+        alertMsg: '',
+        isAlertError: false,
     });
 };
 
-export const addBill = async (req: ExtendedRequest, res: Response) => {
+export const addBill = async (req: Request, res: Response) => {
     console.log('*********** /bills/new POST ************');
-    const userId = req.session?.user?.data?._id;
+
+    if (!req.session) {
+        return res.redirect('/login');
+    }
+
+    const userId = req.session.user.data._id;
+
+    if (!userId) {
+        return res.redirect('/login');
+    }
+
     const { billName, billAmount, billDueDate, billFrequency, billCategory } =
         req.body;
 
     let isAutoPay = req.body.isAutoPay === 'on' ? true : false;
 
-    if (!userId) {
+    const account = await Account.findOne({
+        userId,
+    }).exec();
+
+    if (!account) {
         return res.redirect('/login');
     }
 
@@ -61,14 +96,13 @@ export const addBill = async (req: ExtendedRequest, res: Response) => {
         !billFrequency ||
         !billCategory
     ) {
-        return res.status(400).render('bills', {
-            title: 'Bills',
-            data: req.session?.user?.data,
-            bills: [],
-            layout: './layouts/app',
-            erorr: true,
-            errorMsg: 'Please fill all required fields',
-        });
+        req.session.state = {
+            setShowAlert: true,
+            alertMsg: 'Please fill out all fields',
+            isAlertError: true,
+        };
+
+        return res.redirect('/bills');
     }
 
     // const account = await Account.find({
@@ -87,12 +121,10 @@ export const addBill = async (req: ExtendedRequest, res: Response) => {
         billCategory,
         isAutoPay,
     };
-    const account = await Account.findOne({
-        userId,
-    }).exec();
-    if (!account) {
-        return res.redirect('/login');
-    }
+
+    // if (!account) {
+    //     return res.redirect('/login');
+    // }
 
     const updatedAccount = (await Account.findOneAndUpdate(
         { userId },
@@ -101,14 +133,13 @@ export const addBill = async (req: ExtendedRequest, res: Response) => {
     ).exec()) as any;
 
     if (!updatedAccount) {
-        return res.status(500).render('bills', {
-            title: 'Bills',
-            data: req.session?.user?.data,
-            bills: account.bills,
-            layout: './layouts/app',
-            erorr: true,
-            errorMsg: 'Something went wrong',
-        });
+        req.session.state = {
+            setShowAlert: true,
+            alertMsg: 'Something went wrong',
+            isAlertError: true,
+        };
+
+        return res.redirect('/bills');
     }
 
     // return res.status(200).render('bills', {
@@ -119,13 +150,20 @@ export const addBill = async (req: ExtendedRequest, res: Response) => {
     //     erorr: false,
     //     errorMsg: '',
     // });
-
+    req.session.state = {
+        setShowAlert: true,
+        alertMsg: 'Bill added successfully',
+        isAlertError: false,
+    };
     return res.redirect('/bills');
 };
 
-export const deleteBill = async (req: ExtendedRequest, res: Response) => {
+export const deleteBill = async (req: Request, res: Response) => {
+    if (!req.session) {
+        return res.redirect('/login');
+    }
     console.log('*********** /bills DELETE ************');
-    const userId = req.session?.user?.data?._id;
+    const userId = req.session.user.data._id;
     const billId = req.params.id;
 
     console.log('userId', userId);
@@ -137,14 +175,12 @@ export const deleteBill = async (req: ExtendedRequest, res: Response) => {
     }
 
     if (!billId) {
-        return res.status(400).render('bills', {
-            title: 'Bills',
-            data: req.session?.user?.data,
-            bills: [],
-            layout: './layouts/app',
-            erorr: true,
-            errorMsg: 'Id is required',
-        });
+        req.session.state = {
+            setShowAlert: true,
+            alertMsg: 'Something went wrong. Error: Bill ID not found',
+            isAlertError: true,
+        };
+        return res.redirect('/bills');
     }
 
     const account = await Account.findOne({
@@ -160,14 +196,13 @@ export const deleteBill = async (req: ExtendedRequest, res: Response) => {
     ).exec();
 
     if (!updatedAccount) {
-        return res.status(500).render('bills', {
-            title: 'Bills',
-            data: req.session?.user?.data,
-            bills: account.bills,
-            layout: './layouts/app',
-            erorr: true,
-            errorMsg: 'Something went wrong',
-        });
+        req.session.state = {
+            setShowAlert: true,
+            alertMsg: 'Something went wrong',
+            isAlertError: true,
+        };
+
+        return res.redirect('/bills');
     }
 
     console.log('*********** /bills DELETE ************');
@@ -175,5 +210,10 @@ export const deleteBill = async (req: ExtendedRequest, res: Response) => {
 
     console.log('*********** /bills DELETE ************');
     // refresh the page after deleting the bill
+    req.session.state = {
+        setShowAlert: true,
+        alertMsg: 'Bill deleted successfully',
+        isAlertError: false,
+    };
     return res.redirect('/bills');
 };

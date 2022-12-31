@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="/static/css/style.css" />
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="/static/css/nova-circular.css">
+    <link rel="stylesheet" href="/static/css/popover.css">
     <title>Billify 🧾| <%= title %>
     </title>
 </head>
@@ -15,7 +16,11 @@
 <body>
     <%- include('../partials/header.ejs') %>
         <main class="main"><%- body %></main>
-        <%- include('../partials/footer.ejs') %> <%- include('../partials/scripts.ejs') %>
+        <%- include('../partials/footer.ejs') %>
+            <script src="static/js/theme.js"></script>
+            <script src="static/js/modal.js"></script>
+            <script src="static/js/rememberMe.js"></script>
+            <script src="static/js/sidePanel.js"></script>
 </body>
 
 </html>

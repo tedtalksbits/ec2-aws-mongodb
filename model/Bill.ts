@@ -26,7 +26,7 @@ const billSchema = new Schema(
         },
         billStatus: {
             type: String,
-            default: 'Pending',
+            default: 'Unpaid',
         },
         billNotes: {
             type: Array,

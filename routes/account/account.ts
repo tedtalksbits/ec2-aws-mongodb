@@ -7,8 +7,10 @@ import {
 
 import { verifyAuth } from '../../controllers/view-controllers/verifyAuth';
 const router = express.Router();
+// redirect all get /bills* request to /bills
 
 router.get('/bills', verifyAuth, getAccountById);
+
 // router.get('/bills/:id', verifyAuth, account);
 router.post('/bills/delete/:id', verifyAuth, deleteBill);
 router.post('/bills/new', verifyAuth, addBill);

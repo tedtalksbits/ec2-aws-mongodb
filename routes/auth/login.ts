@@ -11,7 +11,7 @@ router.use('/', async (req: ExtendedRequest, res) => {
     let errorMsg = '';
     let status = 0;
     let token = '';
-    let data = {};
+    let data;
     let showAlert = false;
 
     if (req.session?.user) {
@@ -100,7 +100,7 @@ router.use('/', async (req: ExtendedRequest, res) => {
                         error,
                         errorMsg,
                         status,
-                        data,
+                        data: {},
                         showAlert,
                     });
                 }

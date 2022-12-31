@@ -11,8 +11,10 @@ darkModeStyles.innerHTML = `
     --surface-alt: #2b2c31;
     --surface-alt2: #3c3d42;
     --txt: hsl(0, 0%, 90%);
-    --txt-alt: hsl(208, 7%, 80%);
-    --txt-alt2: hsl(210, 11%, 71%);
+    --txt-alt: hsla(0, 0%, 90%, .75);
+    --txt-alt2: hsla(0, 0%, 90%, .5);
+    --txt-alt3: hsla(0, 0%, 90%, .25);
+    --txt-alt4: hsla(0, 0%, 90%, .1);
 
     --border-color: #373a40;
 }

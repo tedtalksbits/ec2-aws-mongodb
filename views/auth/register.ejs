@@ -8,20 +8,20 @@
         <div class="flex-h gap-m">
             <div class="input-wrapper">
                 <label for="firstName" class="label-required">First Name</label>
-                <input type="text" name="firstName" id="firstName" value="<%= firstName ?? '' %>" required />
+                <input type="text" name="firstName" id="firstName" value="<%= data.firstName ?? '' %>" required />
             </div>
             <div class="input-wrapper">
                 <label for="lastName" class="label-required">Last Name</label>
-                <input type="text" name="lastName" id="lastName" value="<%= lastName ?? '' %>" required />
+                <input type="text" name="lastName" id="lastName" value="<%= data.lastName ?? '' %>" required />
             </div>
         </div>
         <div class="input-wrapper mt-s">
             <label for="username" class="label-required">Username</label>
-            <input type="text" name="username" id="username" value="<%= username ?? '' %>" required />
+            <input type="text" name="username" id="username" value="<%= data.username ?? '' %>" required />
         </div>
         <div class=" input-wrapper mt-s">
             <label for="email" class="label-required">Email</label>
-            <input type="email" name="email" id="email" value="<%= email ?? '' %>" required />
+            <input type="email" name="email" id="email" value="<%= data.email ?? '' %>" required />
         </div>
         <div class="input-wrapper mt-m">
             <label for="username" class="label-required">Password</label>
@@ -35,7 +35,7 @@
         </div>
 
         <button class="mt-m">Sign Up</button>
-        <div class="txt-error font-s<%= error && " mt-m" %>" id="loginError"><%= errorMsg %>
+        <div class="txt-error font-s<%= showAlert && " mt-m" %>" id="loginError"><%= alertMsg %>
 
     </form>
 </div>

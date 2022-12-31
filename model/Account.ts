@@ -18,7 +18,7 @@ const accountSchema = new Schema(
                 billCategory: String,
                 billStatus: {
                     type: String,
-                    default: 'Pending',
+                    default: 'Unpaid',
                 },
                 isAutoPay: Boolean,
                 billNotes: [

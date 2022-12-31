@@ -68,8 +68,11 @@ app.get('/logout', (req, res) => {
 });
 app.use('/register', registerRoute);
 
-app.get('/dashboard', verifyAuth, (req: ExtendedRequest, res) => {
+app.get('/dashboard', verifyAuth, (req: Request, res: Response) => {
     let data = {};
+    if (!req.session) {
+        return res.redirect('/login');
+    }
 
     if (req.session.user) {
         data = req.session.user.data;
@@ -84,9 +87,11 @@ app.get('/dashboard', verifyAuth, (req: ExtendedRequest, res) => {
     });
 });
 
-app.get('/profile', verifyAuth, (req: ExtendedRequest, res) => {
+app.get('/profile', verifyAuth, (req: Request, res: Response) => {
     let data = {};
-
+    if (!req.session) {
+        return res.redirect('/login');
+    }
     if (req.session.user) {
         data = req.session.user.data;
     }

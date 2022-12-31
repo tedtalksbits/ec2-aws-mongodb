@@ -35,6 +35,7 @@
         0% {
             opacity: 0;
         }
+
         100% {
             opacity: 1;
         }
@@ -44,6 +45,7 @@
         0% {
             opacity: 1;
         }
+
         100% {
             opacity: 0;
         }
@@ -66,11 +68,7 @@
                 </a>
                 <a class="mini-card">
                     <span class="mini-card-icon">
-                        <img
-                            src="static/images/notification.svg"
-                            alt=""
-                            srcset=""
-                        />
+                        <img src="static/images/notification.svg" alt="" srcset="" />
                     </span>
                     <div class="mini-card__content">
                         <h4>Notifications</h4>
@@ -94,11 +92,7 @@
                 </a>
                 <a class="mini-card" data-sidebar-toggler="true">
                     <span class="mini-card-icon">
-                        <img
-                            src="static/images/preference.svg"
-                            alt=""
-                            srcset=""
-                        />
+                        <img src="static/images/preference.svg" alt="" srcset="" />
                     </span>
                     <div class="mini-card__content">
                         <h4>Preference</h4>
@@ -122,27 +116,21 @@
             </span>
             <h3>Preference</h3>
         </div>
-        <div
-            class="flex align-center gap-s p-l justify-between bg-surface-900 rounded-md mt-m"
-        >
+        <div class="flex align-center gap-s p-l justify-between bg-surface-900 rounded-md mt-m">
             <span>Dark Mode</span>
             <div class="switch">
                 <input type="checkbox" id="darkMode" />
                 <label for="darkMode"></label>
             </div>
         </div>
-        <div
-            class="flex align-center gap-s p-l justify-between bg-surface-900 rounded-md mt-m"
-        >
+        <div class="flex align-center gap-s p-l justify-between bg-surface-900 rounded-md mt-m">
             <span>Dark Mode</span>
             <div class="switch">
                 <input type="checkbox" id="darkMode" />
                 <label for="darkMode"></label>
             </div>
         </div>
-        <div
-            class="flex align-center gap-s p-l justify-between bg-surface-900 rounded-md mt-m"
-        >
+        <div class="flex align-center gap-s p-l justify-between bg-surface-900 rounded-md mt-m">
             <span>Dark Mode</span>
             <div class="switch">
                 <input type="checkbox" id="darkMode" />
@@ -155,3 +143,12 @@
         </div>
     </div>
 </div>
+
+<script>
+
+    // get session data
+
+    const sessionData = JSON.parse(sessionStorage.getItem('session'));
+
+    console.log(sessionData);
+</script>

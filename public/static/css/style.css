@@ -85,8 +85,10 @@
     --surface-alt2: hsl(0deg 0% 92%);
 
     --txt: hsl(0, 0%, 9%);
-    --txt-alt: hsl(208, 7%, 46%);
-    --txt-alt2: hsl(210, 11%, 71%);
+    --txt-alt: hsla(0, 0%, 9%, .75);
+    --txt-alt2: hsla(0, 0%, 9%, .55);
+    --txt-alt3: hsla(0, 0%, 9%, .35);
+    --txt-alt4: hsla(0, 0%, 9%, .15);
 
     /* --surface-900: #ffffff; */
     /* --surface-alt: #e8e8e8; */
@@ -471,6 +473,14 @@ input[type="checkbox"]:checked::after {
     top: 0;
 }
 
+/*  input validation */
+input.input-error,
+textarea.input-error,
+select.input-error {
+    border: 1px solid var(--danger-transparent-300);
+}
+
+
 /* change the icon color on date input */
 /* input[type="date"]::-webkit-calendar-picker-indicator {
     opacity: 0;
@@ -551,7 +561,7 @@ table {
     border-collapse: collapse;
     text-align: center;
     border-radius: 6px;
-    overflow: hidden;
+    /* overflow: hidden; */
     border-spacing: 0;
     box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
     background-color: var(--surface-alt);
@@ -589,10 +599,11 @@ tbody tr:not(:last-child) {
         } */
 
 th {
-    background-color: var(--surface-alt2);
     /* color: white; */
+    color: var(--txt-alt2);
     position: relative;
     cursor: pointer;
+    border-bottom: 1px solid var(--border-color);
 }
 
 th[data-direction='asc']::after {
@@ -769,7 +780,6 @@ button:disabled {
     border-radius: var(--border-radius-md);
     transition: all 0.2s ease-in-out;
     cursor: pointer;
-    aspect-ratio: 1/1;
 }
 
 .unstyled-btn:hover {
@@ -1374,6 +1384,50 @@ i.icon-trash::after {
 
 .txt-black:hover {
     color: black;
+}
+
+.txt-primary {
+    color: var(--primary);
+}
+
+.txt-primary:hover {
+    color: var(--primary);
+}
+
+.txt-primary-dark {
+    color: var(--primary-dark);
+}
+
+.txt-primary-dark:hover {
+    color: var(--primary-dark);
+}
+
+.txt-primary-light {
+    color: var(--primary-light);
+}
+
+.txt-primary-light:hover {
+    color: var(--primary-light);
+}
+
+.txt {
+    color: var(--txt);
+}
+
+.txt-alt {
+    color: var(--txt-alt);
+}
+
+.txt-alt2 {
+    color: var(--txt-alt2);
+}
+
+.txt-alt3 {
+    color: var(--txt-alt3);
+}
+
+.txt-alt4 {
+    color: var(--txt-alt4);
 }
 
 .txt-gradient-50 {

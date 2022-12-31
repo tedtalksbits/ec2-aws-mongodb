@@ -1,0 +1,44 @@
+.snackbar {
+    /* position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0; */
+    z-index: 999;
+    transition: all 0.3s ease-in-out .125s;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(100%);
+}
+
+.snackbar.active {
+    border-radius: var(--border-radius-md);
+    box-shadow: var(--box-shadow-md);
+    border: 1px solid;
+    margin: 2rem 0;
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.snackbar.bg-success {
+    background-color: var(--success-transparent-100);
+    border-color: var(--success-transparent-100);
+}
+
+.snackbar.bg-error {
+    background-color: var(--error-transparent-100);
+    border-color: var(--error-transparent-100);
+}
+
+.snackbar.bg-warning {
+    background-color: var(--warning-transparent-100);
+    border-color: var(--warning-transparent-100);
+}
+
+.snackbar__content {
+    padding: var(--spacing-md);
+    display: grid;
+    grid-template-columns: 2rem auto 1rem;
+    grid-template-rows: 1fr;
+    min-height: 75px;
+}
