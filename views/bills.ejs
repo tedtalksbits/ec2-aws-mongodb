@@ -1,465 +1,667 @@
 <style>
-    .bills__info__card {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        gap: var(--spacing-md);
-    }
+  .bills__info__card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: var(--spacing-md);
+  }
 
-    .active-bills-info small {
-        color: var(--txt-alt2);
-    }
+  .active-bills-info small {
+    color: var(--txt-alt2);
+  }
 
-    .active-bills-info h4 {
-        margin-bottom: var(--spacing-xs);
-        font-size: var(--font-xl);
-    }
+  .active-bills-info h4 {
+    margin-bottom: var(--spacing-xs);
+    font-size: var(--font-xl);
+  }
 
-    .bills-icon {
-        width: 50px;
-        height: 50px;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        position: relative;
+  .bills-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
 
-    }
+  }
 
-    .active-bills {
-        background: var(--success-transparent-300);
-        border: 1px solid var(--success-transparent-300);
-    }
+  .active-bills {
+    background: var(--success-transparent-300);
+    border: 1px solid var(--success-transparent-300);
+  }
 
-    .active-bills::after {
-        content: '✅';
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-    }
+  .active-bills::after {
+    content: '✅';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
 
-    .total-bills {
-        background: var(--warning-transparent-300);
-        border: 1px solid var(--warning-transparent-300);
-    }
+  .total-bills {
+    background: var(--warning-transparent-300);
+    border: 1px solid var(--warning-transparent-300);
+  }
 
-    .total-bills::after {
-        content: '💰';
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-    }
+  .total-bills::after {
+    content: '💰';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
 
-    .expensive-bill {
-        background: var(--danger-transparent-300);
-        border: 1px solid var(--danger-transparent-300);
-    }
+  .expensive-bill {
+    background: var(--danger-transparent-300);
+    border: 1px solid var(--danger-transparent-300);
+  }
 
-    .expensive-bill::after {
-        content: '🔥';
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-    }
+  .expensive-bill::after {
+    content: '🔥';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
 
-    .hidden {
-        display: none;
-    }
+  .hidden {
+    display: none;
+  }
+
+  /* hide input when not focus */
+  /* input.controlled-input:not(:focus) {
+    opacity: 0;
+    border: none;
+    pointer-events: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+
+  }
+
+  input.controlled-input:focus {
+    opacity: 1;
+    pointer-events: all;
+    position: relative;
+
+  } */
+
+  /*  hide label when input is :focus */
+
+  /* input.controlled-input:focus+label {
+    opacity: 0;
+    pointer-events: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+  } */
+  form.controlled-input-form {
+    position: relative;
+  }
+
+  /* input.controlled-input:not(:focus-within)+button.controlled-input-btn {
+    display: none;
+  }
+
+  input.controlled-input:focus-within+button.controlled-input-btn {
+    position: absolute;
+    top: -8px;
+    padding: 4px;
+    font-size: 14px;
+    width: fit-content;
+    right: -7px;
+  } */
+
+  input.controlled-input {
+    position: relative;
+  }
+
+  span.controlled-input-unsaved {
+    position: absolute;
+    top: 0;
+    right: 0;
+    transform: translate(0, -50%);
+    z-index: 1;
+    height: 12px;
+    width: 12px;
+    border-radius: 50%;
+    background: var(--txt-alt3);
+    border: 1px solid var(--txt-alt3);
+  }
+
+  button.controlled-input-btn {
+    position: absolute;
+    top: -8px;
+    padding: 4px;
+    font-size: 14px;
+    width: fit-content;
+    right: -7px;
+  }
+
+  button.controlled-input-btn.hidden {
+    display: none;
+  }
+
+  th,
+  td {
+    position: relative;
+  }
 </style>
 <div class="bills wrapper p-l">
-    <div class="bills__header">
-        <div class="breadcrumbs mb-l">
-            <a class="mb-l" href="/dashboard">Dashboard</a> / <span class="bold">Bills</span>
-        </div>
-        <h1 class="font-xxl mb-l">Bills</h1>
+  <div class="bills__header">
+    <div class="breadcrumbs mb-l">
+      <a
+          class="mb-l"
+          href="/dashboard"
+      >Dashboard</a> / <span class="bold">Bills</span>
     </div>
-    <div class="bills__info__cards container-grid-items">
-        <div class="bills__info__card paper-bordered">
-            <div class="bills-icon active-bills"></div>
-            <div class="active-bills-info">
-                <h4>
-                    <%= bills.length %>
-                </h4>
-                <small class="">Bills Active</small>
-            </div>
-        </div>
-        <div class="bills__info__card paper-bordered">
-            <div class="bills-icon total-bills"></div>
-            <div class="active-bills-info">
-                <h4>
-                    <!-- display the total amount of all bills -->
-                    $<%= bills.reduce((total, bill)=> total + bill.billAmount, 0) %>
-                </h4>
-                <small>Total Amount</small>
-            </div>
-        </div>
-        <div class="bills__info__card paper-bordered">
-            <div class="bills-icon expensive-bill"></div>
-            <div class="active-bills-info">
-                <h4>
-                    <!-- display the largest bill -->
-                    $<%= bills.reduce((max, bill)=> bill.billAmount > max ? bill.billAmount : max, 0) %>
-                </h4>
-                <small>Most Expensive</small>
-            </div>
-        </div>
+    <h1 class="font-xxl mb-l">Bills</h1>
+  </div>
+  <div class="bills__info__cards container-grid-items">
+    <div class="bills__info__card paper-bordered">
+      <div class="bills-icon active-bills"></div>
+      <div class="active-bills-info">
+        <h4>
+          <%= bills.length %>
+        </h4>
+        <small class="">Bills Active</small>
+      </div>
     </div>
-    <div class="bills__content">
-        <div class="bills__content__header" class="<%= bills.length === 0 && 'hidden' %>">
-            <div class="bills__content__header__actions flex gap-l pb-s my-l border-bottom">
-                <a href="/bills" class="btn btn-primary">All</a>
-                <a href="/bills?status=unpaid" class="btn btn-primary">
+    <div class="bills__info__card paper-bordered">
+      <div class="bills-icon total-bills"></div>
+      <div class="active-bills-info">
+        <h4>
+          <!-- display the total amount of all bills -->
+          $<%= bills.reduce((total, bill)=> total + bill.billAmount, 0) %>
+        </h4>
+        <small>Total Amount</small>
+      </div>
+    </div>
+    <div class="bills__info__card paper-bordered">
+      <div class="bills-icon expensive-bill"></div>
+      <div class="active-bills-info">
+        <h4>
+          <!-- display the largest bill -->
+          $<%= bills.reduce((max, bill)=> bill.billAmount > max ? bill.billAmount : max, 0) %>
+        </h4>
+        <small>Most Expensive</small>
+      </div>
+    </div>
+  </div>
+  <div class="bills__content">
+    <div class="bills__content__header <%= bills.length === 0 && 'hidden' %>">
+      <div class="bills__content__header__actions flex gap-l pb-s my-l border-bottom">
+        <a
+            href="/bills"
+            class="btn btn-primary"
+        >All</a>
+        <a
+            href="/bills?status=unpaid"
+            class="btn btn-primary"
+        >Unpaid</a>
+        <a
+            href="/bills?status=paid"
+            class="btn btn-primary"
+        >Paid</a>
+      </div>
+    </div>
+    <div class="bills__content__body">
+      <div class="bills__content__body__items">
+        <table
+            id="dtBasicExample"
+            cellspacing="0"
+            width="100%"
+            class="<%= bills.length === 0 && 'hidden' %> form-table"
+        >
+          <thead>
+            <tr>
+              <th class="th-sm">Id</th>
+              <th
+                  class="th-sm"
+                  data-sort="true"
+                  data-sort-type="string"
+                  data-sort-target="name"
+              >
+                Name
+              </th>
+              <th
+                  class="th-sm"
+                  data-sort="true"
+                  data-sort-type="money"
+                  data-sort-target="amount"
+              >
+                Amount
+              </th>
+              <th
+                  class="th-sm"
+                  data-sort="true"
+                  data-sort-type="date"
+                  data-sort-target="due"
+              >
+                Due
+              </th>
+              <th
+                  class="th-sm"
+                  data-sort="true"
+                  data-sort-type="string"
+                  data-sort-target="status"
+              >
+                Status
+              </th>
+              <th
+                  class="th-sm"
+                  data-sort="true"
+                  data-sort-type="string"
+                  data-sort-target="category"
+              >
+                Category
+              </th>
+              <th>
+                Actions
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <% bills.forEach((bill, i)=> { %>
+            <tr>
+              <td>
+                <%= i + 1 %>
+              </td>
+              <td data-sortid="name">
+                <input
+                    data-input="controlled"
+                    type="text"
+                    name="billName"
+                    id="<%= bill._id %>"
+                    class="controlled-input"
+                    value="<%= bill.billName %>"
+                    data-originalvalue="<%= bill.billName %>"
+                >
+                <!-- <label for="<%= bill._id %>" class="controlled-input-label"><%= bill.billName %></label> -->
+                <button
+                    class="controlled-input-btn hidden"
+                    id="<%= bill._id %>__btn"
+                >save</button>
+                <span
+                    class="controlled-input-unsaved hidden"
+                    id="<%= bill._id %>__unsaved"
+                ></span>
+              </td>
+              <td data-sortid="amount">
+                <input
+                    data-input="controlled"
+                    type="number"
+                    name="billAmount"
+                    id="billAmount"
+                    value="<%= bill.billAmount %>"
+                >
+              </td>
+              <td data-sortid="due">
+                <input
+                    data-input="controlled"
+                    type="date"
+                    name="billDueDate"
+                    id="billDueDate"
+                    value="<%= bill.billDueDate.toISOString().split('T')[0] %>"
+                >
+              </td>
+              <td data-sortid="status">
+                <select
+                    data-input="controlled"
+                    name="billStatus"
+                    id="billStatus"
+                >
+                  <option
+                      value="unpaid"
+                      <%= bill.billStatus === 'Unpaid' && 'selected' %>
+                  >
                     Unpaid
-                </a>
-                <a href="/bills?status=paid" class="btn btn-primary">Paid</a>
-            </div>
-        </div>
-        <div class="bills__content__body">
-            <div class="bills__content__body__items">
-                <table id="dtBasicExample" class="table table-striped table-bordered table-sm" cellspacing="0"
-                    width="100%" class="<%= bills.length === 0 && 'hidden' %> ">
-                    <thead>
-                        <tr>
-                            <th class="th-sm">Id</th>
-                            <th class="th-sm" data-sort="true" data-sort-type="string" data-sort-target="name">
-                                Name
-                            </th>
-                            <th class="th-sm" data-sort="true" data-sort-type="money" data-sort-target="amount">
-                                Amount
-                            </th>
-                            <th class="th-sm" data-sort="true" data-sort-type="date" data-sort-target="due">
-                                Due
-                            </th>
-                            <th class="th-sm" data-sort="true" data-sort-type="string" data-sort-target="status">
-                                Status
-                            </th>
-                            <th class="th-sm" data-sort="true" data-sort-type="string" data-sort-target="category">
-                                Category
-                            </th>
-                            <th>
-                                Actions
-                            </th>
+                  </option>
+                  <option
+                      value="paid"
+                      <%= bill.billStatus === 'Paid' && 'selected' %>
+                  >
+                    Paid
+                  </option>
+                </select>
+              </td>
+              <td data-sortid="category">
+                <%= bill.billCategory %>
+                <!-- add emoji based on category -->
+                <% if(bill.billCategory==='food' ) { %>
+                <span class="icon icon-food">🍔</span>
+                <% } else if(bill.billCategory==='transportation' ) { %>
+                <span class="icon icon-car">🛫</span>
+                <% } else if(bill.billCategory==='utilities' ) { %>
+                <span class="icon icon-electricity">🔌</span>
+                <% } else if(bill.billCategory==='entertainment' ) { %>
+                <span class="icon icon-gamepad">🎮</span>
+                <% } else if(bill.billCategory==='shopping' ) { %>
+                <span class="icon icon-shopping-bag">🛍</span>
+                <% } else if(bill.billCategory==='other' ) { %>
+                <span>❔</span>
+                <% } %>
+              </td>
+              <td class="">
+                <div
+                    class="popover-container"
+                    role="popover-container"
+                >
+                  <div
+                      class=""
+                      data-toggle="popover"
+                      data-target="<%= bill._id %>"
+                      data-target-location="right"
+                  >
+                    <i class="nc nc-more-horizontal"></i>
+                  </div>
+                  <div
+                      class="popover"
+                      data-popover="<%= bill._id %>"
+                      role="popover"
+                  >
+                    <div
+                        class="popover__content flex-column gap-s"
+                        role="popover-content"
+                    >
+                      <button
+                          class="unstyled-btn"
+                          title="Edit <%= bill.billName %>"
+                          data-toggler="true"
+                          data-toggler-for="editBill"
+                      >
+                        <i class='nc nc-edit'></i>
+                        <span>Edit</span>
+                      </button>
 
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <% bills.forEach((bill, i)=> { %>
-                            <tr>
-                                <td>
-                                    <%= i + 1 %>
-                                </td>
-                                <td data-sortid="name">
-                                    <%= bill.billName %>
-                                </td>
-                                <td data-sortid="amount">
-                                    $<%= bill.billAmount %>
-                                </td>
-                                <td data-sortid="due">
-                                    <%= new Date(bill.billDueDate).toLocaleDateString() %>
-                                </td>
-                                <td data-sortid="status">
-                                    <%= bill.billStatus %>
-                                </td>
-                                <td data-sortid="category">
-                                    <%= bill.billCategory %>
-                                        <!-- add emoji based on category -->
-                                        <% if(bill.billCategory==='food' ) { %>
-                                            <span class="icon icon-food">🍔</span>
-                                            <% } else if(bill.billCategory==='transportation' ) { %>
-                                                <span class="icon icon-car">🛫</span>
-                                                <% } else if(bill.billCategory==='utilities' ) { %>
-                                                    <span class="icon icon-electricity">🔌</span>
-                                                    <% } else if(bill.billCategory==='entertainment' ) { %>
-                                                        <span class="icon icon-gamepad">🎮</span>
-                                                        <% } else if(bill.billCategory==='shopping' ) { %>
-                                                            <span class="icon icon-shopping-bag">🛍</span>
-                                                            <% } else if(bill.billCategory==='other' ) { %>
-                                                                <span>❔</span>
-                                                                <% } %>
-                                </td>
-                                <td class="">
-
-                                    <div class="popover-container" role="popover-container">
-                                        <div class="" data-toggle="popover" data-target="<%= bill._id %>"
-                                            data-target-location="right">
-                                            <i class="nc nc-more-horizontal"></i>
-                                        </div>
-                                        <div class="popover" data-popover="<%= bill._id %>" role="popover">
-
-                                            <div class="popover__content flex-column gap-s" role="popover-content">
-
-                                                <button class="unstyled-btn" title="Edit <%= bill.billName %>"
-                                                    data-toggler="true" data-toggler-for="editBill">
-                                                    <i class='nc nc-edit'></i>
-                                                    <span>Edit</span>
-                                                </button>
-
-                                                <form action="/bills/delete/<%= bill._id %>" method="POST">
-                                                    <button type="submit" class="unstyled-btn"
-                                                        title="Delete <%= bill.billName %>">
-                                                        <i class="nc nc-trash txt-error"></i>
-                                                        <span>Delete</span>
-                                                    </button>
-                                                </form>
-
-                                            </div>
-
-                                        </div>
-                                    </div>
-
-                                </td>
-                            </tr>
-
-                            <% }) %>
-                    </tbody>
-                </table>
-                <% if (bills.length===0) { %>
-
-                    <div class="bills__content__body__item paper">
-                        <h4 class="font-s">No bills found</h4>
+                      <form
+                          action="/bills/delete/<%= bill._id %>"
+                          method="POST"
+                      >
+                        <button
+                            type="submit"
+                            class="unstyled-btn"
+                            title="Delete <%= bill.billName %>"
+                        >
+                          <i class="nc nc-trash txt-error"></i>
+                          <span>Delete</span>
+                        </button>
+                      </form>
                     </div>
-                    <% } %>
-            </div>
-        </div>
-        <% if (showAlert) { %>
-
-            <div class="<%= isAlertError ? 'bg-warning' : 'bg-success' %> snackbar active" data-snackbar="billsAlert">
-                <div class="snackbar__content">
-                    <div class="snackbar__content__icon">
-                        <i class="nc nc-alert-square"></i>
-                    </div>
-                    <div class="snackbar__content__text">
-                        <h4 class="font-s">
-                            <%= alertMsg || "" %>
-                        </h4>
-                    </div>
-                    <div class="snackbar__content__action" data-toggle="snackbar" role="snackbar-toggle"
-                        data-target="billsAlert">
-                        <i class="nc nc-close"></i>
-                    </div>
+                  </div>
                 </div>
-            </div>
-            <% } %>
-
-                <div class="add-bill circle-xl fixed bottom-lg right-md pointer flex align-center justify-center bg-primary shadow-xxxl txt-white"
-                    data-toggler="true" data-toggler-for="newBill" id="newBillBtn">
-                    <i class="nc nc-plus"></i>
-                </div>
+              </td>
+            </tr>
+            <% }) %>
+          </tbody>
+        </table>
+        <% if (bills.length===0) { %>
+        <div class="bills__content__body__item paper">
+          <h4 class="font-s">No bills found</h4>
+        </div>
+        <% } %>
+      </div>
     </div>
+    <% if (showAlert) { %>
+    <div
+        class="<%= isAlertError ? 'bg-warning' : 'bg-success' %> snackbar active"
+        data-snackbar="billsAlert"
+    >
+      <div class="snackbar__content">
+        <div class="snackbar__content__icon">
+          <i class="nc nc-alert-square"></i>
+        </div>
+        <div class="snackbar__content__text">
+          <h4 class="font-s">
+            <%= alertMsg || "" %>
+          </h4>
+        </div>
+        <div
+            class="snackbar__content__action"
+            data-toggle="snackbar"
+            role="snackbar-toggle"
+            data-target="billsAlert"
+        >
+          <i class="nc nc-close"></i>
+        </div>
+      </div>
+    </div>
+    <% } %>
+    <div
+        class="add-bill circle-xl fixed bottom-lg right-md pointer flex align-center justify-center bg-primary shadow-xxxl txt-white"
+        data-toggler="true"
+        data-toggler-for="newBill"
+        id="newBillBtn"
+    >
+      <i class="nc nc-plus"></i>
+    </div>
+  </div>
 </div>
 
-<div class="modal" aria-hidden="true" data-toggle-target="newBill" data-component="modal">
-    <div class="modal__content">
-        <div class="modal__content__header flex align-center justify-between">
-            <h3 class="font-m">Add New Bill</h3>
-            <div class="modal__content__header__actions">
-                <a data-toggler="true" data-toggler-for="newBill">
-                    <img src="static/images/close.svg" alt="x for closing" height="20" width="20">
-                </a>
-            </div>
-        </div>
-        <div class="modal__content__body">
-            <form action="/bills/new" method="POST" class="mt-l">
-                <div class="input-wrapper flex-v gap-s">
-                    <label for="billName" class="label-required">
-                        Name
-                    </label>
-                    <input type="text" name="billName" id="billName" required autofocus />
-                </div>
-                <div class="input-wrapper flex-v gap-s mt-s">
-                    <label for="billAmount" class="label-required">Amount</label>
-                    <input type="number" name="billAmount" id="billAmount" required min="0" />
-                </div>
-
-                <div class="input-wrapper flex-v gap-s mt-s">
-                    <label for="billDueDate" class="label-required">DueDate</label>
-                    <input type="date" name="billDueDate" id="billDueDate" required />
-                </div>
-                <div class="input-wrapper flex-v gap-s mt-s">
-                    <label for="billFrequency" class="label-required">Frequency</label>
-                    <input type="number" name="billFrequency" id="billFrequency" required min="1" />
-                </div>
-                <div class="input-wrapper flex-v gap-s mt-m">
-                    <label for="category" class="label-required">Category</label>
-                    <select name="billCategory" id="billCategory" required>
-                        <option value="">--Select a Category--</option>
-                        <option value="food">Food</option>
-                        <option value="entertainment">Entertainment</option>
-                        <option value="utilities">Utilities</option>
-                        <option value="transportation">
-                            Transportation
-                        </option>
-                        <option value="other">Other</option>
-                    </select>
-                </div>
-                <div class="input-wrapper flex align-center gap-s mt-m">
-                    <label for="isAutoPay">Autopay</label>
-                    <input type="checkbox" name="isAutoPay" id="isAutoPay" />
-                </div>
-
-                <button class="mt-m">Add bill</button>
-            </form>
-        </div>
+<div
+    class="modal"
+    aria-hidden="true"
+    data-toggle-target="newBill"
+    data-component="modal"
+>
+  <div class="modal__content">
+    <div class="modal__content__header flex align-center justify-between">
+      <h3 class="font-m">Add New Bill</h3>
+      <div class="modal__content__header__actions">
+        <a
+            data-toggler="true"
+            data-toggler-for="newBill"
+        >
+          <img
+              src="static/images/close.svg"
+              alt="x for closing"
+              height="20"
+              width="20"
+          >
+        </a>
+      </div>
     </div>
-</div>
-<div class="modal" aria-hidden="true" data-toggle-target="editBill" data-component="modal">
-    <div class="modal__content">
-        <div class="modal__content__header flex align-center justify-between">
-            <h3 class="font-m">Update Bill</h3>
-            <div class="modal__content__header__actions">
-                <a data-toggler="true" data-toggler-for="editBill">
-                    <img src="static/images/close.svg" alt="x for closing" height="20" width="20">
-                </a>
-            </div>
+    <div class="modal__content__body">
+      <form
+          action="/bills/new"
+          method="POST"
+          class="mt-l"
+      >
+        <div class="input-wrapper flex-v gap-s">
+          <label
+              for="billName"
+              class="label-required"
+          >
+            Name
+          </label>
+          <input
+              type="text"
+              name="billName"
+              id="billName"
+              required
+              autofocus
+          />
         </div>
-        <div class="modal__content__body">
-            <form action="/bills/new" method="POST" class="mt-l">
-                <div class="input-wrapper flex-v gap-s">
-                    <label for="billName" class="label-required">
-                        Name
-                    </label>
-                    <input type="text" name="billName" id="billName" required autofocus />
-                </div>
-                <div class="input-wrapper flex-v gap-s mt-s">
-                    <label for="billAmount" class="label-required">Amount</label>
-                    <input type="number" name="billAmount" id="billAmount" required min="0" />
-                </div>
-
-                <div class="input-wrapper flex-v gap-s mt-s">
-                    <label for="billDueDate" class="label-required">DueDate</label>
-                    <input type="date" name="billDueDate" id="billDueDate" required />
-                </div>
-                <div class="input-wrapper flex-v gap-s mt-s">
-                    <label for="billFrequency" class="label-required">Frequency</label>
-                    <input type="number" name="billFrequency" id="billFrequency" required min="1" />
-                </div>
-                <div class="input-wrapper flex-v gap-s mt-m">
-                    <label for="category" class="label-required">Category</label>
-                    <select name="billCategory" id="billCategory" required>
-                        <option value="">--Select a Category--</option>
-                        <option value="food">Food</option>
-                        <option value="entertainment">Entertainment</option>
-                        <option value="utilities">Utilities</option>
-                        <option value="transportation">
-                            Transportation
-                        </option>
-                        <option value="other">Other</option>
-                    </select>
-                </div>
-                <div class="input-wrapper flex align-center gap-s mt-m">
-                    <label for="isAutoPay">Autopay</label>
-                    <input type="checkbox" name="isAutoPay" id="isAutoPay" />
-                </div>
-
-                <button class="mt-m">Add bill</button>
-            </form>
+        <div class="input-wrapper flex-v gap-s mt-s">
+          <label
+              for="billAmount"
+              class="label-required"
+          >Amount</label>
+          <input
+              type="number"
+              name="billAmount"
+              id="billAmount"
+              required
+              min="0"
+          />
         </div>
+
+        <div class="input-wrapper flex-v gap-s mt-s">
+          <label
+              for="billDueDate"
+              class="label-required"
+          >DueDate</label>
+          <input
+              type="date"
+              name="billDueDate"
+              id="billDueDate"
+              required
+          />
+        </div>
+        <div class="input-wrapper flex-v gap-s mt-s">
+          <label
+              for="billFrequency"
+              class="label-required"
+          >Frequency</label>
+          <input
+              type="number"
+              name="billFrequency"
+              id="billFrequency"
+              required
+              min="1"
+          />
+        </div>
+        <div class="input-wrapper flex-v gap-s mt-m">
+          <label
+              for="category"
+              class="label-required"
+          >Category</label>
+          <select
+              name="billCategory"
+              id="billCategory"
+              required
+          >
+            <option value="">--Select a Category--</option>
+            <option value="food">Food</option>
+            <option value="entertainment">Entertainment</option>
+            <option value="utilities">Utilities</option>
+            <option value="transportation">
+              Transportation
+            </option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+        <div class="input-wrapper flex align-center gap-s mt-m">
+          <label for="isAutoPay">Autopay</label>
+          <input
+              type="checkbox"
+              name="isAutoPay"
+              id="isAutoPay"
+          />
+        </div>
+
+        <button class="mt-m">Add bill</button>
+      </form>
     </div>
+  </div>
 </div>
 
 <script>
-    const sortThs = document.querySelectorAll('th[data-sort=true]');
+  const sortThs = document.querySelectorAll('th[data-sort=true]');
 
-    sortThs.forEach((th) => {
-        th.addEventListener('click', (e) => {
-            const sortTarget = e.target.dataset.sortTarget;
-            const sortType = e.target.dataset.sortType;
-            const direction = e.target.dataset.direction || 'asc';
+  sortThs.forEach((th) => {
+    th.addEventListener('click', (e) => {
+      const sortTarget = e.target.dataset.sortTarget;
+      const sortType = e.target.dataset.sortType;
+      const direction = e.target.dataset.direction || 'asc';
 
-            // console.log(sortTarget);
-            // console.log(sortType);
-            const targets = document.querySelectorAll(
-                `td[data-sortid=${sortTarget}]`
-            );
+      // console.log(sortTarget);
+      // console.log(sortType);
+      const targets = document.querySelectorAll(
+        `td[data-sortid=${sortTarget}]`
+      );
 
-            // console.table('targets', targets);
+      // console.table('targets', targets);
 
-            const targetValues = [];
-            targets.forEach((target) => {
-                targetValues.push(target.innerText);
-            });
-            // console.log('target values', targetValues);
+      const targetValues = [];
+      targets.forEach((target) => {
+        targetValues.push(target.innerText);
+      });
+      // console.log('target values', targetValues);
 
-            const sortedValues = getSortedValue(targetValues, sortType);
+      const sortedValues = getSortedValue(targetValues, sortType);
 
-            if (direction === 'asc') {
-                sortedValues.reverse();
-                e.target.dataset.direction = 'desc';
-            } else {
-                e.target.dataset.direction = 'asc';
-            }
+      if (direction === 'asc') {
+        sortedValues.reverse();
+        e.target.dataset.direction = 'desc';
+      } else {
+        e.target.dataset.direction = 'asc';
+      }
 
-            // console.log('sorted values', sortedValues);
+      // console.log('sorted values', sortedValues);
 
-            // check time elapsed
-            const start = new Date().getTime();
+      // check time elapsed
+      const start = new Date().getTime();
 
-            const sortedTrs = [];
-            sortedValues.forEach((sortedValue) => {
-                targets.forEach((target) => {
-                    if (target.innerText === sortedValue) {
-                        sortedTrs.push(target.parentElement);
-                    }
-                });
-            });
-
-            const end = new Date().getTime();
-
-            console.log(
-                `time elapsed: ${(end - start) / 1000} seconds`
-            );
-
-            // console.log('sorted trs', sortedTrs);
-
-            const tbody = document.querySelector('tbody');
-            tbody.innerHTML = '';
-
-            sortedTrs.forEach((sortedTr) => {
-                tbody.appendChild(sortedTr);
-            });
+      const sortedTrs = [];
+      sortedValues.forEach((sortedValue) => {
+        targets.forEach((target) => {
+          if (target.innerText === sortedValue) {
+            sortedTrs.push(target.parentElement);
+          }
         });
+      });
+
+      const end = new Date().getTime();
+
+      console.log(
+        `time elapsed: ${(end - start) / 1000} seconds`
+      );
+
+      // console.log('sorted trs', sortedTrs);
+
+      const tbody = document.querySelector('tbody');
+      tbody.innerHTML = '';
+
+      sortedTrs.forEach((sortedTr) => {
+        tbody.appendChild(sortedTr);
+      });
     });
+  });
 
-    function getSortedValue(targetValues, sortType) {
-        switch (sortType) {
-            case 'string':
-                return targetValues.sort();
-                break;
-            case 'number':
-                return targetValues.sort((a, b) => a - b);
-                break;
-            case 'date':
-                return targetValues.sort((a, b) => {
-                    const dateA = new Date(a);
-                    const dateB = new Date(b);
-                    return dateA - dateB;
-                });
-                break;
-            case 'money':
-                return targetValues.sort((a, b) => {
-                    const moneyA = a.replace(/[^0-9.-]+/g, '');
-                    const moneyB = b.replace(/[^0-9.-]+/g, '');
-                    return moneyA - moneyB;
-                });
-                break;
+  function getSortedValue(targetValues, sortType) {
+    switch (sortType) {
+      case 'string':
+        return targetValues.sort();
+        break;
+      case 'number':
+        return targetValues.sort((a, b) => a - b);
+        break;
+      case 'date':
+        return targetValues.sort((a, b) => {
+          const dateA = new Date(a);
+          const dateB = new Date(b);
+          return dateA - dateB;
+        });
+        break;
+      case 'money':
+        return targetValues.sort((a, b) => {
+          const moneyA = a.replace(/[^0-9.-]+/g, '');
+          const moneyB = b.replace(/[^0-9.-]+/g, '');
+          return moneyA - moneyB;
+        });
+        break;
 
-            default:
-                // console.log('in default');
-                return targetValues.sort();
-                break;
-        }
+      default:
+        // console.log('in default');
+        return targetValues.sort();
+        break;
     }
-
+  }
 </script>
 
 <script src="static/js/popover.js"></script>
 <script src="static/js/snackbar.js"></script>
 <script>
-    initPopover();
-    initSnackbar();
+  initPopover();
+  initSnackbar();
 </script>
 <!-- <script>
     const formValidation = () => {
@@ -518,3 +720,116 @@
         }
     });
 </script> -->
+
+<script>
+  const controlledInputSubmitBtns = document.querySelectorAll('.controlled-input-btn');
+  const controlledInputs = document.querySelectorAll('.controlled-input');
+
+  controlledInputs.forEach((input) => {
+    /*
+        Input states: 
+
+        edited: show save button until input loses focus
+        unfocused and edited: show unsaved icon until input is edited again
+        editing: show save button until input is saved or input loses focus
+        normal: remove save button and unsaved icon
+    */
+
+    const saveBtn = document.getElementById(`${input.id}__btn`);
+
+    saveBtn.addEventListener('click', async (e) => {
+      input.dataset.editing = 'false';
+      input.dataset.edited = 'false';
+      input.classList.remove('editing');
+      input.classList.remove('edited');
+      saveBtn.classList.add('hidden');
+
+      const data = {
+        id: input.getAttribute('id'),
+        property: input.getAttribute('name'),
+        value: input.value,
+      }
+
+      const resp = await updateBill(data);
+
+      if (resp.status === 200) {
+        input.dataset.originalvalue = input.value;
+
+      }
+    })
+
+
+    input.addEventListener('input', (e) => {
+
+      // if input is edited, show save button
+      const inputId = e.target.id;
+      const submitBtn = document.getElementById(`${inputId}__btn`);
+
+      if (e.target.value !== e.target.dataset.originalvalue) {
+        e.target.dataset.edited = 'true';
+        e.target.dataset.editing = 'true';
+        e.target.classList.add('edited');
+        e.target.classList.add('editing');
+        submitBtn.classList.remove('hidden');
+      } else {
+        e.target.dataset.edited = 'false';
+        e.target.dataset.editing = 'false';
+        e.target.classList.remove('edited');
+        e.target.classList.remove('editing');
+        submitBtn.classList.add('hidden');
+      }
+
+    });
+
+    input.addEventListener('focus', (e) => {
+      const inputId = e.target.id;
+      const unsavedIcon = document.getElementById(`${inputId}__unsaved`);
+
+      if (e.target.dataset.edited === 'true') {
+        e.target.dataset.editing = 'true';
+        e.target.classList.add('editing');
+        // unsavedIcon.classList.add('hidden');
+      }
+    });
+
+    input.addEventListener('blur', (e) => {
+      const inputId = e.target.id;
+      const unsavedIcon = document.getElementById(`${inputId}__unsaved`);
+
+      if (e.target.dataset.editing === 'true') {
+        e.target.dataset.editing = 'false';
+        e.target.classList.remove('editing');
+      }
+      if (e.target.dataset.edited === 'true') {
+        e.target.dataset.editing = 'false';
+        e.target.classList.remove('editing');
+
+        // show unsaved icon
+        // unsavedIcon.classList.remove('hidden');
+      }
+    });
+  });
+
+  console.log(controlledInputSubmitBtns);
+
+  const updateBill = async (bill) => {
+    console.log(bill);
+
+    try {
+      const response = await fetch('/api/v1/bills/edit', {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(bill)
+      });
+      const responseData = await response.json();
+
+      console.log(responseData);
+      return responseData;
+    } catch (error) {
+
+      console.log(error);
+    }
+  }
+</script>

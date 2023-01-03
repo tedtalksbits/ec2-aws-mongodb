@@ -2,7 +2,8 @@ import express, { Request, Response, NextFunction } from 'express';
 import dotenv from 'dotenv';
 import cookieParser from 'cookie-parser';
 // import connectDB from './config/dbConfig';
-import authRoutes from './routes/auth/auth';
+import authRoutes from './routes/api/auth';
+import accountAPIRoutes from './routes/api/accountAPI';
 import accountRoutes from './routes/account/account';
 import registerRoute from './routes/auth/register';
 import loginRoute from './routes/auth/login';
@@ -13,8 +14,6 @@ import cookieSession from 'cookie-session';
 import { getAppConfig } from './config/appConfig';
 import expressLayouts from 'express-ejs-layouts';
 import { verifyAuth } from './controllers/view-controllers/verifyAuth';
-
-import { ExtendedRequest } from './types/restResponse';
 
 const app = express();
 dotenv.config();
@@ -35,7 +34,7 @@ app.use(
 );
 // API ROUTES
 app.use('/api/v1', authRoutes);
-app.use('/api/v1', accountRoutes);
+app.use('/api/v1', accountAPIRoutes);
 
 // CONFIGURE EJS TEMPLATE ENGINE && LAYOUTS
 app.use(expressLayouts);

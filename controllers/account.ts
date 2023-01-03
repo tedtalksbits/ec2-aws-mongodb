@@ -217,3 +217,66 @@ export const deleteBill = async (req: Request, res: Response) => {
     };
     return res.redirect('/bills');
 };
+
+export const editBill = async (req: Request, res: Response) => {
+    console.log(req.body);
+
+    if (!req.session) {
+        return res.redirect('/login');
+    }
+    console.log('*********** /bills/edit GET ************');
+    const userId = req.session.user.data._id;
+    /*
+        data expected in body
+
+        property: string;
+        value: string;
+        id: string;
+    */
+
+    const { property, value, id } = req.body;
+
+    if (!userId) {
+        return res.redirect('/login');
+    }
+
+    if (!id || !property || !value) {
+        req.session.state = {
+            setShowAlert: true,
+            alertMsg: 'Something went wrong. Missing data',
+            isAlertError: true,
+        };
+        return res.redirect('/bills');
+    }
+
+    const account = await Account.findOne({
+        userId,
+    }).exec();
+    if (!account) {
+        return res.redirect('/login');
+    }
+
+    const updatedAccount = await Account.findOneAndUpdate(
+        { userId, 'bills._id': id },
+        { $set: { [`bills.$.${property}`]: value } }
+    ).exec();
+    if (!updatedAccount) {
+        req.session.state = {
+            setShowAlert: true,
+            alertMsg: 'Something went wrong',
+            isAlertError: true,
+        };
+
+        return res.redirect('/bills');
+    }
+    console.log('*********** /bills/edit GET ************');
+    console.log('updatedAccount', updatedAccount);
+    console.log('*********** /bills/edit GET ************');
+    // refresh the page after deleting the bill
+    req.session.state = {
+        setShowAlert: true,
+        alertMsg: 'Bill updated successfully',
+        isAlertError: false,
+    };
+    return res.redirect('/bills');
+};
