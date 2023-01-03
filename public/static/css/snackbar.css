@@ -26,8 +26,8 @@
 }
 
 .snackbar.bg-error {
-    background-color: var(--error-transparent-100);
-    border-color: var(--error-transparent-100);
+    background-color: var(--danger-transparent-100);
+    border-color: var(--danger-transparent-100);
 }
 
 .snackbar.bg-warning {

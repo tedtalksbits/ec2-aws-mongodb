@@ -225,7 +225,7 @@
               <th class="th-sm">Id</th>
               <th
                   class="th-sm"
-                  data-sort="true"
+                  data-sort="false"
                   data-sort-type="string"
                   data-sort-target="name"
               >
@@ -233,7 +233,7 @@
               </th>
               <th
                   class="th-sm"
-                  data-sort="true"
+                  data-sort="false"
                   data-sort-type="money"
                   data-sort-target="amount"
               >
@@ -241,7 +241,7 @@
               </th>
               <th
                   class="th-sm"
-                  data-sort="true"
+                  data-sort="false"
                   data-sort-type="date"
                   data-sort-target="due"
               >
@@ -249,7 +249,7 @@
               </th>
               <th
                   class="th-sm"
-                  data-sort="true"
+                  data-sort="false"
                   data-sort-type="string"
                   data-sort-target="status"
               >
@@ -257,7 +257,7 @@
               </th>
               <th
                   class="th-sm"
-                  data-sort="true"
+                  data-sort="false"
                   data-sort-type="string"
                   data-sort-target="category"
               >
@@ -284,15 +284,13 @@
                     value="<%= bill.billName %>"
                     data-originalvalue="<%= bill.billName %>"
                 >
-                <!-- <label for="<%= bill._id %>" class="controlled-input-label"><%= bill.billName %></label> -->
                 <button
                     class="controlled-input-btn hidden"
                     id="<%= bill._id %>__btn"
-                >save</button>
-                <span
-                    class="controlled-input-unsaved hidden"
-                    id="<%= bill._id %>__unsaved"
-                ></span>
+                >
+                  save
+                </button>
+
               </td>
               <td data-sortid="amount">
                 <input
@@ -755,6 +753,12 @@
       if (resp.status === 200) {
         input.dataset.originalvalue = input.value;
 
+        showSnackbar({
+          message: 'Bill updated successfully',
+          type: "success",
+          duration: 3000,
+        });
+
       }
     })
 
@@ -832,4 +836,14 @@
       console.log(error);
     }
   }
+</script>
+<script>
+  //   showSnackbar({
+  //     message: 'Bill updated successfully',
+  //     timeout: 3000,
+  //     actionText: 'Undo',
+  //     actionHandler: () => {
+  //       console.log('Undo clicked');
+  //     }
+  //   });
 </script>
