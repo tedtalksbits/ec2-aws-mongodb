@@ -153,6 +153,39 @@
     td {
         position: relative;
     }
+
+    input[data-input="controlled"],
+    [data-input="controlled"] {
+        border: none;
+        background: none;
+        padding: 0;
+        margin: 0;
+        transition: all 0.125s ease-in-out;
+
+    }
+
+    input[data-input="controlled"]:focus,
+    [data-input="controlled"]:focus {
+        border: var(--primary) 1px solid;
+        background: var(--surface-alt2);
+        padding: var(--spacing-sm);
+    }
+
+    .menu {
+        background-color: rgba(31, 32, 33, 0.85);
+        backdrop-filter: blur(10px);
+        border: var(--border-color) 1px solid;
+    }
+
+    .menu-item {
+        padding: var(--spacing-sm);
+        border-radius: var(--border-radius-sm);
+        cursor: pointer;
+    }
+
+    .menu-item:hover {
+        background: var(--surface-alt2);
+    }
 </style>
 <div class="bills wrapper p-l">
     <div class="bills__header">
@@ -288,7 +321,11 @@
                                     save
                                 </button>
                             </td>
-                            <td data-sortid="amount">
+                            <td
+                                data-sortid="amount"
+                                class="flex align-center gap-xs"
+                            >
+                                <span>$</span>
                                 <input
                                     data-input="controlled"
                                     type="number"
@@ -393,53 +430,13 @@
                                 </button>
                             </td>
                             <td class="">
-                                <div
-                                    class="
-                                    popover-container"
-                                    role="popover-container"
-                                >
-                                    <div
-                                        class=""
-                                        data-toggle="popover"
-                                        data-target="<%= bill._id %>"
-                                        data-target-location="right"
+                                <div>
+                                    <button
+                                        class="menu-btn"
+                                        data-billid="<%= bill._id %>"
                                     >
-                                        <i class="nc nc-more-horizontal"></i>
-                                    </div>
-                                    <div
-                                        class="popover"
-                                        data-popover="<%= bill._id %>"
-                                        role="popover"
-                                    >
-                                        <div
-                                            class="popover__content flex-column gap-s"
-                                            role="popover-content"
-                                        >
-                                            <button
-                                                class="unstyled-btn"
-                                                title="Edit <%= bill.billName %>"
-                                                data-toggler="true"
-                                                data-toggler-for="editBill"
-                                            >
-                                                <i class='nc nc-edit'></i>
-                                                <span>Edit</span>
-                                            </button>
-
-                                            <form
-                                                action="/bills/delete/<%= bill._id %>"
-                                                method="POST"
-                                            >
-                                                <button
-                                                    type="submit"
-                                                    class="unstyled-btn"
-                                                    title="Delete <%= bill.billName %>"
-                                                >
-                                                    <i class="nc nc-trash txt-error"></i>
-                                                    <span>Delete</span>
-                                                </button>
-                                            </form>
-                                        </div>
-                                    </div>
+                                        <span><i class="nc nc-more-horizontal"></i></span>
+                                    </button>
                                 </div>
                             </td>
                         </tr>
@@ -608,11 +605,38 @@
 </div>
 <script src="static/js/popover.js"></script>
 <script src="static/js/snackbar.js"></script>
+<script src="static/js/menu.js"></script>
+<script src="static/js/menu2.js"></script>
 <script>
     initPopover();
     initSnackbar();
 </script>
-
+<script>
+    const menuBtns = document.querySelectorAll('.menu-btn');
+    console.log(menuBtns)
+    menuBtns.forEach((btn, index) => {
+        btn.setAttribute('data-menu', `menu-${index}`);
+        new Menu({
+            toggler: btn,
+            width: 300,
+            items: [{
+                    text: 'Edit',
+                    icon: 'nc nc-edit',
+                    callback: () => {
+                        console.log('edit');
+                    },
+                },
+                {
+                    text: 'Delete',
+                    icon: 'nc nc-trash',
+                    callback: async () => {
+                        await deleteBill(btn.dataset.billid);
+                    },
+                },
+            ],
+        })
+    })
+</script>
 
 <script>
     const controlledInputSubmitBtns = document.querySelectorAll('.controlled-input-btn');
@@ -699,6 +723,56 @@
             console.log(error);
             showSnackbar({
                 message: 'Bill update failed',
+                type: "error",
+                duration: 3000,
+            });
+        }
+    }
+
+    const deleteBill = async (id) => {
+        console.log("called deleteBill")
+
+        console.log(id)
+
+        try {
+            const response = await fetch(`api/v1/bills/delete/${id}`, {
+                method: 'POST',
+            });
+
+            const responseData = await response.json();
+            console.log("response data", responseData);
+
+            if (responseData.status === 200) {
+                showSnackbar({
+                    message: 'Bill deleted',
+                    type: "success",
+                    duration: 500,
+                    callback: () => {
+                        window.location.reload();
+                    }
+                });
+                // window.location.reload();
+            } else if (responseData.status === 401) {
+                showSnackbar({
+                    message: 'You are not authorized to delete this bill, please login',
+                    type: "error",
+                    duration: 500,
+                    callback: () => {
+                        window.location.href = '/login';
+                    }
+                });
+            } else {
+                showSnackbar({
+                    message: 'Bill delete failed',
+                    type: "error",
+                    duration: 500,
+                });
+            }
+
+        } catch (error) {
+            console.log(error);
+            showSnackbar({
+                message: 'Bill delete failed',
                 type: "error",
                 duration: 3000,
             });

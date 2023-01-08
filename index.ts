@@ -43,6 +43,7 @@ app.set('view engine', 'ejs');
 app.set('views', './views');
 
 // STATIC FILES
+
 app.use(express.static('public'));
 
 // APP ROUTES
@@ -86,7 +87,7 @@ app.get('/dashboard', verifyAuth, (req: Request, res: Response) => {
     });
 });
 
-app.get('/profile', verifyAuth, (req: Request, res: Response) => {
+app.get('/profile/:id', verifyAuth, (req: Request, res: Response) => {
     let data = {};
     if (!req.session) {
         return res.redirect('/login');
@@ -96,11 +97,9 @@ app.get('/profile', verifyAuth, (req: Request, res: Response) => {
     }
     res.render('profile', {
         title: 'Profile',
-        data,
-        layout: './layouts/app',
     });
 });
-app.use('', accountRoutes);
+app.use('/', accountRoutes);
 
 /*
     ========================================

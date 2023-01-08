@@ -8,10 +8,10 @@
     display: inline-block;
 }
 
-.popover {
+.popover__content {
     border-radius: 4px;
     overflow: hidden;
-    padding: var(--spacing-md);
+    padding: var(--spacing-xs);
     background: var(--surface-alt);
     border: 1px solid var(--border-color);
     display: flex;
@@ -20,7 +20,7 @@
         rgb(0 0 0 / 22%) 0px 15px 12px;
     position: absolute;
     z-index: 2000;
-    width: max-content;
+    width: 0px;
     max-width: 400px;
     opacity: 0;
     visibility: hidden;
@@ -28,9 +28,11 @@
     transition: all 0.25s ease 0s;
 }
 
-.popover__content {}
+.popover {
+    position: relative;
+}
 
-.popover.active {
+.popover__content.active {
     opacity: 1;
     visibility: visible;
     transform: scale(1);

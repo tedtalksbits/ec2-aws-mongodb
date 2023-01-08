@@ -218,65 +218,66 @@ export const deleteBill = async (req: Request, res: Response) => {
     return res.redirect('/bills');
 };
 
-export const editBill = async (req: Request, res: Response) => {
-    console.log(req.body);
+export const viewBill = async (req: Request, res: Response) => {
+    // if (!req.session) {
+    //     return res.redirect('/login');
+    // }
+    // console.log('*********** /bills/view GET ************');
+    // const userId = req.session.user.data._id;
+    // const billId = req.params.id;
 
-    if (!req.session) {
-        return res.redirect('/login');
-    }
-    console.log('*********** /bills/edit GET ************');
-    const userId = req.session.user.data._id;
-    /*
-        data expected in body
+    // console.log('userId', userId);
+    // console.log('billId', billId);
+    // console.log(req.params);
 
-        property: string;
-        value: string;
-        id: string;
-    */
+    // if (!userId) {
+    //     return res.redirect('/login');
+    // }
 
-    const { property, value, id } = req.body;
+    // if (!billId) {
+    //     req.session.state = {
+    //         setShowAlert: true,
+    //         alertMsg: 'Something went wrong. Error: Bill ID not found',
+    //         isAlertError: true,
+    //     };
+    //     return res.redirect('/bills');
+    // }
 
-    if (!userId) {
-        return res.redirect('/login');
-    }
+    // const account = await Account.findOne({
+    //     userId,
+    // }).exec();
 
-    if (!id || !property || !value) {
-        req.session.state = {
-            setShowAlert: true,
-            alertMsg: 'Something went wrong. Missing data',
-            isAlertError: true,
-        };
-        return res.redirect('/bills');
-    }
+    // if (!account) {
+    //     return res.redirect('/login');
+    // }
 
-    const account = await Account.findOne({
-        userId,
-    }).exec();
-    if (!account) {
-        return res.redirect('/login');
-    }
+    // // const bill = account.bills.find({ _id: new mongoose.Types.ObjectId(billId)});
 
-    const updatedAccount = await Account.findOneAndUpdate(
-        { userId, 'bills._id': id },
-        { $set: { [`bills.$.${property}`]: value } }
-    ).exec();
-    if (!updatedAccount) {
-        req.session.state = {
-            setShowAlert: true,
-            alertMsg: 'Something went wrong',
-            isAlertError: true,
-        };
+    // const bill = Account.findOne({ userId, 'bills._id': billId }).exec();
 
-        return res.redirect('/bills');
-    }
-    console.log('*********** /bills/edit GET ************');
-    console.log('updatedAccount', updatedAccount);
-    console.log('*********** /bills/edit GET ************');
-    // refresh the page after deleting the bill
-    req.session.state = {
-        setShowAlert: true,
-        alertMsg: 'Bill updated successfully',
+    // if (!bill) {
+    //     req.session.state = {
+    //         setShowAlert: true,
+    //         alertMsg: 'Something went wrong. Error: Bill not found',
+    //         isAlertError: true,
+    //     };
+    //     return res.redirect('/bills');
+    // }
+    return res.status(200).render('viewbill', {
+        title: 'Bill',
+        data: req.session?.user?.data,
+        bill: [
+            {
+                billName: 'test',
+                billAmount: 100,
+                billDueDate: '2021-01-01',
+                billFrequency: 'monthly',
+                id: req.params.id,
+            },
+        ],
+        layout: './layouts/app',
+        showAlert: false,
+        alertMsg: '',
         isAlertError: false,
-    };
-    return res.redirect('/bills');
+    });
 };

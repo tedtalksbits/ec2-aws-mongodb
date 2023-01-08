@@ -1,27 +1,38 @@
 /* eslint-disable no-unused-vars */
 
 function initPopover() {
-    const popovers = document.querySelectorAll('[data-toggle="popover"]');
+    const popoverToggles = document.querySelectorAll('[data-toggle="popover"]');
 
-    popovers.forEach((popover) => {
-        popover.addEventListener('click', (e) => {
-            const target = popover.getAttribute('data-target');
-            const popoverContent = document.querySelector(
+    popoverToggles.forEach((popoverToggle) => {
+        popoverToggle.addEventListener('click', (e) => {
+            const target = popoverToggle.getAttribute('data-target');
+            const popover = document.querySelector(
                 `[data-popover="${target}"]`
             );
-            // close other popovers
-            popovers.forEach((popover) => {
-                const target = popover.getAttribute('data-target');
-                const popoverContent = document.querySelector(
-                    `[data-popover="${target}"]`
-                );
-                popoverContent.classList.remove('active');
-            });
+            const popoverContent = popover.querySelector(
+                '[role="popover-content"]'
+            );
+            // close other popovers thats not the current one
 
-            const top = popover.offsetHeight + 5;
-            const bottom = popover.offsetHeight + 5;
-            const left = popover.offsetWidth + popoverContent.offsetWidth - 5;
-            const right = popover.offsetWidth - 5;
+            if (!popoverContent.classList.contains('active')) {
+                popoverToggles.forEach((popoverToggle) => {
+                    const target = popoverToggle.getAttribute('data-target');
+                    const popover = document.querySelector(
+                        `[data-popover="${target}"]`
+                    );
+                    const popoverContent = popover.querySelector(
+                        '[role="popover-content"]'
+                    );
+                    popoverContent.classList.remove('active');
+                });
+            }
+
+            const top = popoverToggle.offsetHeight + 5;
+            const bottom = popoverToggle.offsetHeight + 5;
+            // const left =
+            //     popoverToggle.offsetWidth + popoverContent.offsetWidth + 5;
+            const left = 300;
+            const right = popoverToggle.offsetWidth - 5;
 
             const location = popover.getAttribute('data-target-location');
 
@@ -32,8 +43,10 @@ function initPopover() {
                     popoverContent.style.bottom = bottom + 'px';
                     break;
                 case 'left':
+                    console.log('left');
                     popoverContent.style.left = '-' + left + 'px';
-                    popoverContent.style.top = '0px';
+                    popoverContent.style.top =
+                        '-' + popoverContent.offsetHeight / 2 + 'px';
                     break;
                 case 'right':
                     popoverContent.style.right = right + 'px';
@@ -41,10 +54,12 @@ function initPopover() {
                     break;
 
                 default:
+                    console.log(location);
                     popoverContent.style.top = top + 'px';
                     break;
             }
-
+            // toggle popover
+            popoverContent.style.width = '300px';
             popoverContent.classList.toggle('active');
         });
     });
@@ -56,10 +71,13 @@ function initPopover() {
             !e.target.closest('[data-toggle="popover"]') &&
             !e.target.closest('[data-popover]')
         ) {
-            popovers.forEach((popover) => {
-                const target = popover.getAttribute('data-target');
-                const popoverContent = document.querySelector(
+            popoverToggles.forEach((popoverToggle) => {
+                const target = popoverToggle.getAttribute('data-target');
+                const popover = document.querySelector(
                     `[data-popover="${target}"]`
+                );
+                const popoverContent = popover.querySelector(
+                    '[role="popover-content"]'
                 );
                 popoverContent.classList.remove('active');
             });
@@ -78,10 +96,13 @@ function initPopover() {
 
             console.log('clicked');
 
-            popovers.forEach((popover) => {
-                const target = popover.getAttribute('data-target');
-                const popoverContent = document.querySelector(
+            popoverToggles.forEach((popoverToggle) => {
+                const target = popoverToggle.getAttribute('data-target');
+                const popover = document.querySelector(
                     `[data-popover="${target}"]`
+                );
+                const popoverContent = popover.querySelector(
+                    '[role="popover-content"]'
                 );
                 popoverContent.classList.remove('active');
             });

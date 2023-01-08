@@ -20,7 +20,12 @@ function initSnackbar() {
     }
 }
 
-function showSnackbar({ message, type = 'success', duration = 3000 }) {
+function showSnackbar({
+    message,
+    type = 'success',
+    duration = 3000,
+    callback,
+}) {
     // create snackbar
 
     // generate unique id
@@ -72,6 +77,10 @@ function showSnackbar({ message, type = 'success', duration = 3000 }) {
         setTimeout(() => {
             snackbar.remove();
         }, 300);
+
+        if (callback) {
+            callback();
+        }
     }, duration);
 
     // add event listener to close button

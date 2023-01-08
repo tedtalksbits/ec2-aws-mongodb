@@ -1316,6 +1316,25 @@ i.icon-trash::after {
     background: var(--gradient-grey);
 }
 
+.hover {
+    transition: all 0.3s ease;
+}
+
+.hover.hover-bg-surface:hover {
+    background-color: var(--surface);
+}
+
+.hover.hover-bg-surface-alt:hover {
+    background-color: var(--surface-alt);
+}
+
+.hover.hover-bg-surface-alt2:hover {
+    background-color: var(--surface-alt2);
+}
+
+
+
+
 /* .bg-gradient-primary {
     background: var(--gradient-primary);
     background-position: 100% 50%;
@@ -1339,6 +1358,23 @@ i.icon-trash::after {
 .bg-black {
     background-color: black;
 }
+
+.bg-none,
+.bg-transparent,
+.bg-transparent-100 {
+    background-color: transparent;
+
+}
+
+.bg-none:hover,
+.bg-transparent:hover,
+.bg-transparent-100:hover {
+    background-color: transparent;
+
+}
+
+
+
 
 
 @keyframes AnimationName {
@@ -1516,6 +1552,21 @@ i.icon-trash::after {
     color: var(--danger-400);
 }
 
+
+/* text align */
+
+.txt-left {
+    text-align: left;
+}
+
+.txt-center {
+    text-align: center;
+}
+
+.txt-right {
+    text-align: right;
+}
+
 /*
     ========================================
     box model
@@ -1584,6 +1635,10 @@ i.icon-trash::after {
 }
 
 /* box model */
+.gap-xs {
+    gap: var(--spacing-xs);
+}
+
 .gap-s {
     gap: var(--spacing-sm);
 }
@@ -1608,6 +1663,71 @@ i.icon-trash::after {
     gap: var(--spacing-3xl);
 }
 
+.p-none {
+    padding: 0;
+}
+
+.pl-none {
+    padding-left: 0;
+}
+
+.pr-none {
+    padding-right: 0;
+}
+
+.pt-none {
+    padding-top: 0;
+}
+
+.pb-none {
+    padding-bottom: 0;
+}
+
+.px-none {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.py-none {
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+.m-none {
+    margin: 0;
+}
+
+.ml-none {
+    margin-left: 0;
+}
+
+.mr-none {
+    margin-right: 0;
+}
+
+.mt-none {
+    margin-top: 0;
+}
+
+.mb-none {
+    margin-bottom: 0;
+}
+
+.mx-none {
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.my-none {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+
+.p-xs {
+    padding: var(--spacing-xs);
+}
+
 .p-s {
     padding: var(--spacing-sm);
 }
@@ -1630,6 +1750,11 @@ i.icon-trash::after {
 
 .p-xxxl {
     padding: var(--spacing-3xl);
+}
+
+.py-xs {
+    padding-top: var(--spacing-xs);
+    padding-bottom: var(--spacing-xs);
 }
 
 .py-s {
@@ -1660,6 +1785,11 @@ i.icon-trash::after {
 .py-xxxl {
     padding-top: var(--spacing-3xl);
     padding-bottom: var(--spacing-3xl);
+}
+
+.px-xs {
+    padding-left: var(--spacing-xs);
+    padding-right: var(--spacing-xs);
 }
 
 .px-s {
