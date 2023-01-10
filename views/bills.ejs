@@ -65,6 +65,19 @@
         transform: translate(-50%, -50%);
     }
 
+    .pass-due {
+        background: var(--danger-transparent-300);
+        border: 1px solid var(--danger-transparent-300);
+    }
+
+    .pass-due::after {
+        content: '⏰';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
     .hidden {
         display: none;
     }
@@ -172,7 +185,7 @@
     }
 
     .menu {
-        background-color: rgba(31, 32, 33, 0.85);
+        background-color: var(--surface-transparent-900);
         backdrop-filter: blur(10px);
         border: var(--border-color) 1px solid;
     }
@@ -187,6 +200,12 @@
         background: var(--surface-alt2);
     }
 </style>
+<%# get current date %>
+<% const today = new Date(); %>
+<% const todayDate = today.getDate(); %>
+<% const todayMonth = today.getMonth() + 1; %>
+<% const todayYear = today.getFullYear(); %>
+<% const todayDateStr = `${todayDate}/${todayMonth}/${todayYear}`; %>
 <div class="bills wrapper p-l">
     <div class="bills__header">
         <div class="breadcrumbs mb-l">
@@ -225,6 +244,21 @@
                     $<%= bills.reduce((max, bill)=> bill.billAmount > max ? bill.billAmount : max, 0) %>
                 </h4>
                 <small>Most Expensive</small>
+            </div>
+        </div>
+        <div class="bills__info__card paper-bordered">
+            <div class="bills-icon pass-due"></div>
+            <div class="active-bills-info">
+                <h4>
+                    <!-- display pass due bill -->
+                    <%= bills.filter(bill => {
+                        const billDate = new Date(bill.billDueDate);
+                     
+                        return billDate < today && bill.billStatus.toLowerCase() === 'unpaid';
+                    }).length %>
+
+                </h4>
+                <small>Pass Due</small>
             </div>
         </div>
     </div>
@@ -541,14 +575,55 @@
                         id="billAmount"
                         required
                         min="0"
+                        step="0.01"
                     />
+                    <div class="amount-suggestions grid-4-col">
+                        <button
+                            type="button"
+                            class="amount-suggestion"
+                            data-input="billAmount"
+                        >
+                            $<%= Math.floor(Math.random() * 100) + 10 %>
+                        </button>
+                        <button
+                            type="button"
+                            class="amount-suggestion"
+                            data-input="billAmount"
+                        >
+                            $<%= Math.floor(Math.random() * 200) + 101 %>
+                        </button>
+                        <button
+                            type="button"
+                            class="amount-suggestion"
+                            data-input="billAmount"
+                        >
+                            $<%= Math.floor(Math.random() * 500) + 201 %>
+                        </button>
+                        <button
+                            type="button"
+                            class="amount-suggestion"
+                            data-input="billAmount"
+                        >
+                            $<%= Math.floor(Math.random() * 1000) + 501 %>
+                        </button>
+                        <button
+                            type="button"
+                            class="amount-suggestion"
+                            data-input="billAmount"
+                        >
+                            <!-- random number between 90 and 1500 -->
+                            $<%= Math.floor(Math.random() * 1500) + 1001 %>
+                        </button>
+                    </div>
                 </div>
 
                 <div class="input-wrapper flex-v gap-s mt-s">
                     <label
                         for="billDueDate"
                         class="label-required"
-                    >DueDate</label>
+                    >
+                        DueDate
+                    </label>
                     <input
                         type="date"
                         name="billDueDate"
@@ -560,20 +635,32 @@
                     <label
                         for="billFrequency"
                         class="label-required"
-                    >Frequency</label>
-                    <input
-                        type="number"
+                    >
+                        Frequency
+                    </label>
+                    <select
                         name="billFrequency"
                         id="billFrequency"
                         required
-                        min="1"
-                    />
+                    >
+                        <option value="">--Repeat Bill Every--</option>
+                        <option value="1">Week</option>
+                        <option value="2">Two Weeks</option>
+                        <option value="3">Three Weeks</option>
+                        <option value="4">Month</option>
+                        <option value="12">Year</option>
+                        <option value="24">Two Years</option>
+                        <option value="60">Five Years</option>
+
+                    </select>
                 </div>
                 <div class="input-wrapper flex-v gap-s mt-m">
                     <label
                         for="category"
                         class="label-required"
-                    >Category</label>
+                    >
+                        Category
+                    </label>
                     <select
                         name="billCategory"
                         id="billCategory"
@@ -606,7 +693,6 @@
 <script src="static/js/popover.js"></script>
 <script src="static/js/snackbar.js"></script>
 <script src="static/js/menu.js"></script>
-<script src="static/js/menu2.js"></script>
 <script>
     initPopover();
     initSnackbar();
@@ -620,10 +706,10 @@
             toggler: btn,
             width: 300,
             items: [{
-                    text: 'Edit',
-                    icon: 'nc nc-edit',
+                    text: 'More Details',
+                    icon: 'nc nc-eye',
                     callback: () => {
-                        console.log('edit');
+                        window.location.href = `/bill/${btn.dataset.billid}`;
                     },
                 },
                 {
@@ -856,6 +942,9 @@
                     message: 'Bill updated successfully',
                     type: "success",
                     duration: 3000,
+                    callback: () => {
+                        window.location.reload();
+                    }
                 });
 
                 btn.classList.add('hidden');
@@ -875,6 +964,19 @@
                     duration: 3000,
                 });
             }
+        });
+    });
+</script>
+<script>
+    // set suggested bill amount on click
+    const suggestedAmounts = document.querySelectorAll('.amount-suggestion');
+
+    suggestedAmounts.forEach((suggestedAmount) => {
+        suggestedAmount.addEventListener('click', (e) => {
+            console.log(e.target.dataset.input);
+            const input = document.getElementById(`${e.target.dataset.input}`);
+            input.value = suggestedAmount.textContent.split('$')[1].toString().trim();
+            console.log(e.target.textContent.split('$')[1]);
         });
     });
 </script>

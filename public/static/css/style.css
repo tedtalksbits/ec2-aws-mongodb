@@ -84,6 +84,16 @@
     --surface-alt: hsl(0, 0%, 100%);
     --surface-alt2: hsl(0deg 0% 92%);
 
+    --surface-transparent-100: hsla(210, 17%, 98%, 0.08);
+    --surface-transparent-200: hsla(210, 17%, 98%, 0.16);
+    --surface-transparent-300: hsla(210, 17%, 98%, 0.24);
+    --surface-transparent-400: hsla(210, 17%, 98%, 0.32);
+    --surface-transparent-500: hsla(210, 17%, 98%, 0.4);
+    --surface-transparent-600: hsla(210, 17%, 98%, 0.48);
+    --surface-transparent-700: hsla(210, 17%, 98%, 0.56);
+    --surface-transparent-800: hsla(210, 17%, 98%, 0.64);
+    --surface-transparent-900: hsla(210, 17%, 98%, 0.72);
+
     --txt: hsl(0, 0%, 9%);
     --txt-alt: hsla(0, 0%, 9%, .75);
     --txt-alt2: hsla(0, 0%, 9%, .55);
@@ -1265,6 +1275,42 @@ i.icon-trash::after {
 
 .bg-surface {
     background-color: var(--surface);
+}
+
+.bg-surface-transparent-100 {
+    background-color: var(--surface-transparent-100);
+}
+
+.bg-surface-transparent-200 {
+    background-color: var(--surface-transparent-200);
+}
+
+.bg-surface-transparent-300 {
+    background-color: var(--surface-transparent-300);
+}
+
+.bg-surface-transparent-400 {
+    background-color: var(--surface-transparent-400);
+}
+
+.bg-surface-transparent-500 {
+    background-color: var(--surface-transparent-500);
+}
+
+.bg-surface-transparent-600 {
+    background-color: var(--surface-transparent-600);
+}
+
+.bg-surface-transparent-700 {
+    background-color: var(--surface-transparent-700);
+}
+
+.bg-surface-transparent-800 {
+    background-color: var(--surface-transparent-800);
+}
+
+.bg-surface-transparent-900 {
+    background-color: var(--surface-transparent-900);
 }
 
 .bg-surface-alt {

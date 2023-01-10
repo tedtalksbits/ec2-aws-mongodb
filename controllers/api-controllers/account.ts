@@ -168,3 +168,82 @@ export const deleteBill = async (req: Request, res: Response) => {
         });
     }
 };
+
+export const findOneBill = async (req: Request, res: Response) => {
+    console.log('*********** /bills/:id GET ************');
+    console.log('checking session');
+    if (!req.session) {
+        console.log('session not found');
+        return res.status(401).json({
+            error: true,
+            status: 401,
+            errorMsg: 'Unauthorized',
+        });
+    }
+
+    console.log('session found');
+    const userId = req.session.user.data._id;
+
+    console.log('userId: ', userId);
+
+    if (!userId) {
+        console.log('userId not found');
+        return res.status(401).json({
+            error: true,
+            status: 401,
+            errorMsg: 'Unauthorized',
+        });
+    }
+
+    console.log('userId found');
+
+    const billId = req.params.id;
+    console.log('billId: ', billId);
+
+    if (!billId) {
+        console.log('billId not found');
+        return res.status(400).json({
+            error: true,
+            status: 400,
+            errorMsg: 'Missing data',
+        });
+    }
+
+    console.log('billId found');
+
+    // add _id bill array type
+
+    const account = await Account.findOne({
+        userId,
+    }).exec();
+
+    if (!account) {
+        console.log('account not found');
+        return res.status(404).json({
+            error: true,
+            status: 404,
+            errorMsg: 'Account not found',
+        });
+    }
+
+    console.log('account found');
+
+    const bill = account.bills.find((bill) => bill._id == billId);
+
+    if (!bill) {
+        console.log('bill not found');
+        return res.status(404).json({
+            error: true,
+            status: 404,
+            errorMsg: 'Bill not found',
+        });
+    }
+
+    console.log('bill found');
+
+    return res.status(200).json({
+        ok: true,
+        status: 200,
+        data: bill,
+    });
+};

@@ -1,6 +1,89 @@
-<div>
-    hello
-    <%- bill[0].billName %>
-    <%- bill[0].id %>
+<style>
+    .bill.wrapper {
+        text-transform: capitalize;
+    }
+</style>
 
-</div>
+<!-- generate a random color -->
+
+<div class="bill wrapper p-l">
+    <div class="bill__header mb-l">
+        <div class="breadcrumbs mb-l">
+            <a
+                class="mb-l"
+                href="/bills"
+            >All Bills</a> / <span class="bold">Bill Name: <%= bill.billName %> </span>
+        </div>
+        <div
+            class="rounded-md bg-primary flex align-center justify-center"
+            style="height: 5rem; width: 5rem;"
+            id="bill__header__icon"
+        >
+
+            <h1 class="font-xxl"><%= bill.billName[0] %></h1>
+        </div>
+        <small class=""><%= bill.billName %></small>
+    </div>
+    <div class="bill__content paper-bordered p-m">
+        <div class="flex align-center justify-between py-m border-bottom">
+            <p class="txt-alt">Bill Name</p>
+            <p><%= bill.billName %></p>
+        </div>
+        <div class="flex align-center justify-between py-m border-bottom">
+            <p class="txt-alt">Amount</p>
+            <p><%= bill.billAmount %></p>
+        </div>
+        <div class="flex align-center justify-between py-m border-bottom">
+            <p class="txt-alt">Due Date</p>
+            <p><%= new Date(bill.billDueDate).toLocaleDateString() %></p>
+        </div>
+        <div class="flex align-center justify-between py-m border-bottom">
+            <p class="txt-alt">Category</p>
+            <p><%= bill.billCategory %></p>
+        </div>
+        <div class="flex align-center justify-between py-m border-bottom">
+            <p class="txt-alt">Status</p>
+            <p><%= bill.billStatus %></p>
+        </div>
+        <div class="flex align-center justify-between py-m border-bottom">
+            <p class="txt-alt">Type</p>
+            <p><%= bill.billFrequency === '1' ?  'One-time' : 'Recurring'%></p>
+        </div>
+        <div class="flex align-center justify-between py-m border-bottom">
+            <p class="txt-alt">Frequency</p>
+            <% if (bill.billFrequency === '1') { %>
+            <p class="txt-alt">Weekly</p>
+            <% } %>
+            <% if (bill.billFrequency === '2') { %>
+            <p class="txt-alt">Bi-Weekly</p>
+            <% } %>
+            <% if (bill.billFrequency === '4') { %>
+            <p class="txt-alt">Monthly</p>
+            <% } %>
+            <% if (bill.billFrequency === '12') { %>
+            <p class="txt-alt">Yearly</p>
+            <% } %>
+            <% if (bill.billFrequency === '24') { %>
+            <p class="txt-alt">2 Years</p>
+            <% } %>
+            <% if (bill.billFrequency === '60') { %>
+            <p class="txt-alt">5 Years</p>
+            <% } %>
+        </div>
+    </div>
+
+    <script>
+        function getRandomColor() {
+            let letters = '0123456789ABCDEF';
+            let color = '#';
+            for (let i = 0; i < 6; i++) {
+                color += letters[Math.floor(Math.random() * 16)];
+            }
+            return color;
+        }
+
+        let gradientFrom = getRandomColor();
+        let gradientTo = getRandomColor();
+
+        document.querySelector('#bill__header__icon').style.background = `linear-gradient(90deg, ${gradientFrom} 0%, ${gradientTo} 100%)`;
+    </script>

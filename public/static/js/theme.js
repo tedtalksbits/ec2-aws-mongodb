@@ -7,9 +7,18 @@ const darkModeStyles = document.createElement('style');
 darkModeStyles.innerHTML = `
 :root{
 
-    --surface: #1a1a1d;
-    --surface-alt: #2b2c31;
-    --surface-alt2: #3c3d42;
+    --surface: hsl(240, 5%, 11%);
+    --surface-alt: hsl(230, 7%, 18%);
+    --surface-alt2: hsl(230, 5%, 25%);
+    --surface-transparent-100: hsla(240, 5%, 11%, 0.08);
+    --surface-transparent-200: hsla(240, 5%, 11%, 0.16);
+    --surface-transparent-300: hsla(240, 5%, 11%, 0.24);
+    --surface-transparent-400: hsla(240, 5%, 11%, 0.32);
+    --surface-transparent-500: hsla(240, 5%, 11%, 0.4);
+    --surface-transparent-600: hsla(240, 5%, 11%, 0.48);
+    --surface-transparent-700: hsla(240, 5%, 11%, 0.56);
+    --surface-transparent-800: hsla(240, 5%, 11%, 0.64);
+    --surface-transparent-900: hsla(240, 5%, 11%, 0.72);
     --txt: hsl(0, 0%, 90%);
     --txt-alt: hsla(0, 0%, 90%, .75);
     --txt-alt2: hsla(0, 0%, 90%, .5);

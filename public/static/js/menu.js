@@ -17,7 +17,24 @@ class Menu {
         this.items.forEach((item) => {
             let menuItem = document.createElement('li');
             menuItem.classList.add('menu-item');
-            menuItem.innerHTML = item.text;
+
+            if (item.type === 'link') {
+                menuItem = document.createElement('a');
+                menuItem.href = item.href;
+                menuItem.target = '_blank';
+            }
+
+            if (item.type === 'button') {
+                menuItem = document.createElement('button');
+            }
+
+            if (item.icon) {
+                const icon = `<i class="${item.icon}"></i>`;
+
+                menuItem.innerHTML = icon;
+            }
+            menuItem.innerHTML += item.text;
+
             menuItem.addEventListener('click', async () => {
                 await item.callback();
                 this.toggle();
@@ -39,6 +56,8 @@ class Menu {
                     '[data-component="menu"]'
                 );
                 if (menus.length > 0) {
+                    this.menu.classList.remove('show');
+                    this.menu.classList.add('hidden');
                     menus.forEach((menu) => {
                         menu.classList.add('hidden');
                         setTimeout(() => {
@@ -76,10 +95,14 @@ class Menu {
                 list-style: none;
                 margin: 0;
                 padding: 0;
+                
             }
             .menu-item {
                 cursor: pointer;
                 padding: 5px;
+                display: flex;
+                align-items: center;
+                gap: 8px;
             }
             .menu-item:hover {
                 background-color: #eee;
@@ -114,6 +137,7 @@ class Menu {
     toggle() {
         console.log('toggle');
         if (this.menu.classList.contains('show')) {
+            console.log('menu has class of show');
             this.menu.classList.remove('show');
             this.menu.classList.add('hidden');
             setTimeout(() => {
@@ -142,6 +166,7 @@ class Menu {
     }
 
     init() {
+        console.log('init');
         // create styles for the menu
         // check if the styles already exist
         if (!document.querySelector('[data-for="menu"]')) {

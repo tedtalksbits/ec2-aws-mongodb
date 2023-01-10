@@ -1,8 +1,42 @@
 // create a schema for a bank account
 
-import mongoose from 'mongoose';
+import mongoose, { Types } from 'mongoose';
 const { Schema } = mongoose;
-const accountSchema = new Schema(
+interface iAccount {
+    userId: string;
+    preferenceId: string;
+    bills: iBill[];
+    createdAt: Date;
+    updatedAt: Date;
+}
+interface iBill {
+    // _id: Types.ObjectId;
+    _id: string;
+    billId: string;
+    billName: string;
+    billAmount: number;
+    billDueDate: Date;
+    billFrequency: string;
+    billCategory: string;
+    billStatus: string;
+    isAutoPay: boolean;
+    billNotes: [
+        {
+            note: string;
+            noteId: string;
+            noteDate: Date;
+            createdAt: Date;
+        }
+    ];
+    billReminders: [
+        {
+            reminderId: string;
+            reminderDate: Date;
+            reminderStatus: string;
+        }
+    ];
+}
+const accountSchema = new Schema<iAccount>(
     {
         preferenceId: {
             type: String,

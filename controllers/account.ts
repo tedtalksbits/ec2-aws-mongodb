@@ -219,62 +219,52 @@ export const deleteBill = async (req: Request, res: Response) => {
 };
 
 export const viewBill = async (req: Request, res: Response) => {
-    // if (!req.session) {
-    //     return res.redirect('/login');
-    // }
-    // console.log('*********** /bills/view GET ************');
-    // const userId = req.session.user.data._id;
-    // const billId = req.params.id;
+    if (!req.session) {
+        return res.redirect('/login');
+    }
+    console.log('*********** /bills/view GET ************');
+    const userId = req.session.user.data._id;
+    const billId = req.params.id;
 
-    // console.log('userId', userId);
-    // console.log('billId', billId);
-    // console.log(req.params);
+    console.log('userId', userId);
+    console.log('billId', billId);
+    console.log(req.params);
 
-    // if (!userId) {
-    //     return res.redirect('/login');
-    // }
+    if (!userId) {
+        return res.redirect('/login');
+    }
 
-    // if (!billId) {
-    //     req.session.state = {
-    //         setShowAlert: true,
-    //         alertMsg: 'Something went wrong. Error: Bill ID not found',
-    //         isAlertError: true,
-    //     };
-    //     return res.redirect('/bills');
-    // }
+    if (!billId) {
+        req.session.state = {
+            setShowAlert: true,
+            alertMsg: 'Something went wrong. Error: Bill ID not found',
+            isAlertError: true,
+        };
+        return res.redirect('/bills');
+    }
 
-    // const account = await Account.findOne({
-    //     userId,
-    // }).exec();
+    const account = await Account.findOne({
+        userId,
+    }).exec();
 
-    // if (!account) {
-    //     return res.redirect('/login');
-    // }
+    if (!account) {
+        return res.redirect('/login');
+    }
+    if (!account) {
+        req.session.state = {
+            setShowAlert: true,
+            alertMsg: 'Something went wrong. Error: Bill not found',
+            isAlertError: true,
+        };
+        return res.redirect('/bills');
+    }
 
-    // // const bill = account.bills.find({ _id: new mongoose.Types.ObjectId(billId)});
+    const bill = account?.bills.filter((bill) => bill._id == billId);
 
-    // const bill = Account.findOne({ userId, 'bills._id': billId }).exec();
-
-    // if (!bill) {
-    //     req.session.state = {
-    //         setShowAlert: true,
-    //         alertMsg: 'Something went wrong. Error: Bill not found',
-    //         isAlertError: true,
-    //     };
-    //     return res.redirect('/bills');
-    // }
     return res.status(200).render('viewbill', {
         title: 'Bill',
         data: req.session?.user?.data,
-        bill: [
-            {
-                billName: 'test',
-                billAmount: 100,
-                billDueDate: '2021-01-01',
-                billFrequency: 'monthly',
-                id: req.params.id,
-            },
-        ],
+        bill: bill[0],
         layout: './layouts/app',
         showAlert: false,
         alertMsg: '',
