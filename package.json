@@ -9,7 +9,8 @@
     "start": "node dist/index.js",
     "watch": "tsc -w",
     "build": "tsc",
-    "dev:watch": "cross-env NODE_ENV=development tsc -w & nodemone dist/index.js"
+    "dev:watch": "cross-env NODE_ENV=development tsc -w & nodemon dist/index.js",
+    "dev-watch": "concurrently \"npm run watch\" \"npm run dev\" "
   },
   "keywords": [],
   "author": "Tedane Blake",
@@ -20,6 +21,7 @@
     "@types/crypto-js": "^4.1.1",
     "@types/express-ejs-layouts": "^2.5.0",
     "@types/jsonwebtoken": "^8.5.9",
+    "concurrently": "^7.6.0",
     "cross-env": "^7.0.3",
     "eslint": "^8.29.0",
     "nodemon": "^2.0.20",

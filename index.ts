@@ -21,7 +21,13 @@ const appConfig = getAppConfig();
 
 // MIDDLEWARE
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+app.use(
+    express.urlencoded({
+        extended: true,
+        limit: '50mb',
+        parameterLimit: 100000,
+    })
+);
 app.use(cors());
 app.use(cookieParser());
 // this is needed for cookie-session to work behind a proxy

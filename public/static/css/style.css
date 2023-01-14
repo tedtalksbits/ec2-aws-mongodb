@@ -779,10 +779,300 @@ button:active {
 }
 
 button:disabled {
-    background-color: var(--primary-transparent-400);
+    background-color: var(--danger-transparent-100);
     color: var(--txt);
     cursor: not-allowed;
 }
+
+button.bg-warning-100:hover {
+    background-color: var(--warning-200);
+}
+
+button.bg-warning-200:hover {
+    background-color: var(--warning-300);
+}
+
+button.bg-warning-300:hover {
+    background-color: var(--warning-400);
+}
+
+button.bg-warning-400:hover {
+    background-color: var(--warning-500);
+}
+
+button.bg-warning-500:hover {
+    background-color: var(--warning-600);
+}
+
+button.bg-warning-600:hover {
+    background-color: var(--warning-700);
+}
+
+button.bg-warning-700:hover {
+    background-color: var(--warning-800);
+}
+
+button.bg-warning-800:hover {
+    background-color: var(--warning-900);
+}
+
+button.bg-warning-900:hover {
+    background-color: var(--warning-500);
+}
+
+button.bg-danger-100:hover {
+    background-color: var(--danger-200);
+}
+
+button.bg-danger-200:hover {
+    background-color: var(--danger-300);
+}
+
+button.bg-danger-300:hover {
+    background-color: var(--danger-400);
+}
+
+button.bg-danger-400:hover {
+    background-color: var(--danger-500);
+}
+
+button.bg-danger-500:hover {
+    background-color: var(--danger-600);
+}
+
+button.bg-danger-600:hover {
+    background-color: var(--danger-700);
+}
+
+button.bg-danger-700:hover {
+    background-color: var(--danger-800);
+}
+
+button.bg-danger-800:hover {
+    background-color: var(--danger-900);
+}
+
+button.bg-danger-900:hover {
+    background-color: var(--danger-500);
+}
+
+button.bg-success-100:hover {
+    background-color: var(--success-200);
+}
+
+button.bg-success-200:hover {
+    background-color: var(--success-300);
+}
+
+button.bg-success-300:hover {
+    background-color: var(--success-400);
+}
+
+button.bg-success-400:hover {
+    background-color: var(--success-500);
+}
+
+button.bg-success-500:hover {
+    background-color: var(--success-600);
+}
+
+button.bg-success-600:hover {
+    background-color: var(--success-700);
+}
+
+button.bg-success-700:hover {
+    background-color: var(--success-800);
+}
+
+button.bg-success-800:hover {
+    background-color: var(--success-900);
+}
+
+button.bg-success-900:hover {
+    background-color: var(--success-500);
+}
+
+button.bg-info-100:hover {
+    background-color: var(--info-200);
+}
+
+button.bg-info-200:hover {
+    background-color: var(--info-300);
+}
+
+button.bg-info-300:hover {
+    background-color: var(--info-400);
+}
+
+button.bg-info-400:hover {
+    background-color: var(--info-500);
+}
+
+button.bg-info-500:hover {
+    background-color: var(--info-600);
+}
+
+button.bg-info-600:hover {
+    background-color: var(--info-700);
+}
+
+button.bg-info-700:hover {
+    background-color: var(--info-800);
+}
+
+button.bg-info-800:hover {
+    background-color: var(--info-900);
+}
+
+button.bg-info-900:hover {
+    background-color: var(--info-500);
+}
+
+button.bg-warning-transparent-100:hover {
+    background-color: var(--warning-transparent-200);
+}
+
+button.bg-warning-transparent-200:hover {
+    background-color: var(--warning-transparent-300);
+}
+
+button.bg-warning-transparent-300:hover {
+    background-color: var(--warning-transparent-400);
+}
+
+button.bg-warning-transparent-400:hover {
+    background-color: var(--warning-transparent-500);
+}
+
+button.bg-warning-transparent-500:hover {
+    background-color: var(--warning-transparent-600);
+}
+
+button.bg-warning-transparent-600:hover {
+    background-color: var(--warning-transparent-700);
+}
+
+button.bg-warning-transparent-700:hover {
+    background-color: var(--warning-transparent-800);
+}
+
+button.bg-warning-transparent-800:hover {
+    background-color: var(--warning-transparent-900);
+}
+
+button.bg-warning-transparent-900:hover {
+    background-color: var(--warning-500);
+}
+
+button.bg-danger-transparent-100:hover {
+    background-color: var(--danger-transparent-200);
+}
+
+button.bg-danger-transparent-200:hover {
+    background-color: var(--danger-transparent-300);
+}
+
+button.bg-danger-transparent-300:hover {
+    background-color: var(--danger-transparent-400);
+}
+
+button.bg-danger-transparent-400:hover {
+    background-color: var(--danger-transparent-500);
+}
+
+button.bg-danger-transparent-500:hover {
+    background-color: var(--danger-transparent-600);
+}
+
+button.bg-danger-transparent-600:hover {
+    background-color: var(--danger-transparent-700);
+}
+
+button.bg-danger-transparent-700:hover {
+    background-color: var(--danger-transparent-800);
+}
+
+button.bg-danger-transparent-800:hover {
+    background-color: var(--danger-transparent-900);
+}
+
+button.bg-danger-transparent-900:hover {
+    background-color: var(--danger-500);
+}
+
+button.bg-success-transparent-100:hover {
+    background-color: var(--success-transparent-200);
+}
+
+button.bg-success-transparent-200:hover {
+    background-color: var(--success-transparent-300);
+}
+
+button.bg-success-transparent-300:hover {
+    background-color: var(--success-transparent-400);
+}
+
+button.bg-success-transparent-400:hover {
+    background-color: var(--success-transparent-500);
+}
+
+button.bg-success-transparent-500:hover {
+    background-color: var(--success-transparent-600);
+}
+
+button.bg-success-transparent-600:hover {
+    background-color: var(--success-transparent-700);
+}
+
+button.bg-success-transparent-700:hover {
+    background-color: var(--success-transparent-800);
+}
+
+button.bg-success-transparent-800:hover {
+    background-color: var(--success-transparent-900);
+}
+
+button.bg-success-900:hover {
+    background-color: var(--success-500);
+}
+
+button.bg-info-transparent-100:hover {
+    background-color: var(--info-transparent-200);
+}
+
+button.bg-info-transparent-200:hover {
+    background-color: var(--info-transparent-300);
+}
+
+button.bg-info-transparent-300:hover {
+    background-color: var(--info-transparent-400);
+}
+
+button.bg-info-transparent-400:hover {
+    background-color: var(--info-transparent-500);
+}
+
+button.bg-info-transparent-500:hover {
+    background-color: var(--info-transparent-600);
+}
+
+button.bg-info-transparent-600:hover {
+    background-color: var(--info-transparent-700);
+}
+
+button.bg-info-transparent-700:hover {
+    background-color: var(--info-transparent-800);
+}
+
+button.bg-info-transparent-800:hover {
+    background-color: var(--info-transparent-900);
+}
+
+button.bg-info-transparent-900:hover {
+    background-color: var(--info-500);
+}
+
+
 
 *[role="button"] {
     cursor: pointer;
@@ -863,6 +1153,10 @@ button:disabled {
 
 .border-0 {
     border: 0;
+}
+
+.border-none {
+    border: none;
 }
 
 .border-success-100 {
@@ -2816,9 +3110,70 @@ i.icon-trash::after {
     width: var(--width-full);
 }
 
+.w-fit-content {
+    width: fit-content;
+}
+
+.w-max-content {
+    width: max-content;
+}
+
+.w-min-content {
+    width: min-content;
+}
+
+.w-auto {
+    width: auto;
+}
+
+.w-half {
+    width: 50%;
+}
+
+.w-third {
+    width: 33.333333%;
+}
+
+.w-two-third {
+    width: 66.666667%;
+}
+
+.w-quarter {
+    width: 25%;
+}
+
+.w-three-quarter {
+    width: 75%;
+}
+
 .h-full {
     height: var(--height-full);
 }
+
+.h-auto {
+    height: auto;
+}
+
+.h-half {
+    height: 50%;
+}
+
+.h-third {
+    height: 33.333333%;
+}
+
+.h-two-third {
+    height: 66.666667%;
+}
+
+.h-quarter {
+    height: 25%;
+}
+
+.h-three-quarter {
+    height: 75%;
+}
+
 
 /* animation */
 .animateOut {
