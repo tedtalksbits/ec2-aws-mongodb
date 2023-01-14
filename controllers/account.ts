@@ -33,6 +33,29 @@ export const getAccountById = async (req: Request, res: Response) => {
 
     console.log('account found', account);
 
+    const query = req.query;
+
+    console.log('query', query);
+
+    if (query.status) {
+        const filteredBills = account[0].bills.filter((bill) => {
+            return (
+                bill.billStatus.toLowerCase() ===
+                query?.status?.toString().toLowerCase()
+            );
+        });
+
+        return res.status(200).render('bills', {
+            title: 'Bills',
+            data: req.session?.user?.data,
+            bills: filteredBills,
+            layout: './layouts/app',
+            showAlert: false,
+            alertMsg: '',
+            isAlertError: false,
+        });
+    }
+
     if (req.session.state?.setShowAlert) {
         const { alertMsg, isAlertError, setShowAlert } = req.session.state;
         req.session.state = {
@@ -105,14 +128,6 @@ export const addBill = async (req: Request, res: Response) => {
         return res.redirect('/bills');
     }
 
-    // const account = await Account.find({
-    //     userId,
-    // }).exec();
-
-    // if (!account) {
-    //     return res.redirect('/login');
-    // }
-
     const bill = {
         billName,
         billAmount,
@@ -121,10 +136,6 @@ export const addBill = async (req: Request, res: Response) => {
         billCategory,
         isAutoPay,
     };
-
-    // if (!account) {
-    //     return res.redirect('/login');
-    // }
 
     const updatedAccount = (await Account.findOneAndUpdate(
         { userId },

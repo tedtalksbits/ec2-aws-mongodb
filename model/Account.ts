@@ -19,6 +19,7 @@ interface iBill {
     billFrequency: string;
     billCategory: string;
     billStatus: string;
+    billCompanyImg: string;
     isAutoPay: boolean;
     billNotes: [
         {
@@ -50,6 +51,7 @@ const accountSchema = new Schema<iAccount>(
                 billDueDate: Date,
                 billFrequency: String,
                 billCategory: String,
+                billCompanyImg: String,
                 billStatus: {
                     type: String,
                     default: 'Unpaid',

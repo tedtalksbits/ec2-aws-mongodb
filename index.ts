@@ -87,18 +87,6 @@ app.get('/dashboard', verifyAuth, (req: Request, res: Response) => {
     });
 });
 
-app.get('/profile/:id', verifyAuth, (req: Request, res: Response) => {
-    let data = {};
-    if (!req.session) {
-        return res.redirect('/login');
-    }
-    if (req.session.user) {
-        data = req.session.user.data;
-    }
-    res.render('profile', {
-        title: 'Profile',
-    });
-});
 app.use('/', accountRoutes);
 
 /*

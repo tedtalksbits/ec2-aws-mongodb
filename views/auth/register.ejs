@@ -1,41 +1,103 @@
 <div class="container">
     <h1 class="center">Sign Up</h1>
-    <p class="center my-s">
+    <p class="center my-sm">
         Already have an account?
-        <a class="link" href="/login">Login</a>
+        <a
+            class="link"
+            href="/login"
+        >Login</a>
     </p>
-    <form action="/register" method="POST" class="paper mt-l">
-        <div class="flex-h gap-m">
+    <form
+        action="/register"
+        method="POST"
+        class="paper mt-lg"
+    >
+        <div class="flex-h gap-md">
             <div class="input-wrapper">
-                <label for="firstName" class="label-required">First Name</label>
-                <input type="text" name="firstName" id="firstName" value="<%= data.firstName ?? '' %>" required />
+                <label
+                    for="firstName"
+                    class="label-required"
+                >First Name</label>
+                <input
+                    type="text"
+                    name="firstName"
+                    id="firstName"
+                    value="<%= data.firstName ?? '' %>"
+                    required
+                />
             </div>
             <div class="input-wrapper">
-                <label for="lastName" class="label-required">Last Name</label>
-                <input type="text" name="lastName" id="lastName" value="<%= data.lastName ?? '' %>" required />
+                <label
+                    for="lastName"
+                    class="label-required"
+                >Last Name</label>
+                <input
+                    type="text"
+                    name="lastName"
+                    id="lastName"
+                    value="<%= data.lastName ?? '' %>"
+                    required
+                />
             </div>
         </div>
-        <div class="input-wrapper mt-s">
-            <label for="username" class="label-required">Username</label>
-            <input type="text" name="username" id="username" value="<%= data.username ?? '' %>" required />
+        <div class="input-wrapper mt-sm">
+            <label
+                for="username"
+                class="label-required"
+            >Username</label>
+            <input
+                type="text"
+                name="username"
+                id="username"
+                value="<%= data.username ?? '' %>"
+                required
+            />
         </div>
-        <div class=" input-wrapper mt-s">
-            <label for="email" class="label-required">Email</label>
-            <input type="email" name="email" id="email" value="<%= data.email ?? '' %>" required />
+        <div class=" input-wrapper mt-sm">
+            <label
+                for="email"
+                class="label-required"
+            >Email</label>
+            <input
+                type="email"
+                name="email"
+                id="email"
+                value="<%= data.email ?? '' %>"
+                required
+            />
         </div>
-        <div class="input-wrapper mt-m">
-            <label for="username" class="label-required">Password</label>
+        <div class="input-wrapper mt-md">
+            <label
+                for="username"
+                class="label-required"
+            >Password</label>
             <div style="position: relative">
-                <input type="password" name="password" id="register-password" required autocomplete="password" />
-                <div class="input-icon" role="button" id="showPassword" data-toggler="show-password"
-                    data-target="register-password">
-                    Show
+                <input
+                    type="password"
+                    name="password"
+                    id="register-password"
+                    required
+                    autocomplete="password"
+                />
+                <div
+                    class="input-icon"
+                    role="button"
+                    id="showPassword"
+                    data-toggler="show-password"
+                    data-target="register-password"
+                    data-show-icon="nc nc-eye"
+                    data-hide-icon="nc nc-eye-off"
+                >
+                    <i class="nc nc-eye"></i>
                 </div>
             </div>
         </div>
 
-        <button class="mt-m">Sign Up</button>
-        <div class="txt-error font-s<%= showAlert && " mt-m" %>" id="loginError"><%= alertMsg %>
+        <button class="mt-md">Sign Up</button>
+        <div
+            class="txt-error font-sm<%= showAlert && " mt-md" %>"
+            id="loginError"
+        ><%= alertMsg %>
 
     </form>
 </div>

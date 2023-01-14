@@ -206,15 +206,15 @@
 <% const todayMonth = today.getMonth() + 1; %>
 <% const todayYear = today.getFullYear(); %>
 <% const todayDateStr = `${todayDate}/${todayMonth}/${todayYear}`; %>
-<div class="bills wrapper p-l">
+<div class="bills wrapper p-lg">
     <div class="bills__header">
-        <div class="breadcrumbs mb-l">
+        <div class="breadcrumbs mb-lg">
             <a
-                class="mb-l"
+                class="mb-lg"
                 href="/dashboard"
             >Dashboard</a> / <span class="bold">Bills</span>
         </div>
-        <h1 class="font-xxl mb-l">Bills</h1>
+        <h1 class="font-xxl mb-lg">Bills</h1>
     </div>
     <div class="bills__info__cards container-grid-items">
         <div class="bills__info__card paper-bordered">
@@ -263,8 +263,8 @@
         </div>
     </div>
     <div class="bills__content">
-        <div class="bills__content__header <%= bills.length === 0 && 'hidden' %>">
-            <div class="bills__content__header__actions flex gap-l pb-s my-l border-bottom">
+        <div class="bills__content__header">
+            <div class="bills__content__header__actions flex gap-lg pb-sm my-lg border-bottom">
                 <a
                     href="/bills"
                     class="btn btn-primary"
@@ -479,7 +479,7 @@
                 </table>
                 <% if (bills.length===0) { %>
                 <div class="bills__content__body__item paper">
-                    <h4 class="font-s">No bills found</h4>
+                    <h4 class="font-sm">No bills found</h4>
                 </div>
                 <% } %>
             </div>
@@ -494,7 +494,7 @@
                     <i class="nc nc-alert-square"></i>
                 </div>
                 <div class="snackbar__content__text">
-                    <h4 class="font-s">
+                    <h4 class="font-sm">
                         <%= alertMsg || "" %>
                     </h4>
                 </div>
@@ -528,7 +528,7 @@
 >
     <div class="modal__content">
         <div class="modal__content__header flex align-center justify-between">
-            <h3 class="font-m">Add New Bill</h3>
+            <h3 class="font-md">Add New Bill</h3>
             <div class="modal__content__header__actions">
                 <a
                     data-toggler="true"
@@ -547,9 +547,9 @@
             <form
                 action="/bills/new"
                 method="POST"
-                class="mt-l"
+                class="mt-lg"
             >
-                <div class="input-wrapper flex-v gap-s">
+                <div class="input-wrapper flex-v gap-sm">
                     <label
                         for="billName"
                         class="label-required"
@@ -564,7 +564,7 @@
                         autofocus
                     />
                 </div>
-                <div class="input-wrapper flex-v gap-s mt-s">
+                <div class="input-wrapper flex-v gap-sm mt-sm">
                     <label
                         for="billAmount"
                         class="label-required"
@@ -617,7 +617,7 @@
                     </div>
                 </div>
 
-                <div class="input-wrapper flex-v gap-s mt-s">
+                <div class="input-wrapper flex-v gap-sm mt-sm">
                     <label
                         for="billDueDate"
                         class="label-required"
@@ -631,7 +631,7 @@
                         required
                     />
                 </div>
-                <div class="input-wrapper flex-v gap-s mt-s">
+                <div class="input-wrapper flex-v gap-sm mt-sm">
                     <label
                         for="billFrequency"
                         class="label-required"
@@ -654,7 +654,7 @@
 
                     </select>
                 </div>
-                <div class="input-wrapper flex-v gap-s mt-m">
+                <div class="input-wrapper flex-v gap-sm mt-md">
                     <label
                         for="category"
                         class="label-required"
@@ -676,7 +676,7 @@
                         <option value="other">Other</option>
                     </select>
                 </div>
-                <div class="input-wrapper flex align-center gap-s mt-m">
+                <div class="input-wrapper flex align-center gap-sm mt-md">
                     <label for="isAutoPay">Autopay</label>
                     <input
                         type="checkbox"
@@ -685,7 +685,7 @@
                     />
                 </div>
 
-                <button class="mt-m">Add bill</button>
+                <button class="mt-md">Add bill</button>
             </form>
         </div>
     </div>

@@ -54,7 +54,7 @@ function showSnackbar({
                 <i class="${iconClass}"></i>
             </div>
             <div class="snackbar__content__text">
-                <h4 class="font-s">
+                <h4 class="font-sm">
                     ${message}
                 </h4>
             </div>

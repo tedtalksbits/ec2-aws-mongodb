@@ -1,42 +1,85 @@
 <div class="container">
     <h1 class="center">Welcome back!</h1>
-    <p class="center my-s">
+    <p class="center my-sm">
         Do not have an account yet?
-        <a class="link" href="/register">Create account</a>
+        <a
+            class="link"
+            href="/register"
+        >Create account</a>
     </p>
-    <form class="paper mt-l" id="loginForm" method="post" action="/login">
+    <form
+        class="paper mt-lg"
+        id="loginForm"
+        method="post"
+        action="/login"
+    >
         <div class="input-wrapper">
-            <label for="username" class="label-required">Username</label>
-            <input type="text" name="username" id="username" value="<%= data?.username %> " required />
+            <label
+                for="username"
+                class="label-required"
+            >Username</label>
+            <input
+                type="text"
+                name="username"
+                id="username"
+                value="<%= data?.username %> "
+                required
+            />
         </div>
-        <div class="input-wrapper mt-m">
-            <label for="username" class="label-required">Password</label>
+        <div class="input-wrapper mt-md">
+            <label
+                for="username"
+                class="label-required"
+            >Password</label>
             <div style="position: relative">
-                <input type="password" name="password" id="login-password" required autocomplete="password" />
-                <div class="input-icon" role="button" id="showPassword" data-toggler="show-password"
-                    data-target="login-password" data-show-icon="nc nc-eye" data-hide-icon="nc nc-eye-off">
+                <input
+                    type="password"
+                    name="password"
+                    id="login-password"
+                    required
+                    autocomplete="password"
+                />
+                <div
+                    class="input-icon"
+                    role="button"
+                    id="showPassword"
+                    data-toggler="show-password"
+                    data-target="login-password"
+                    data-show-icon="nc nc-eye"
+                    data-hide-icon="nc nc-eye-off"
+                >
                     <i class="nc nc-eye"></i>
                 </div>
             </div>
         </div>
-        <div class="flex align-center justify-between mt-m">
-            <div class="input-wrapper flex align-center gap-s">
-                <input type="checkbox" name="remember" id="remember" />
+        <div class="flex align-center justify-between mt-md">
+            <div class="input-wrapper flex align-center gap-sm">
+                <input
+                    type="checkbox"
+                    name="remember"
+                    id="remember"
+                />
                 <label for="remember">Remember me</label>
             </div>
             <label>
-                <a class="link" href="/forgot-password"> Forgot password? </a>
+                <a
+                    class="link"
+                    href="/forgot-password"
+                > Forgot password? </a>
             </label>
         </div>
-        <button class="mt-m">Sign In</button>
-        <div class="txt-error font-m<%= error && " mt-m" %>" id="loginError"><%= errorMsg %>
+        <button class="mt-md">Sign In</button>
+        <div
+            class="txt-error font-md<%= error && " mt-md" %>"
+            id="loginError"
+        ><%= errorMsg %>
         </div>
 
 
     </form>
     <% if (showAlert) { %>
-        <div class="paper fade-in mt-xxl bg-gradient-400">
-            <h4 style="color: black">Account created!</h4>
-        </div>
-        <% } %>
+    <div class="paper fade-in mt-xxl bg-gradient-400">
+        <h4 style="color: black">Account created!</h4>
+    </div>
+    <% } %>
 </div>

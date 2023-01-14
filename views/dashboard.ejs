@@ -53,14 +53,21 @@
 </style>
 
 <div class="dashboard">
-    <div class="dashboard__main container container-md w-full w-100 p-m">
+    <div class="dashboard__main container container-md w-full w-100 p-md">
         <h2 class="mb-xxxl">Hello <%= data.firstName %> <span>👋🏿</span></h2>
-        <div class="paper paper-alt p-l">
+        <div class="paper paper-alt p-lg">
             <h4>Services</h4>
-            <div class="container-grid-items mt-l">
-                <a class="mini-card" href="/bills">
+            <div class="container-grid-items mt-lg">
+                <a
+                    class="mini-card"
+                    href="/bills"
+                >
                     <span class="mini-card-icon">
-                        <img src="static/images/bills.svg" alt="" srcset="" />
+                        <img
+                            src="static/images/bills.svg"
+                            alt=""
+                            srcset=""
+                        />
                     </span>
                     <div class="mini-card__content">
                         <h4>Bills</h4>
@@ -68,7 +75,11 @@
                 </a>
                 <a class="mini-card">
                     <span class="mini-card-icon">
-                        <img src="static/images/notification.svg" alt="" srcset="" />
+                        <img
+                            src="static/images/notification.svg"
+                            alt=""
+                            srcset=""
+                        />
                     </span>
                     <div class="mini-card__content">
                         <h4>Notifications</h4>
@@ -76,7 +87,11 @@
                 </a>
                 <a class="mini-card">
                     <span class="mini-card-icon">
-                        <img src="static/images/search.svg" alt="" srcset="" />
+                        <img
+                            src="static/images/search.svg"
+                            alt=""
+                            srcset=""
+                        />
                     </span>
                     <div class="mini-card__content">
                         <h4>Search</h4>
@@ -84,23 +99,41 @@
                 </a>
                 <a class="mini-card">
                     <span class="mini-card-icon">
-                        <img src="static/images/user.svg" alt="" srcset="" />
+                        <img
+                            src="static/images/user.svg"
+                            alt=""
+                            srcset=""
+                        />
                     </span>
                     <div class="mini-card__content">
                         <h4>Profile</h4>
                     </div>
                 </a>
-                <a class="mini-card" data-sidebar-toggler="true">
+                <a
+                    class="mini-card"
+                    data-sidebar-toggler="true"
+                >
                     <span class="mini-card-icon">
-                        <img src="static/images/preference.svg" alt="" srcset="" />
+                        <img
+                            src="static/images/preference.svg"
+                            alt=""
+                            srcset=""
+                        />
                     </span>
                     <div class="mini-card__content">
                         <h4>Preference</h4>
                     </div>
                 </a>
-                <a class="mini-card" href="/logout">
+                <a
+                    class="mini-card"
+                    href="/logout"
+                >
                     <span class="mini-card-icon">
-                        <img src="static/images/logout.svg" alt="" srcset="" />
+                        <img
+                            src="static/images/logout.svg"
+                            alt=""
+                            srcset=""
+                        />
                     </span>
                     <div class="mini-card__content">
                         <h4>Logout</h4>
@@ -110,30 +143,43 @@
         </div>
     </div>
     <div class="dashboard__sidebar hidden border bg-surface-800 flex-v">
-        <div class="flex-h gap-s align-center">
+        <div class="flex-h gap-sm align-center">
             <span class="mini-card-icon">
-                <img src="static/images/preference.svg" alt="" srcset="" />
+                <img
+                    src="static/images/preference.svg"
+                    alt=""
+                    srcset=""
+                />
             </span>
             <h3>Preference</h3>
         </div>
-        <div class="flex align-center gap-s p-l justify-between bg-surface-900 rounded-md mt-m">
+        <div class="flex align-center gap-sm p-lg justify-between bg-surface-900 rounded-md mt-md">
             <span>Dark Mode</span>
             <div class="switch">
-                <input type="checkbox" id="darkMode" />
+                <input
+                    type="checkbox"
+                    id="darkMode"
+                />
                 <label for="darkMode"></label>
             </div>
         </div>
-        <div class="flex align-center gap-s p-l justify-between bg-surface-900 rounded-md mt-m">
+        <div class="flex align-center gap-sm p-lg justify-between bg-surface-900 rounded-md mt-md">
             <span>Dark Mode</span>
             <div class="switch">
-                <input type="checkbox" id="darkMode" />
+                <input
+                    type="checkbox"
+                    id="darkMode"
+                />
                 <label for="darkMode"></label>
             </div>
         </div>
-        <div class="flex align-center gap-s p-l justify-between bg-surface-900 rounded-md mt-m">
+        <div class="flex align-center gap-sm p-lg justify-between bg-surface-900 rounded-md mt-md">
             <span>Dark Mode</span>
             <div class="switch">
-                <input type="checkbox" id="darkMode" />
+                <input
+                    type="checkbox"
+                    id="darkMode"
+                />
                 <label for="darkMode"></label>
             </div>
         </div>
@@ -145,7 +191,6 @@
 </div>
 
 <script>
-
     // get session data
 
     const sessionData = JSON.parse(sessionStorage.getItem('session'));
