@@ -28,6 +28,10 @@
         color: var(--txt);
     }
 
+    .modal-title {
+        margin-bottom: 1rem;
+    }
+
     .modal-buttons {
         display: flex;
         justify-content: space-between;
@@ -50,9 +54,9 @@
             >All Bills</a> / <span class="bold">Bill Name: <%= bill.billName %> </span>
         </div>
         <div
-            class="rounded-md bg-primary flex align-center justify-center add-img"
+            class="rounded-md flex align-center justify-center add-img p-sm border"
             style="height: 5rem; width: 5rem;"
-            id="bill__header__icon"
+            id="<%= bill.billCompanyImg ? '' : 'bill__header__icon' %>"
         >
             <% if (bill.billCompanyImg) { %>
 
@@ -132,10 +136,13 @@
 
     let gradientFrom = getRandomColor();
     let gradientTo = getRandomColor();
-
-    document.querySelector('#bill__header__icon').style.background = `linear-gradient(90deg, ${gradientFrom} 0%, ${gradientTo} 100%)`;
+    const billHeaderIcon = document.querySelector('#bill__header__icon');
+    if (billHeaderIcon) {
+        billHeaderIcon.style.background = `linear-gradient(90deg, ${gradientFrom} 0%, ${gradientTo} 100%)`
+    };
 </script>
 <script src="/static/js/customModal.js"></script>
+<script src="/static/js/snackbar.js"></script>
 <script>
     const uploadForm = `
         <div>
@@ -185,57 +192,7 @@
         uploadImgModal.show();
     })
 
-    // read uploaded image
-
-    // const billCompanyImgFileInput = document.querySelector('#billCompanyImgFileInput');
-
     let img = '';
-
-
-
-    // billCompanyImgFileInput.addEventListener('change', (e) => {
-    //     const uploadBtn = document.querySelector('#save-btn');
-    //     const file = e.target.files[0];
-
-    //     const size = file.size;
-
-    //     if (size > 1000000) {
-    //         alert('File size is too large. Please upload a file less than 1MB');
-    //         // clear input
-    //         billCompanyImgFileInput.value = '';
-
-    //         // clear preview
-
-    //         const imgPreviewContainer = document.querySelector('#img-preview-container');
-    //         imgPreviewContainer.innerHTML = `
-    //             <div class="bg-error-transparent-200 border border-danger-transparent-200 p-md my-lg rounded-md font-sm">File size must be less than 1MB</div>
-    //         `;
-
-    //         // disable upload button
-    //         uploadBtn.disabled = true;
-
-    //         return;
-
-    //     }
-
-    //     // enable upload button
-    //     uploadBtn.disabled = false;
-
-    //     const reader = new FileReader();
-
-    //     reader.addEventListener('load', () => {
-    //         const imgPreviewContainer = document.querySelector('#img-preview-container');
-    //         imgPreviewContainer.innerHTML = `
-    //             <p class="txt-alt mb-sm font-sm">Image Preview</p>
-    //             <img src=${reader.result} alt="logo preview" id="img-preview" style="height: 10rem; width: 10rem; object-fit: contain;" class="mb-lg m-auto">
-    //         `
-
-    //         img = reader.result;
-
-    //     })
-
-    //     reader.readAsDataURL(file);
-    // })
 
     const saveImgUrl = async (billId) => {
 
@@ -255,6 +212,29 @@
                 })
             })
             const response = await request.json();
+
+            if (response.status === 200) {
+                uploadImgModal.hide();
+
+                showSnackbar({
+                    message: 'Image uploaded successfully',
+                    type: 'success',
+                    duration: 3000,
+                    callback: () => {
+                        window.location.reload();
+                    }
+
+
+                })
+
+            } else {
+                showSnackbar({
+                    message: 'Something went wrong',
+                    type: 'error',
+                    duration: 3000,
+                })
+            }
+
 
             console.log(response);
         } catch (err) {
@@ -286,15 +266,31 @@
     })
 
     async function searchImg(query = "") {
-        const imgUrl = `https://raw.githubusercontent.com/tedtalksbits/company-logos/master/logos/${query}/${query}.png`;
+
+        // set query to lowercase and replace spaces with dashes
+        query = query.toLowerCase().replace(/\s/g, '-');
         const imgPreviewContainer = document.querySelector('#img-preview-container');
         const saveBtn = document.querySelector('#save-btn');
+        const imgUrl = `https://raw.githubusercontent.com/tedtalksbits/company-logos/master/logos/${query}/${query}.png`;
+
+        if (imgUrl === "<%= bill.billCompanyImg %>") {
+            imgPreviewContainer.innerHTML = `
+                <div class="bg-error-transparent-200 border border-danger-transparent-200 p-md my-lg rounded-md font-sm">
+                    This is the current image
+                </div>
+            `;
+            saveBtn.disabled = true;
+            return;
+        }
+
 
         const req = await fetch(imgUrl);
 
         if (req.status === 404) {
             imgPreviewContainer.innerHTML = `
-                <div class="bg-error-transparent-200 border border-danger-transparent-200 p-md my-lg rounded-md font-sm">No image found</div>
+                <div class="bg-error-transparent-200 border border-danger-transparent-200 p-md my-lg rounded-md font-sm">
+                    No image found
+                </div>
             `;
             saveBtn.disabled = true;
             return;
@@ -308,7 +304,7 @@
 
         imgPreviewContainer.innerHTML = `
             <p class="txt-alt mb-sm font-sm">Image Preview</p>
-            <img src=${imgUrl} alt="logo preview" id="img-preview" style="height: 10rem; width: 10rem; object-fit: contain;" class="mb-lg m-auto">
+            <img src=${imgUrl} alt="logo preview" id="img-preview" style="height: 10rem; width: 10rem; object-fit: contain;" class="mb-lg m-auto border rounded-md">
         `
     }
 </script>

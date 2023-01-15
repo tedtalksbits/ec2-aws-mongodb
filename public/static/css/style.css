@@ -647,11 +647,32 @@ th[data-direction='desc']::after {
     max-width: var(--width-md);
 }
 
+.container.container-lg {
+    max-width: var(--width-lg);
+}
+
+.container.container-xl {
+    max-width: var(--width-xl);
+}
+
 .container.container-md .container-grid-items {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(calc((var(--width-md) / 3) - 3rem), 1fr));
     grid-gap: 1rem;
 }
+
+.container.container-lg .container-grid-items {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(calc((var(--width-lg) / 3) - 3rem), 1fr));
+    grid-gap: 1rem;
+}
+
+.container.container-xl .container-grid-items {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(calc((var(--width-xl) / 3) - 3rem), 1fr));
+    grid-gap: 1rem;
+}
+
 
 .container-grid-items {
     display: grid;
